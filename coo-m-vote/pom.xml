@@ -1,0 +1,95 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>com.kingstar.ngbf</groupId>
+		<artifactId>ngbf-dev-m</artifactId>
+		<version>2.3.0.0</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.coo</groupId>
+	<artifactId>coo-m-vote</artifactId>
+	<version>${app.version.name}</version>
+	<packaging>apk</packaging>
+
+	<properties>
+		<artifactId>coo-m-vote</artifactId>
+		<app.version.name>0.6.0.0</app.version.name>
+		<coo-s-vote-model.version>0.6.2.0</coo-s-vote-model.version>
+		<ngbf-ms-util.version>2.4.8.0</ngbf-ms-util.version>
+		<ngbf-ms-mpchart.version>2.4.0.0</ngbf-ms-mpchart.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.coo</groupId>
+			<artifactId>coo-s-vote-model</artifactId>
+			<version>${coo-s-vote-model.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.kingstar.ngbf</groupId>
+			<artifactId>ngbf-s-ntp</artifactId>
+			<version>2.4.0.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.kingstar.ngbf</groupId>
+			<artifactId>ngbf-ms-util</artifactId>
+			<version>${ngbf-ms-util.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+			<!-- -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.xerial</groupId>
+					<artifactId>sqlite-jdbc</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.kingstar.ngbf</groupId>
+			<artifactId>ngbf-ms-mpchart</artifactId>
+			<version>${ngbf-ms-mpchart.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>litepal</groupId>
+			<artifactId>litepal</artifactId>
+			<version>1.1.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>android-support</artifactId>
+			<version>v4</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+	</dependencies>
+
+	<!-- <build> <plugins> <plugin> <artifactId>maven-compiler-plugin</artifactId> 
+		<configuration> <source>1.6</source> <target>1.6</target> <encoding>UTF-8</encoding> 
+		</configuration> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+		<artifactId>maven-jarsigner-plugin</artifactId> <version>1.2</version> <executions> 
+		<execution> <id>sign</id> <goals> <goal>sign</goal> </goals> </execution> 
+		<execution> <id>verify</id> <goals> <goal>verify</goal> </goals> </execution> 
+		</executions> <configuration> <encoding>UTF-8</encoding> <includes> <include>target/${coo-m-vote}-${app.version.name}.apk</include> 
+		</includes> <removeExistingSignatures>true</removeExistingSignatures> <keystore>${keyFilePath}</keystore> 
+		<storepass>${storePassword}</storepass> <keypass>${keyPassword}</keypass> 
+		<alias>${keyAlias}</alias> </configuration> </plugin> </plugins> </build> 
+		<profiles> <profile> <id>sign</id> <activation> <activeByDefault>true</activeByDefault> 
+		</activation> <properties> <keyFilePath>C:/ngbfkeystore/ngbf.keystore</keyFilePath> 
+		<storePassword>ngbf1234</storePassword> <keyPassword>ngbf1234</keyPassword> 
+		<keyAlias>ngbf.keystore</keyAlias> </properties> </profile> </profiles> -->
+</project>

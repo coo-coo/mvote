@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_phone_activity"
+    style="@style/activity_common" >
+
+    <ListView
+        android:id="@+id/lv_phone_activity"
+        style="@style/listview_common" />
+
+</LinearLayout>

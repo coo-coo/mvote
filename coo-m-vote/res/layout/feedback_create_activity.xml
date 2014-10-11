@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/activity_common" >
+
+    <EditText
+        android:id="@+id/et_feedback_create_note"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:hint="" >
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/btn_feedback_create_save"
+        android:layout_width="match_parent"
+        android:text="@string/app_submit"
+        android:layout_height="60dp"
+        android:background="@color/orange"
+        android:textColor="#ffffffff"
+        android:textSize="20sp" />
+
+</LinearLayout>

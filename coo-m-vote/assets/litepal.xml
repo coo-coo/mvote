@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+
+    <dbname value="vote" >
+    </dbname>
+
+    <version value="3" >
+    </version>
+
+    <list>
+
+        <mapping class="com.coo.m.vote.model.MChannel" />
+
+        <mapping class="com.coo.m.vote.model.MContact" />
+        
+        <mapping class="com.coo.m.vote.model.MGroup" />
+    </list>
+
+</litepal>

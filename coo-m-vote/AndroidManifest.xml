@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.coo.m.vote"
+    android:versionCode="2"
+    android:versionName="0.6.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="18" />
+
+    <!--
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <application
+        android:name="com.coo.m.vote.VoteApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_logo1"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme2" >
+        <activity
+            android:name="com.coo.m.vote.activity.SysWelcomeActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.coo.m.vote.activity.SysRegisterActivity" >
+        </activity>
+        <activity android:name="com.coo.m.vote.activity.SysLoginActivity" >
+        </activity>
+        <activity android:name="com.coo.m.vote.activity.SysMainActivity" >
+        </activity>
+        <activity android:name="com.coo.m.vote.activity.ChannelActivity" >
+        </activity>
+        <activity android:name="com.coo.m.vote.activity.TopicActivity" >
+        </activity>
+        <activity android:name="com.coo.m.vote.activity.TopicConfigActivity" >
+        </activity>
+        <activity android:name="com.coo.m.vote.activity.SysConfigActivity" >
+        </activity>
+        <activity android:name="com.coo.m.vote.activity.SysProfileActivity" >
+        </activity>
+        <activity android:name="com.coo.m.vote.activity.SysVersionActivity" >
+        </activity>
+        <activity android:name="com.coo.m.vote.activity.FeedbackCreateActivity" >
+        </activity>
+        <activity android:name="com.coo.m.vote.activity.TopicCreateActivity" >
+        </activity>
+        <activity android:name="com.coo.m.vote.activity.ContactActivity" >
+        </activity>
+        <activity android:name="com.coo.m.vote.activity.GroupActivity" >
+        </activity>
+        <activity android:name="com.coo.m.vote.activity.FeedbackMgtActivity" >
+        </activity>
+ 	<activity android:name="com.coo.m.vote.activity.AccountMgtActivity" >
+        </activity>
+        <activity android:name="com.coo.m.vote.activity.TopicMgtActivity" >
+        </activity>
+ 	
+        <service android:name="com.coo.m.vote.VoteService" >
+        </service>
+    </application>
+
+</manifest>

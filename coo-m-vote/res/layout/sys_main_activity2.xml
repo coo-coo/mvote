@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <!-- 采用ViewPager支持手势滑动 -->
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_sys_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" >
+
+            <!-- 支持标题显示,不适用actionBar -->
+
+            <android.support.v4.view.PagerTabStrip
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="top"
+                android:background="@drawable/ic_bg_orange"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </android.support.v4.view.ViewPager>
+    </FrameLayout>
+
+    <!-- 从左向右滑动布局,空内容,站位 -->
+
+    <LinearLayout
+        android:id="@+id/ll_sys_main_left"
+        android:layout_width="20dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_sys_main_right"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:paddingTop="50dp" >
+
+        <!-- 动态引入界面Topic详细界面(供投票或查看投票结果),降低界面的复杂度 -->
+        <!--include
+            android:id="@+id/inc_topic_detail_vote"
+            layout="@layout/inc_topic_vote" / -->
+    </LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>

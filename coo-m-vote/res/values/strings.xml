@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- APP基础信息 -->
+    <string name="app_name">Vote</string>
+    <string name="app_copyright">2014</string>
+    <string name="app_back">返回</string>
+    <string name="app_exit">退出</string>
+    <string name="app_update">更新</string>
+    <string name="app_register">注册</string>
+    <string name="app_login">登录</string>
+    <string name="app_test">测试</string>
+    <string name="app_submit">提交</string>
+    <string name="app_blank"></string>
+    <string name="app_blank2">  |  </string>
+    <string name="app_vote">投票</string>
+
+    <!-- Menu菜单:Common -->
+    <string name="item_search_text">查询</string>
+    <string name="item_topic_create_text">创建</string>
+    <string name="item_more_text">更多</string>
+    <string name="item_profile_text">个人信息</string>
+    <string name="item_sys_config_text">系统设置</string>
+    <string name="item_feedback_create_text">意见反馈</string>
+    <string name="item_sys_version_text">版本信息</string>
+    <string name="item_channel_text">频道管理</string>
+    <string name="item_topic_text">我的话题</string>
+    <!-- Menu菜单:Admin -->
+    <string name="item_account_mgt_text">账号管理</string>
+    <string name="item_private_text">隐私设置</string>
+    <string name="item_feedback_mgt_text">反馈管理</string>
+    <string name="item_topic_mgt_text">话题管理</string>
+    <string name="item_contact_text">通讯录</string>
+    <string name="item_group_text">群组管理</string>
+
+    <!-- Login -->
+    <string name="login_username_hint">手机号</string>
+    <string name="login_password_hint">密码</string>
+    <string name="login_register_link">没有帐号？ <a href="#">注册</a></string>
+
+    <!-- Register -->
+    <string name="register_mobile_hint">请输入手机号码</string>
+    <string name="register_sms_hint">请输入短信验证码</string>
+    <string name="register_smsget_hint">获取验证码</string>
+    <string name="register_pwd1_hint">请设置登录密码</string>
+    <string name="register_pwd2_hint">请确认登录密码</string>
+    <string name="register_vote1">已阅读并同意</string>
+    <string name="register_vote2">《Vote服务条款》</string>
+    <string name="register_clause">TODO Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....Vote服务条款....</string>
+
+    <!-- topic 创建 -->
+    <string name="item_topic_publish_text">发布</string>
+    <string name="item_topic_leg_create_text">增加选项</string>
+    
+    <string name="topic_create_content_hint">请输入投票主题</string>
+    <string name="topic_create_leg_delete">删除</string>
+    <string name="et_topic_create_leg_content_hint">请输入选择项</string>
+    <string name="topic_create_leg_label">请编辑选择项</string>
+    <string name="btn_topic_leg_create">新增选项</string>
+    <string name="btn_topic_publish">发布主题</string>
+    <string name="tv_topic_create_leg_index">index</string>
+    <string name="btn_back">返回</string>
+    <string name="topic_title_image">Topic title image</string>
+    <string name="topic_title_label">投票主题内容</string>
+    <string name="topicshot_lastmodified_time">最后更新时间</string>
+    <string name="topicshot_publish_status">投票发送状态</string>
+    <string name="topic_row_image_content_desc">投票图片</string>
+    <string name="topic_row_vote_number">投票数</string>
+
+    <!-- popup window -->
+    <string name="vote_popup_btn_vote">投票</string>
+    <string name="vote_popup_unvote_tile">投票结果</string>
+    <string name="vote_popup_unvote_btn_ys">原始</string>
+    <string name="vote_popup_unvote_btn_dx">倒序</string>
+    <string name="vote_popup_unvote_btn_zx">增序</string>
+    <string name="vote_popup_unvote_btn_bt">饼图</string>
+    <string name="vote_popup_unvote_btn_zzt">柱状图</string>
+    <string name="vote_popup_unvote_btn_ldt">雷达图</string>
+
+</resources>

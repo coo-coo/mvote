@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/activity_common" >
+
+    <View style="@style/view_space" />
+
+    <EditText
+        android:id="@+id/et_sys_register_mobile"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="@string/register_mobile_hint"
+        android:inputType="number"
+        android:singleLine="true" />
+
+    <View style="@style/view_space" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp" >
+
+        <EditText
+            android:id="@+id/et_sys_register_verify"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="5"
+            android:hint="@string/register_sms_hint"
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/btn_sys_register_sendcode"
+            style="@style/btn_common"
+            android:layout_width="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="3"
+            android:text="@string/register_smsget_hint" />
+    </LinearLayout>
+
+    <View style="@style/view_space" />
+
+    <EditText
+        android:id="@+id/et_sys_register_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="@string/register_pwd1_hint"
+        android:inputType="textPassword"
+        android:singleLine="true" />
+
+    <View style="@style/view_space" />
+
+    <EditText
+        android:id="@+id/et_sys_register_pwd2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="@string/register_pwd2_hint"
+        android:inputType="textPassword"
+        android:singleLine="true" />
+
+    <View style="@style/view_space" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal" >
+
+        <CheckBox
+            android:id="@+id/cb_sys_register_agree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:drawablePadding="4dp"
+            android:padding="2dp"
+            android:text="@string/register_vote1" />
+
+        <TextView
+            android:id="@+id/tv_sys_register_clause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="@string/register_vote2"
+            android:textColor="@color/blue" />
+    </LinearLayout>
+
+    <View style="@style/view_space" />
+
+    <Button
+        android:id="@+id/btn_sys_register_submit"
+        style="@style/btn_common"
+        android:layout_width="match_parent"
+        android:text="@string/app_register" />
+
+    <View style="@style/view_space" />
+
+    <ScrollView
+        android:id="@+id/sv_sys_register"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:scrollbarStyle="outsideOverlay" >
+
+        <EditText
+            android:id="@+id/et_sys_register_clause"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:gravity="top"
+            android:hint="@string/register_clause"
+            android:minLines="20"
+            android:textSize="12sp" >
+        </EditText>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,106 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_sys_window_popup_unvote"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    tools:context=".SysMainActivity" >
+
+    <LinearLayout
+        android:id="@+id/ll_sys_window_popup_unvote_1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#30000000"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_sys_window_popup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:text="@string/vote_popup_unvote_tile"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_sys_window_popup_unvote_2"
+        android:layout_width="fill_parent"
+        android:layout_height="380dp"
+        android:layout_below="@+id/ll_sys_window_popup_unvote_1"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:orientation="vertical" >
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_sys_window_popup_unvote_3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_sys_window_popup_unvote_2"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:orientation="horizontal" >
+        <Button
+            android:id="@+id/btn_sys_window_popup_unvote_ys"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            style="?android:attr/borderlessButtonStyle"
+            android:text="@string/vote_popup_unvote_btn_ys" />
+        
+         <Button
+            android:id="@+id/btn_sys_window_popup_unvote_dx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            style="?android:attr/borderlessButtonStyle"
+            android:text="@string/vote_popup_unvote_btn_dx" />
+         
+          <Button
+            android:id="@+id/btn_sys_window_popup_unvote_zx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            style="?android:attr/borderlessButtonStyle"
+            android:text="@string/vote_popup_unvote_btn_zx" />
+        
+    </LinearLayout>  
+    
+    <LinearLayout
+        android:id="@+id/ll_sys_window_popup_unvote_4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_sys_window_popup_unvote_3"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:orientation="horizontal" >
+        <Button
+            android:id="@+id/btn_sys_window_popup_unvote_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            style="?android:attr/borderlessButtonStyle"
+            android:text="@string/vote_popup_unvote_btn_bt"/>
+        
+         <Button
+            android:id="@+id/btn_sys_window_popup_unvote_zzt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            style="?android:attr/borderlessButtonStyle"
+            android:text="@string/vote_popup_unvote_btn_zzt" />
+         
+          <Button
+            android:id="@+id/btn_sys_window_popup_unvote_ldt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            style="?android:attr/borderlessButtonStyle"
+            android:text="@string/vote_popup_unvote_btn_ldt" />
+        
+    </LinearLayout>  
+
+</RelativeLayout>

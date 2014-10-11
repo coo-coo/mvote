@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/activity_common" >
+
+    <View style="@style/view_space" />
+
+    <Button
+        android:id="@+id/btn_sys_config_version"
+        style="@style/btn_common"
+        android:layout_width="match_parent"
+        android:text="@string/item_sys_version_text" />
+
+    <View style="@style/view_space" />
+
+    <Button
+        android:id="@+id/btn_sys_config_private"
+        style="@style/btn_common"
+        android:layout_width="match_parent"
+        android:text="@string/item_private_text" />
+
+    <View style="@style/view_space" />
+
+    <Button
+        android:id="@+id/btn_sys_config_exit"
+        style="@style/btn_common"
+        android:layout_width="match_parent"
+        android:text="@string/app_exit" />
+
+    <View style="@style/view_space" />
+
+</LinearLayout>
