@@ -30,7 +30,7 @@ public class ChannelActivity2 extends CommonBizActivity implements
 		} else {
 			// TODO 直接加载本地的MChannel(已经有Focus行为)
 			// 异步加载获得的数据
-			String uri = Constants.SERVERHOST
+			String uri = Constants.HOST_REST
 					+ "/channel/focus/account/"
 					+ VoteManager.getStrAccount();
 			HttpAsynCaller.doGet(uri, Constants.TYPE_CHANNEL, this);
@@ -50,7 +50,7 @@ public class ChannelActivity2 extends CommonBizActivity implements
 			String account = VoteManager.getStrAccount();
 			toast(account + "-" + c.getCode() + "-" + c.getStatus()
 					+ "-" + c.get_id());
-			String uri = Constants.SERVERHOST + "/focus/channel/"
+			String uri = Constants.HOST_REST + "/focus/channel/"
 					+ account + "/" + c.getCode();
 			toast(uri);
 			// 异步请求

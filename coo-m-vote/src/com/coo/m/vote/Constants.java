@@ -22,8 +22,8 @@ public final class Constants {
 	/**
 	 * 后台服务器地址
 	 */
-	public final static String SERVERHOST = "http://10.253.45.103:8080/vote/rest";
-	
+	public final static String HOST_REST = "http://10.253.45.103:8080/vote/rest";
+	public final static String HOST_SERVLET = "http://10.253.45.103:8080/vote/servlet";
 	/**
 	 * 模拟账号
 	 */

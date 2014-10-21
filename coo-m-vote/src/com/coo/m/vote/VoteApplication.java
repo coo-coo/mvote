@@ -14,6 +14,8 @@ import com.coo.m.vote.model.MManager;
 import com.coo.s.vote.model.Channel;
 import com.coo.s.vote.model.Contact;
 import com.kingstar.ngbf.ms.util.android.CommonItemConfig;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 /**
  * 主函数
@@ -38,6 +40,11 @@ public class VoteApplication extends LitePalApplication {
 		// 初始化M模型信息
 		initMChannels();
 		initMContacts();
+
+		// 初始化ImageLoader
+		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
+				this).build();
+		ImageLoader.getInstance().init(config);
 
 		// MManager.clearChannels();
 		// Intent intent = new Intent(this, VoteService.class);

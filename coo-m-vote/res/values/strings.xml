@@ -14,6 +14,8 @@
     <string name="app_blank"></string>
     <string name="app_blank2">  |  </string>
     <string name="app_vote">投票</string>
+    <string name="app_ok">确定</string>
+    <string name="app_more">更多</string>
 
     <!-- Menu菜单:Common -->
     <string name="item_search_text">查询</string>
@@ -51,6 +53,10 @@
     <!-- topic 创建 -->
     <string name="item_topic_publish_text">发布</string>
     <string name="item_topic_leg_create_text">增加选项</string>
+    
+    
+    
+    
     
     <string name="topic_create_content_hint">请输入投票主题</string>
     <string name="topic_create_leg_delete">删除</string>

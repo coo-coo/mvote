@@ -131,7 +131,7 @@ public class TopicCreateActivity extends CommonBizActivity implements
 		// 提示信息... toJson有问题?
 		String json = NtpHelper.toJson(topic);
 		toast(json);
-		String restUrl = Constants.SERVERHOST + "/topic/create";
+		String restUrl = Constants.HOST_REST + "/topic/create";
 		HttpAsynCaller.doPost(restUrl, json, this);
 	}
 

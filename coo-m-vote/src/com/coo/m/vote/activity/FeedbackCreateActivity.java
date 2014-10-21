@@ -83,7 +83,7 @@ public class FeedbackCreateActivity extends CommonBizActivity implements
 			sm.set("note", note);
 			sm.set("app_version", app_version);
 
-			String uri = Constants.SERVERHOST + "/feedback/create/";
+			String uri = Constants.HOST_REST + "/feedback/create/";
 			Log.i(TAG, uri);
 			// 异步调用
 			HttpAsynCaller.doPost(uri, sm, this);

@@ -131,7 +131,7 @@ public class SysRegisterActivity extends CommonBizActivity implements
 		} else {
 			// 参见AccountRestService.accountVerifyCode
 			String params = "/account/sms/mobile/" + mobile;
-			String uri = Constants.SERVERHOST + params;
+			String uri = Constants.HOST_REST + params;
 			HttpAsynCaller.doGet(uri, null, this);
 		}
 	}
@@ -170,7 +170,7 @@ public class SysRegisterActivity extends CommonBizActivity implements
 			String params = "/account/register/mobile/" + mobile
 					+ "/sms/" + sms + "/password/"
 					+ password;
-			String uri = Constants.SERVERHOST + params;
+			String uri = Constants.HOST_REST + params;
 			// toast(uri);
 			HttpAsynCaller.doGet(uri, null, this);
 

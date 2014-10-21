@@ -74,7 +74,6 @@ public class SysWelcomeActivity extends Activity implements AnimationListener,
 		animation.setFillAfter(true);
 		iv_cover.setAnimation(animation);
 
-		
 		tv_copyright = (TextView) findViewById(R.id.tv_sys_welcome_copyright);
 		tv_copyright.setAnimation(animation);
 
@@ -94,10 +93,12 @@ public class SysWelcomeActivity extends Activity implements AnimationListener,
 			if (Constants.MOCK_ACCOUNT) {
 				VoteManager.get().setAccount(Mock.getAccount());
 			}
-			Intent intent = new Intent(SysWelcomeActivity.this,
-					SysLoginActivity.class);
+			// 跳转到登录界面
 			// Intent intent = new Intent(SysWelcomeActivity.this,
-			// SysMainActivity.class);
+			// SysLoginActivity.class);
+			// 调试用，跳转到指定界面
+			Intent intent = new Intent(SysWelcomeActivity.this,
+					SysProfileActivity.class);
 			startActivity(intent);
 			// this.overridePendingTransition(R.anim.fadeout,
 			// R.anim.fadein);
@@ -127,7 +128,7 @@ public class SysWelcomeActivity extends Activity implements AnimationListener,
 		// 参见AccountRestService.accountLogin
 		String params = "/account/login/mobile/" + mobile
 				+ "/password/" + password;
-		String uri = Constants.SERVERHOST + params;
+		String uri = Constants.HOST_REST + params;
 		// 同步調用不可以,需要异步调用
 		HttpAsynCaller.doGet(uri, null, this);
 	}

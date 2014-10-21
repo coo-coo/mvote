@@ -54,9 +54,12 @@ public class CommonItemListAdapter extends CommonItemAdapter<CommonItem> {
 		if (uiType == CommonItem.UIT_PASSWORD) {
 			// 按密码显示处理
 			holder.tv_value.setInputType(VoteUtil.getPwdInputType());
-		} else {
+		} 
+		else {
 			holder.tv_value.setInputType(InputType.TYPE_CLASS_TEXT);
 		}
+		// TODO 图片设置....
+		
 		holder.tv_value.setText("" + item.getValue());
 	}
 }

@@ -94,7 +94,7 @@ public class SysVersionActivity extends CommonBizActivity {
 		String version_latest = "1.0.0";
 		if (network) {
 			String params = "/account/version/update/";
-			String uri = Constants.SERVERHOST + params;
+			String uri = Constants.HOST_REST + params;
 			toast("网络连接可用=" + uri);
 			// 获取最新版本，进行显示
 			// updateBean = updateManager.request(uri);

@@ -69,7 +69,7 @@ public class SysMainChannel extends Fragment implements
 			response(Mock.topicshots(this.code));
 		} else {
 			// 异步加载获得的数据
-			String uri = Constants.SERVERHOST
+			String uri = Constants.HOST_REST
 					+ "/topic/code/" + code + "/account/"
 					+ VoteManager.getStrAccount();
 			HttpAsynCaller.doGet(uri, Constants.TYPE_TOPIC, this);

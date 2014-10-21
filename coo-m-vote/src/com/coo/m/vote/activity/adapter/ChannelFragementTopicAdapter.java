@@ -179,7 +179,7 @@ public class ChannelFragementTopicAdapter extends CommonItemAdapter<Topic>
 		String account = VoteManager.getStrAccount();
 		String topicId = selected.get_id();
 
-		String uri = Constants.SERVERHOST + "/topic/vote/account/"
+		String uri = Constants.HOST_REST + "/topic/vote/account/"
 				+ account + "/topic/" + topicId + "/legSeq/"
 				+ topicLeg.getSeq();
 		toast(uri);

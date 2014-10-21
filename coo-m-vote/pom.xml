@@ -18,6 +18,7 @@
 		<coo-s-vote-model.version>0.6.2.0</coo-s-vote-model.version>
 		<ngbf-ms-util.version>2.4.8.0</ngbf-ms-util.version>
 		<ngbf-ms-mpchart.version>2.4.0.0</ngbf-ms-mpchart.version>
+		<ngbf-ms-cropper.version>2.4.0.0</ngbf-ms-cropper.version>
 	</properties>
 
 	<dependencies>
@@ -56,6 +57,14 @@
 			<groupId>com.kingstar.ngbf</groupId>
 			<artifactId>ngbf-ms-mpchart</artifactId>
 			<version>${ngbf-ms-mpchart.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.kingstar.ngbf</groupId>
+			<artifactId>ngbf-ms-cropper</artifactId>
+			<version>${ngbf-ms-cropper.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>

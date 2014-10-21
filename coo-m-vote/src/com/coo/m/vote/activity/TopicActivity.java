@@ -39,7 +39,7 @@ public class TopicActivity extends CommonBizActivity implements
 			// 异步调用数据
 			String account = VoteManager.getStrAccount();
 			toast("account=" + account);
-			String URL = Constants.SERVERHOST
+			String URL = Constants.HOST_REST
 					+ "/topic/mine/account/" + account;
 			HttpAsynCaller.doGet(URL, Constants.TYPE_TOPIC, this);
 		}

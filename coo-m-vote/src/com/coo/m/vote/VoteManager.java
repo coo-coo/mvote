@@ -6,6 +6,8 @@ import java.util.List;
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Environment;
+import android.os.Message;
 import android.util.Log;
 
 import com.coo.s.vote.model.Account;
@@ -24,6 +26,36 @@ public class VoteManager {
 	private String TAG = VoteManager.class.getName();
 
 	private static SharedManager sharedManager = null;
+
+	public static String SD_Path = Environment
+			.getExternalStorageDirectory().getPath();
+	public static String PACKAGE_Path = SD_Path + "/com.coo.vote";
+	
+	/**
+	 * 创建一个简单的消息
+	 * @param what
+	 * @param message
+	 * @return
+	 */
+	public static Message buildMessage(int what, Object message) {
+		Message msg = new Message();
+		msg.what = what;
+		msg.obj = message;
+		return msg;
+	}
+
+	/**
+	 * 获得SD下的Profile的IconPath
+	 */
+	public static String getSdProfileIconPath() {
+		return PACKAGE_Path + "/" + VoteManager.getStrAccount()
+				+ "_icon.png";
+	}
+	
+	public static String getSdProfileIconPath2() {
+		return "file:///mnt/sdcard/com.coo.vote/" + VoteManager.getStrAccount()
+				+ "_icon.png";
+	}
 
 	/**
 	 * 获得静态类型的频道
@@ -99,9 +131,11 @@ public class VoteManager {
 		List<CommonItem> items = new ArrayList<CommonItem>();
 		// 基础属性
 		items.add(new CommonItem("title", "标题", topic.getTitle()));
-		items.add(new CommonItem("_tsi", "创建时间", VoteUtil.getTsDateText(topic.get_tsi())));
-		items.add(new CommonItem("_expired", "截止时间", VoteUtil.getTsDateText(topic.get_tsi())));
-		
+		items.add(new CommonItem("_tsi", "创建时间", VoteUtil
+				.getTsDateText(topic.get_tsi())));
+		items.add(new CommonItem("_expired", "截止时间", VoteUtil
+				.getTsDateText(topic.get_tsi())));
+
 		// TODO 可以分享之... 根据图标生成二维码
 		items.add(new CommonItem("icon", "图标", "暂未实现"));
 		items.add(new CommonItem("qrcode", "二维码", "暂未实现"));

@@ -27,7 +27,7 @@ public class FeedbackMgtActivity extends CommonBizActivity implements
 			response(Mock.feedbacks());
 		} else {
 			// 异步调用数据
-			String URL = Constants.SERVERHOST
+			String URL = Constants.HOST_REST
 					+ "/feedback/latest/20";
 			HttpAsynCaller.doGet(URL, Constants.TYPE_FEEDBACK, this);
 		}

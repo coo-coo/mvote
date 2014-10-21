@@ -119,7 +119,7 @@ public class SysLoginActivity extends GenericActivity implements
 		// 参见AccountRestService.accountLogin
 		String params = "/account/login/mobile/" + mobile
 				+ "/password/" + password;
-		String uri = Constants.SERVERHOST + params;
+		String uri = Constants.HOST_REST + params;
 		// 同步調用?不可以,需要异步调用
 		// SimpleMessage<?> sm = HttpUtils2.doGet(uri, null);
 		HttpAsynCaller.doGet(uri, null, this);

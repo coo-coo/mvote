@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/activity_common" >
+
+    <LinearLayout style="@style/listview_adapter_common" >
+
+        <Button
+            android:id="@+id/btn_sys_profile_icon_more"
+            style="@style/btn_common"
+            android:layout_width="80dp"
+            android:text="@string/app_more" />
+
+        <Button
+            android:id="@+id/btn_sys_profile_icon_ok"
+            style="@style/btn_common"
+            android:layout_width="80dp"
+            android:text="@string/app_ok" />
+    </LinearLayout>
+
+    <com.kingstar.ngbf.ms.cropper.CropImageView
+        xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/civ_btn_sys_profile_icon"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_gravity="center" />
+
+</LinearLayout>
