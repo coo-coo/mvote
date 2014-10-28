@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/tv_channel_grid_title"
-        style="@style/tv_common"
+        style="@style/tv_command_row"
         android:layout_below="@+id/iv_channel_grid_icon"
         android:layout_centerHorizontal="true" />
 

@@ -8,7 +8,12 @@ import org.litepal.crud.DataSupport;
  * @author boqing.shen
  * 
  */
-public class MChannel extends DataSupport {
+public class MChannel extends DataSupport implements java.io.Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6148210912329774733L;
 
 	public MChannel() {
 		// TODO Auto-generated constructor stub
@@ -17,15 +22,16 @@ public class MChannel extends DataSupport {
 	public MChannel(String code, String label) {
 		this.code = code;
 		this.label = label;
+		this.tsi = System.currentTimeMillis();
 	}
 
-	private int id = 0;
+	private long id = 0l;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -52,6 +58,32 @@ public class MChannel extends DataSupport {
 	 * 本机账号，即account
 	 */
 	private String host = "";
+	
+	/**
+	 * 创建时间戳
+	 */
+	private long tsi = 0l;
+	/**
+	 * 更新时间戳
+	 */
+	private long tsu = 0l;
+	
+	
+	public long getTsi() {
+		return tsi;
+	}
+
+	public void setTsi(long tsi) {
+		this.tsi = tsi;
+	}
+
+	public long getTsu() {
+		return tsu;
+	}
+
+	public void setTsu(long tsu) {
+		this.tsu = tsu;
+	}
 
 	public String getCode() {
 		return code;
@@ -69,7 +101,6 @@ public class MChannel extends DataSupport {
 		this.label = label;
 	}
 
-	
 	public int getStatus() {
 		return status;
 	}

@@ -16,6 +16,7 @@ public class MContact extends DataSupport {
 	public MContact(String mobile, String name) {
 		this.mobile = mobile;
 		this.name = name;
+		this.tsi = System.currentTimeMillis();
 	}
 
 	private long id = 0l;
@@ -59,6 +60,31 @@ public class MContact extends DataSupport {
 	 * 是否已关注:0 未关注,1 已关注 (服务器端获得)
 	 */
 	private int focus = 0;
+
+	/**
+	 * 创建时间戳
+	 */
+	private long tsi = 0l;
+	/**
+	 * 更新时间戳
+	 */
+	private long tsu = 0l;
+	
+	public long getTsi() {
+		return tsi;
+	}
+
+	public void setTsi(long tsi) {
+		this.tsi = tsi;
+	}
+
+	public long getTsu() {
+		return tsu;
+	}
+
+	public void setTsu(long tsu) {
+		this.tsu = tsu;
+	}
 
 	public String getName() {
 		return name;
@@ -148,4 +174,16 @@ public class MContact extends DataSupport {
 		this.id = id;
 	}
 
+	/**
+	 * UI操作,选中操作,应该不进入数据库
+	 */
+	private boolean selected = false;
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
 }

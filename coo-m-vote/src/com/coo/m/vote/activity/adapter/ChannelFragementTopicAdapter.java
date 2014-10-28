@@ -2,6 +2,7 @@ package com.coo.m.vote.activity.adapter;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -23,7 +24,7 @@ import com.kingstar.ngbf.ms.mpchart.ChartFactory;
 import com.kingstar.ngbf.ms.mpchart.ChartSeries;
 import com.kingstar.ngbf.ms.mpchart.CommonBarChart;
 import com.kingstar.ngbf.ms.mpchart.CommonPieChart;
-import com.kingstar.ngbf.ms.util.android.CommonItemAdapter;
+import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
 import com.kingstar.ngbf.ms.util.rpc.HttpAsynCaller;
 import com.kingstar.ngbf.ms.util.rpc.IHttpCallback;
@@ -36,18 +37,18 @@ import com.kingstar.ngbf.s.ntp.SimpleMessage;
  * @author boqing.shen
  * 
  */
-public class ChannelFragementTopicAdapter extends CommonItemAdapter<Topic>
+public class ChannelFragementTopicAdapter extends CommonAdapter<Topic>
 		implements OnClickListener, IHttpCallback<SimpleMessage<?>> {
 
 	/**
 	 * 构造函数
 	 */
-	public ChannelFragementTopicAdapter(List<Topic> items,
+	public ChannelFragementTopicAdapter(Activity parent, List<Topic> items,
 			ListView composite) {
-		super(items, composite);
-
+		super(parent,items, composite);
 	}
-
+	
+	
 	@Override
 	public int getItemConvertViewId() {
 		// TODO 返回Topic的布局
@@ -66,14 +67,13 @@ public class ChannelFragementTopicAdapter extends CommonItemAdapter<Topic>
 			int position, long rowId) {
 
 		if (linearLayoutRight == null) {
-			linearLayoutRight = (LinearLayout) getActivity()
-					.findViewById(R.id.ll_sys_main_right);
+			linearLayoutRight = (LinearLayout) getParent().findViewById(
+							R.id.ll_sys_main_right);
 		}
 		// 清除右侧滑动界面，动态加载布局...
 		linearLayoutRight.removeAllViews();
 		if (layoutInflater == null) {
-			layoutInflater = LayoutInflater
-					.from(this.getActivity());
+			layoutInflater = LayoutInflater.from(parent);
 		}
 
 		Topic item = this.getItem(position);
@@ -86,7 +86,7 @@ public class ChannelFragementTopicAdapter extends CommonItemAdapter<Topic>
 		}
 
 		// 显示右侧滑动的信息....
-		drawerLayout = (DrawerLayout) getActivity().findViewById(
+		drawerLayout = (DrawerLayout) getParent().findViewById(
 				R.id.drawer_layout);
 		drawerLayout.openDrawer(Gravity.RIGHT);
 	}
@@ -102,14 +102,14 @@ public class ChannelFragementTopicAdapter extends CommonItemAdapter<Topic>
 		linearLayoutRight.addView(viewTopicResult);
 
 		// 初始化标题
-		TextView tv_title = (TextView) getActivity().findViewById(
+		TextView tv_title = (TextView) getParent().findViewById(
 				R.id.tv_inc_topic_result_title);
 		tv_title.setText(item.getTitle());
 
 		// 初始化结果，以饼图的形式呈现
-		CommonPieChart chart = (CommonPieChart) getActivity()
+		CommonPieChart chart = (CommonPieChart) getParent()
 				.findViewById(R.id.cpc_inc_topic_result);
-		CommonBarChart chart2 = (CommonBarChart) getActivity()
+		CommonBarChart chart2 = (CommonBarChart) getParent()
 				.findViewById(R.id.cbc_inc_topic_result);
 		ChartSeries cs = ChartSeries.instance("投票数");
 		for (TopicLeg leg : item.getLegs()) {
@@ -135,20 +135,19 @@ public class ChannelFragementTopicAdapter extends CommonItemAdapter<Topic>
 		linearLayoutRight.addView(viewTopicVote);
 
 		// 初始化标题
-		TextView tv_title = (TextView) getActivity().findViewById(
+		TextView tv_title = (TextView) getParent().findViewById(
 				R.id.tv_inc_topic_vote_title);
 		tv_title.setText(item.getTitle());
 
 		// 初始化选项条目
-		ListView lv_legs = (ListView) getActivity().findViewById(
+		ListView lv_legs = (ListView) getParent().findViewById(
 				R.id.lv_inc_topic_vote_legs);
 
 		// 初始化适配器...
-		topicLegVoteAdapter = new TopicLegVoteAdapter(item.getLegs(),
+		topicLegVoteAdapter = new TopicLegVoteAdapter(parent,item.getLegs(),
 				lv_legs);
-		topicLegVoteAdapter.initContext(getActivity());
-
-		Button btn_vote = (Button) getActivity().findViewById(
+		
+		Button btn_vote = (Button) getParent().findViewById(
 				R.id.btn_topic_vote);
 		btn_vote.setOnClickListener(this);
 	}
@@ -222,14 +221,14 @@ public class ChannelFragementTopicAdapter extends CommonItemAdapter<Topic>
 				+ VoteUtil.getTsDateText(item.get_tsi()));
 		// TODO 作者账号|昵称
 		holder.tv_author.setText(BLANK + "作者:" + item.getOwner());
-		
+
 		// 初始化数据饼图...
 		ChartSeries cs = ChartSeries.instance(item.getTitle());
 		for (TopicLeg leg : item.getLegs()) {
 			cs.add(leg.getTitle(), leg.getVote());
 		}
 		ChartFactory.init(cs, holder.cpc_chart);
-		
+
 	}
 
 }
@@ -240,6 +239,6 @@ class ChannelFragementTopicRowHolder extends CommonItemHolder {
 	public TextView tv_createtime;
 	public TextView tv_vote;
 	public TextView tv_author;
-	
+
 	public CommonPieChart cpc_chart;
 }

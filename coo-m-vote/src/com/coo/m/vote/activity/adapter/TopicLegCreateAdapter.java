@@ -19,11 +19,11 @@ import com.kingstar.ngbf.ms.util.android.CommonTextCacheListener;
  * Topic新建时后Leg的填充器 参见:http://blog.csdn.net/nairuohe/article/details/6457300
  * 
  */
-public class TopicLegCreateArrayAdapter extends ArrayAdapter<TopicLeg> {
+public class TopicLegCreateAdapter extends ArrayAdapter<TopicLeg> {
 
 	private final Context context;
 
-	public TopicLegCreateArrayAdapter(Context context, List<TopicLeg> legs) {
+	public TopicLegCreateAdapter(Context context, List<TopicLeg> legs) {
 		super(context, R.layout.topic_create_leg_row, legs);
 		this.context = context;
 	}
@@ -76,9 +76,9 @@ class LegDeletionListener implements View.OnClickListener {
 	/**
 	 * 该Adapter
 	 */
-	private TopicLegCreateArrayAdapter adapter;
+	private TopicLegCreateAdapter adapter;
 
-	public LegDeletionListener(TopicLegCreateArrayAdapter adapter,
+	public LegDeletionListener(TopicLegCreateAdapter adapter,
 			TopicLeg leg) {
 		this.leg = leg;
 		this.adapter = adapter;

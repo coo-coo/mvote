@@ -6,7 +6,9 @@
         android:id="@+id/tv_phone_row_icon"
         android:layout_height="45dp"
        	android:layout_width="45dp"
+       	android:layout_marginRight="5dp"
         android:contentDescription="@string/app_blank"
+        android:layout_gravity="center"
         android:src="@drawable/ic_user" />
     
     <TextView
@@ -14,13 +16,13 @@
         style="@style/tv_common_row"
         android:layout_width="0dip"
         android:layout_weight="3"
-        android:gravity="left" />
-
+        android:gravity="left|center" />
+    
     <TextView
         android:id="@+id/tv_phone_row_mobile"
         style="@style/tv_common_row"
         android:layout_width="0dip"
-        android:layout_weight="7"
-        android:gravity="left|center" />
+        android:layout_weight="5"
+        android:layout_gravity="bottom|right"/>
 
 </LinearLayout>

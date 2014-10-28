@@ -2,19 +2,20 @@ package com.coo.m.vote.activity.adapter;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.coo.m.vote.R;
 import com.coo.m.vote.model.MContact;
-import com.kingstar.ngbf.ms.util.android.CommonItemAdapter;
+import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
 
-public class ContactBeanAdapter extends CommonItemAdapter<MContact> {
+public class ContactBeanAdapter extends CommonAdapter<MContact> {
 
-	public ContactBeanAdapter(List<MContact> items, ListView lv) {
-		super(items, lv);
+	public ContactBeanAdapter(Activity parent, List<MContact> items, ListView composite) {
+		super(parent,items, composite);
 	}
 
 	@Override

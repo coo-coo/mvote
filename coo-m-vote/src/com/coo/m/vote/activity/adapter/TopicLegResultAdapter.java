@@ -2,6 +2,7 @@ package com.coo.m.vote.activity.adapter;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AbsListView;
@@ -10,19 +11,20 @@ import android.widget.TextView;
 
 import com.coo.m.vote.R;
 import com.coo.s.vote.model.TopicLeg;
-import com.kingstar.ngbf.ms.util.android.CommonItemAdapter;
+import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
 
 /**
  * 用于Topic投票的LEG适配器,Radio|Title|
+ * 
  * @deprecated 参见CommonBarChart
  * @author boqing.shen
  * 
  */
-public class TopicLegResultAdapter extends CommonItemAdapter<TopicLeg> {
+public class TopicLegResultAdapter extends CommonAdapter<TopicLeg> {
 
-	public TopicLegResultAdapter(List<TopicLeg> items, AbsListView composite) {
-		super(items, composite);
+	public TopicLegResultAdapter(Activity parent, List<TopicLeg> items, AbsListView composite) {
+		super(parent,items, composite);
 	}
 
 	@Override

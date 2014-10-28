@@ -2,6 +2,7 @@ package com.coo.m.vote.activity.adapter;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -9,7 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.coo.m.vote.R;
-import com.kingstar.ngbf.ms.util.android.CommonItemAdapter;
+import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemDialog;
 import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
@@ -24,18 +25,18 @@ import com.kingstar.ngbf.ms.util.model.CommonItemOption;
  * 
  */
 public class SysProfilePropertyOptionAdapter extends
-		CommonItemAdapter<CommonItemOption> {
+		CommonAdapter<CommonItemOption> {
 
 	/**
 	 * 构造函数
 	 */
-	public SysProfilePropertyOptionAdapter(List<CommonItemOption> items,
+	public SysProfilePropertyOptionAdapter(Activity parent, List<CommonItemOption> items,
 			ListView composite) {
-		super(items, composite);
+		super(parent,items, composite);
 	}
 
 	/**
-	 * 初始化对象,用于对象的选中,值的回写 TODO 再考虑
+	 * TODO 再考虑 初始化对象,用于对象的选中,值的回写 
 	 * 
 	 * @param dialog
 	 * @param item
@@ -62,7 +63,7 @@ public class SysProfilePropertyOptionAdapter extends
 		item.setValue(current.getValue());
 
 		// 通知父类Activity对象进行数据的更新
-		dialog.notitifyParentAbsViewItemChanged();
+		dialog.notifyAdapterEvent(CommonAdapter.EVT_ITEM_CHANGED, item);
 		// 关闭对话框
 		dialog.dismiss();
 	}

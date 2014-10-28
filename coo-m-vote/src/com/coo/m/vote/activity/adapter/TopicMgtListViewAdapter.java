@@ -7,11 +7,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.coo.m.vote.R;
 import com.coo.s.vote.model.Topic;
-import com.kingstar.ngbf.ms.util.android.CommonItemAdapter;
+import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemDialog;
 import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
 
@@ -19,11 +18,10 @@ import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
  * Topic管理行Adapter
  * 
  */
-public class TopicMgtListViewAdapter extends CommonItemAdapter<Topic> {
+public class TopicMgtListViewAdapter extends CommonAdapter<Topic> {
 
-	public TopicMgtListViewAdapter(List<Topic> items,
-			ListView composite) {
-		super(items, composite);
+	public TopicMgtListViewAdapter(Activity parent, List<Topic> items, ListView composite) {
+		super(parent,items, composite);
 	}
 
 	/**
@@ -55,7 +53,7 @@ public class TopicMgtListViewAdapter extends CommonItemAdapter<Topic> {
 			int position, long rowId) {
 		// 弹出处理对话框
 		Topic item = this.getItem(position);
-		new TopicMgtItemHandleDialog(this.getActivity(), item).show();
+		new TopicMgtItemHandleDialog(parent,item).show();
 		return true;
 	}
 
@@ -68,13 +66,14 @@ class TopicMgtItemRowHolder extends CommonItemHolder {
 
 /**
  * 条目长恩处理
+ * 
  * @author boqing.shen
- *
+ * 
  */
 class TopicMgtItemHandleDialog extends CommonItemDialog<Topic> {
 
-	public TopicMgtItemHandleDialog(Activity activity, Topic item) {
-		super(activity, item);
+	public TopicMgtItemHandleDialog(Activity parent,Topic item) {
+		super(parent,item);
 	}
 
 	@Override
@@ -84,11 +83,8 @@ class TopicMgtItemHandleDialog extends CommonItemDialog<Topic> {
 
 	@Override
 	public void doOkAction() {
-		Toast.makeText(getParent(),
-				"doOkAction..." + item.getTitle() + "-" + item.getOwner(),
-				Toast.LENGTH_SHORT).show();
 		// TODO 处理,发送请求，改状态0到1
-//		item.setStatus(1);
-		this.notitifyParentAbsViewItemChanged();
+		// item.setStatus(1);
+//		this.notitifyParentAbsViewItemChanged();
 	}
 }

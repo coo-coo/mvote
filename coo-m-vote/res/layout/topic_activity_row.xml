@@ -4,23 +4,23 @@
 
     <TextView
         android:id="@+id/tv_topic_row_title"
-        style="@style/tv_common_row"
+        style="@style/tv_command_row"
         android:layout_width="0dip"
         android:layout_weight="5"
-        android:gravity="left|center" />
+        android:gravity="left|center_vertical" />
 
     <TextView
         android:id="@+id/tv_topic_row_vote"
         style="@style/tv_common_row"
         android:layout_width="0dip"
         android:layout_weight="1"
-        android:gravity="center" />
+        android:gravity="left|center_vertical" />
 
     <TextView
         android:id="@+id/tv_topic_row_createtime"
         style="@style/tv_common_row"
         android:layout_width="0dip"
         android:layout_weight="4"
-        android:gravity="left|center" />
+        android:gravity="right|center_vertical" />
 
 </LinearLayout>

@@ -14,9 +14,9 @@
 
 	<properties>
 		<artifactId>coo-m-vote</artifactId>
-		<app.version.name>0.6.0.0</app.version.name>
+		<app.version.name>0.7.0.0</app.version.name>
 		<coo-s-vote-model.version>0.6.2.0</coo-s-vote-model.version>
-		<ngbf-ms-util.version>2.4.8.0</ngbf-ms-util.version>
+		<ngbf-ms-util.version>2.4.9.0</ngbf-ms-util.version>
 		<ngbf-ms-mpchart.version>2.4.0.0</ngbf-ms-mpchart.version>
 		<ngbf-ms-cropper.version>2.4.0.0</ngbf-ms-cropper.version>
 	</properties>
@@ -60,7 +60,7 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.kingstar.ngbf</groupId>
 			<artifactId>ngbf-ms-cropper</artifactId>

@@ -48,8 +48,7 @@ public class SysMainChannel extends Fragment implements
 	/**
 	 * 构造函数
 	 */
-	public SysMainChannel(FragmentActivity parent, String code,
-			String label) {
+	public SysMainChannel(FragmentActivity parent, String code, String label) {
 		super();
 		this.parent = parent;
 		this.code = code;
@@ -64,31 +63,30 @@ public class SysMainChannel extends Fragment implements
 			Bundle savedInstanceState) {
 		fragementView = inflater.inflate(R.layout.sys_main_fragment,
 				container, false);
-		
+
 		if (Constants.MOCK_DATA) {
 			response(Mock.topicshots(this.code));
 		} else {
 			// 异步加载获得的数据
-			String uri = Constants.HOST_REST
-					+ "/topic/code/" + code + "/account/"
+			String uri = Constants.HOST_REST + "/topic/code/"
+					+ code + "/account/"
 					+ VoteManager.getStrAccount();
 			HttpAsynCaller.doGet(uri, Constants.TYPE_TOPIC, this);
 		}
-		
+
 		// TODO 根据频道代码来加载数据,应根据手势滑动来加载数据，效率为高
 		return fragementView;
 	}
 
-	
 	// @Override
 	public void response(SimpleMessage<Topic> resp) {
 		// 获得Fragement视图内的ListView,加载数据
 		ListView lv_topics = (ListView) fragementView
 				.findViewById(R.id.lv_sys_main_fragment);
 		// toast("msg-" + code + "-" + label);
+		@SuppressWarnings("unused")
 		ChannelFragementTopicAdapter adapter = new ChannelFragementTopicAdapter(
-				resp.getRecords(), lv_topics);
-		adapter.initContext(parent);
+				parent, resp.getRecords(), lv_topics);
 	}
 
 	public String getLabel() {

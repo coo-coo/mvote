@@ -5,7 +5,7 @@ import android.widget.ListView;
 import com.coo.m.vote.Constants;
 import com.coo.m.vote.Mock;
 import com.coo.m.vote.R;
-import com.coo.m.vote.activity.adapter.AccountMgtListViewAdapter;
+import com.coo.m.vote.activity.adapter.AccountMgtAdapter;
 import com.coo.s.vote.model.Account;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 import com.kingstar.ngbf.ms.util.rpc.IHttpCallback;
@@ -39,17 +39,17 @@ public class AccountMgtActivity extends CommonBizActivity implements
 		return "账号管理";
 	}
 
-	AccountMgtListViewAdapter adapter;
 	@Override
 	public void response(SimpleMessage<Account> resp) {
 		ListView listView = (ListView) findViewById(R.id.lv_account_mgt);
-		adapter = new AccountMgtListViewAdapter(
-				resp.getRecords(), listView);
-		adapter.initContext(this);
+
+		adapter = new AccountMgtAdapter(this, resp.getRecords(),
+				listView);
 	}
-	
+
 	@Override
-	public void onAbsViewItemChanged(Object item) {
+	public void onAdapterItemClicked(Object item) {
+
 		// 更新Adapter
 		adapter.notifyDataSetChanged();
 		// TODO 进行RPC调用

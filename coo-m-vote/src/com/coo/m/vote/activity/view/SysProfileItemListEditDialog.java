@@ -3,7 +3,6 @@ package com.coo.m.vote.activity.view;
 import java.util.List;
 
 import android.app.Activity;
-import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -21,23 +20,17 @@ import com.kingstar.ngbf.ms.util.model.CommonItemOption;
  */
 public class SysProfileItemListEditDialog extends CommonItemDialog<CommonItem> {
 
-	public static final String TAG = SysProfileItemListEditDialog.class
-			.getSimpleName();
-
-	public SysProfileItemListEditDialog(Activity activity, CommonItem item) {
-		super(activity, item);
+	public SysProfileItemListEditDialog(Activity parent, CommonItem item) {
+		super(parent, item);
 	}
 
 	@Override
 	public void initControls(LinearLayout layout) {
-		Log.i(TAG, "initControls...");
 		// 定义控件，控件New产生,没有从Context中寻找
 		ListView lv_options = new ListView(parent);
 		// 定义适配器
 		SysProfilePropertyOptionAdapter adapter = new SysProfilePropertyOptionAdapter(
-				getItems(), lv_options);
-		// 初始化上下文
-		adapter.initContext(parent);
+				parent, getItems(), lv_options);
 		adapter.initParams(this, item);
 		// 添加控件
 		layout.addView(lv_options);
@@ -53,7 +46,6 @@ public class SysProfileItemListEditDialog extends CommonItemDialog<CommonItem> {
 				option.setSelected(false);
 			}
 		}
-		toast("options size:" + options.size());
 		return options;
 	}
 

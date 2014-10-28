@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.coo.m.vote"
-    android:versionCode="2"
-    android:versionName="0.6.0" >
+    android:versionCode="3"
+    android:versionName="0.7.0" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -67,9 +67,11 @@
         </activity>
         <activity android:name="com.coo.m.vote.activity.TopicCreateActivity" >
         </activity>
-        <activity android:name="com.coo.m.vote.activity.ContactActivity" >
+        <activity android:name="com.coo.m.vote.activity.MContactActivity" >
         </activity>
-        <activity android:name="com.coo.m.vote.activity.GroupActivity" >
+        <activity android:name="com.coo.m.vote.activity.MGroupActivity" >
+        </activity>
+        <activity android:name="com.coo.m.vote.activity.MGroupEditorActivity" >
         </activity>
         <activity android:name="com.coo.m.vote.activity.FeedbackMgtActivity" >
         </activity>

@@ -1,6 +1,5 @@
-package com.coo.m.vote.activity.adapter;
+package com.coo.m.vote;
 
-import com.coo.m.vote.Constants;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 import com.kingstar.ngbf.ms.util.rpc.IHttpCallback;
 import com.kingstar.ngbf.s.ntp.SimpleMessage;

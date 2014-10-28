@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
 
-    <dbname value="vote" >
+    <dbname value="vote1" >
     </dbname>
 
-    <version value="3" >
+    <version value="4" >
     </version>
 
     <list>

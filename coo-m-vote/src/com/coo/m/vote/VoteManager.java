@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Environment;
 import android.os.Message;
@@ -32,10 +33,32 @@ public class VoteManager {
 	public static String PACKAGE_Path = SD_Path + "/com.coo.vote";
 	
 	/**
+	 * 管理器初始化，在VoteApplication中进行
+	 */
+	public static void onAppCreate(Application app) {
+		// TODO 短信推送、百度推送
+
+		// 初始化数据库,参见LitePay架构
+		// https://github.com/suzlwang/LitePal/
+
+		sharedManager = new SharedManager(app, "vote");
+		
+		// 启动后台程序
+//		startBackgound(app);
+	}
+	
+	/**
+	 * 启动后台服务
+	 * @param context
+	 */
+	public static void startBackgound(Context context){
+		// 启动后台程序
+		Intent intent = new Intent(context, VoteService.class);
+		context.startService(intent);
+	}
+	
+	/**
 	 * 创建一个简单的消息
-	 * @param what
-	 * @param message
-	 * @return
 	 */
 	public static Message buildMessage(int what, Object message) {
 		Message msg = new Message();
@@ -70,18 +93,6 @@ public class VoteManager {
 	}
 
 	/**
-	 * 管理器初始化，在VoteApplication中进行
-	 */
-	public static void onAppCreate(Application app) {
-		// TODO 百度推送注册
-
-		// 初始化数据库,参见LitePay架构
-		// https://github.com/suzlwang/LitePal/
-
-		sharedManager = new SharedManager(app, "user_info");
-	}
-
-	/**
 	 * 返回SharedManager对象
 	 */
 	public static SharedManager getSharedManager() {
@@ -102,7 +113,7 @@ public class VoteManager {
 		List<CommonItem> items = new ArrayList<CommonItem>();
 		// 基础属性
 		String account = getStrAccount();
-		items.add(new CommonItem("account", "用户名", account));
+//		items.add(new CommonItem("account", "用户名", account));
 		items.add(new CommonItem("mobile", "手机号", account));
 		items.add(new CommonItem("password", "登录密码", "")
 				.uiType(CommonItem.UIT_PASSWORD));
@@ -124,7 +135,7 @@ public class VoteManager {
 	}
 
 	/**
-	 * 
+	 * 获得Topic的骨架
 	 * @return
 	 */
 	public static List<CommonItem> getTopicSkeletonItems(Topic topic) {
@@ -260,5 +271,6 @@ public class VoteManager {
 	private VoteManager() {
 
 	}
-
+	
+	
 }

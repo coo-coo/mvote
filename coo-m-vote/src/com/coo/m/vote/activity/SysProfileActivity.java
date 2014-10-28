@@ -19,11 +19,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.coo.m.vote.CommonItemAdapter;
 import com.coo.m.vote.Constants;
 import com.coo.m.vote.R;
 import com.coo.m.vote.VoteManager;
 import com.coo.m.vote.VoteUtil;
-import com.coo.m.vote.activity.adapter.SysProfilePropertyAdapter;
+import com.coo.m.vote.activity.view.SysProfileItemListEditDialog;
+import com.coo.m.vote.activity.view.SysProfileItemPasswordEditDialog;
+import com.coo.m.vote.activity.view.SysProfileItemTextEditDialog;
 import com.kingstar.ngbf.ms.util.FileUtil;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
@@ -48,17 +51,42 @@ public class SysProfileActivity extends CommonBizActivity implements
 		return R.layout.sys_profile_activity;
 	}
 
-	/**
-	 * 条目适配器
-	 */
-	private SysProfilePropertyAdapter adapter;
-
 	private ImageView ivIcon = null;
 
 	private TextView tvAccount = null;
 
+	/**
+	 * AdapterItem改变时调用，对应EVT_ITEM_CLICKED事件
+	 */
+	public void onAdapterItemClicked(Object object) {
+		if (object instanceof CommonItem) {
+			CommonItem item = (CommonItem) object;
+			int uiType = item.getUiType();
+			switch (uiType) {
+			case CommonItem.UIT_TEXT:
+				// 显示文本，修改对话框
+				new SysProfileItemTextEditDialog(this, item)
+						.show();
+				break;
+			case CommonItem.UIT_PASSWORD:
+				// 显示文本，修改对话框
+				new SysProfileItemPasswordEditDialog(this, item)
+						.show();
+				break;
+			case CommonItem.UIT_LIST:
+				// 显示文本，修改对话框
+				new SysProfileItemListEditDialog(this, item)
+						.show();
+				break;
+			default:
+				// 其它，包括Label/Boolean等,不处理
+				break;
+			}
+		}
+	}
+
 	@Override
-	public void onAbsViewItemChanged(Object item) {
+	public void onAdapterItemChanged(Object item) {
 		// 交由子类实现
 		adapter.notifyDataSetChanged();
 		if (item instanceof CommonItem) {
@@ -80,15 +108,17 @@ public class SysProfileActivity extends CommonBizActivity implements
 
 	@Override
 	public void loadContent() {
+		// 启动后台服务
+		// this.startService(new Intent(this, VoteService.class));
+
 		// 定义控件 & 定义适配器
 		if (Constants.MOCK_DATA) {
 			ListView listView = (ListView) findViewById(R.id.lv_sys_profile);
 
 			// TODO 需要数据的服务器端Merge处理...
-			adapter = new SysProfilePropertyAdapter(
+			adapter = new CommonItemAdapter(this,
 					VoteManager.getProfileSkeletonItems(),
 					listView);
-			adapter.initContext(this);
 		} else {
 			// 异步调用数据
 			String account = VoteManager.getStrAccount();
@@ -134,23 +164,23 @@ public class SysProfileActivity extends CommonBizActivity implements
 
 	private void doSettingIcon() {
 		// 从相册中获取
-//		Intent intent = new Intent(Intent.ACTION_PICK, null);
-//		intent.setDataAndType(
-//				MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-//				"image/*");
-//		startActivityForResult(intent, REQUEST_ALBUM);
-		
+		Intent intent = new Intent(Intent.ACTION_PICK, null);
+		intent.setDataAndType(
+				MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+				"image/*");
+		startActivityForResult(intent, REQUEST_ALBUM);
+
 		// TODO 参见系统参数配置....
-		
+
 		// 从拍照中获取
-		Intent intent2 = new Intent(
-				MediaStore.ACTION_IMAGE_CAPTURE);
-		intent2.putExtra(MediaStore.EXTRA_OUTPUT, Uri
-				.fromFile(new File(Environment
-						.getExternalStorageDirectory(),
-						"test11.jpg")));
-		startActivityForResult(intent2, REQUEST_CAMERA);
-		
+		// Intent intent2 = new Intent(
+		// MediaStore.ACTION_IMAGE_CAPTURE);
+		// intent2.putExtra(MediaStore.EXTRA_OUTPUT, Uri
+		// .fromFile(new File(Environment
+		// .getExternalStorageDirectory(),
+		// "test11.jpg")));
+		// startActivityForResult(intent2, REQUEST_CAMERA);
+
 		// toast("图片设置");
 		// Intent intent = new Intent();
 		// intent.setClass(SysProfileActivity.this,
@@ -166,8 +196,9 @@ public class SysProfileActivity extends CommonBizActivity implements
 			startPhotoZoom(data.getData());
 			break;
 		case REQUEST_CAMERA:
-			File temp = new File(Environment.getExternalStorageDirectory()
-					+ "/test11.jpg");
+			File temp = new File(
+					Environment.getExternalStorageDirectory()
+							+ "/test11.jpg");
 			startPhotoZoom(Uri.fromFile(temp));
 			break;
 		case REQUEST_CROP:
@@ -190,9 +221,10 @@ public class SysProfileActivity extends CommonBizActivity implements
 		intent.putExtra("return-data", true);
 		startActivityForResult(intent, REQUEST_CROP);
 	}
-	
+
 	/**
 	 * 获得返回结果,重新设置Icon,存储/上传的
+	 * 
 	 * @param picdata
 	 */
 	private void resetIcon(Intent picdata) {
@@ -211,9 +243,10 @@ public class SysProfileActivity extends CommonBizActivity implements
 			}
 		}
 	}
-	
+
 	/**
 	 * 上传图片到网络
+	 * 
 	 * @param filePath
 	 */
 	private void uploadFile(String filePath) {
@@ -270,8 +303,7 @@ public class SysProfileActivity extends CommonBizActivity implements
 				ci.setValue(value);
 			}
 		}
-		adapter = new SysProfilePropertyAdapter(items, listView);
-		adapter.initContext(this);
+		adapter = new CommonItemAdapter(this, items, listView);
 	}
 
 }

@@ -48,7 +48,7 @@ public class SysConfigActivity extends CommonBizActivity {
 			doExit();
 			break;
 		case R.id.btn_sys_config_version:
-			doJump(SysVersionActivity.class);
+			this.handleNext(SysVersionActivity.class);
 			break;
 		case R.id.btn_sys_config_private:
 			toast("暂未实现...");
@@ -69,10 +69,10 @@ public class SysConfigActivity extends CommonBizActivity {
 		startActivity(intent);
 	}
 
-	private void doJump(Class<?> next) {
-		// 跳转到登录界面....
-		Intent intent = new Intent(SysConfigActivity.this, next);
-		startActivity(intent);
-	}
+//	private void doJump(Class<?> next) {
+//		// 跳转到登录界面....
+//		Intent intent = new Intent(this, next);
+//		startActivity(intent);
+//	}
 
 }

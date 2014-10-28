@@ -27,30 +27,20 @@ public class TopicConfigActivity extends CommonBizActivity {
 		return R.layout.topic_config_activity;
 	}
 	
-	private TopicPropertyAdapter adapter;
-	
 	@Override
 	public void loadContent() {
 		ListView listView = (ListView) findViewById(R.id.lv_topic_config);
 		// 获得从TopicActivity传递过来的某一个Topic，进行设置
 		Intent intent = getIntent();
-		current = ((Topic) intent.getSerializableExtra("item"));
+		current = ((Topic) intent.getSerializableExtra("ITEM"));
 		// 初始化设置
 		adapter = new TopicPropertyAdapter(
-				VoteManager.getTopicSkeletonItems(current), listView);
-		adapter.initContext(this);
+				this,VoteManager.getTopicSkeletonItems(current), listView);
+
 	}
 
 	@Override
 	public String getHeaderTitle() {
 		return "话题设置";
 	}
-
-//	@Override
-//	public void response(SimpleMessage<Topic> resp) {
-//		ListView listView = (ListView) findViewById(R.id.lv_topic_mgt);
-//		TopicMgtListViewAdapter adapter = new TopicMgtListViewAdapter(
-//				resp.getRecords(), listView);
-//		adapter.initContext(this);
-//	}
 }

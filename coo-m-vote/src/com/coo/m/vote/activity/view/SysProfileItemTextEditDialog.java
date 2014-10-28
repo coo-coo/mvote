@@ -7,6 +7,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemDialog;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
 
@@ -24,8 +25,8 @@ public class SysProfileItemTextEditDialog extends CommonItemDialog<CommonItem> {
 	 */
 	private EditText et_item;
 
-	public SysProfileItemTextEditDialog(Activity activity, CommonItem item) {
-		super(activity, item);
+	public SysProfileItemTextEditDialog(Activity parent, CommonItem item) {
+		super(parent, item);
 	}
 
 	@Override
@@ -41,28 +42,26 @@ public class SysProfileItemTextEditDialog extends CommonItemDialog<CommonItem> {
 		// 添加子控件
 		layout.addView(et_item);
 	}
-	
+
 	/**
 	 * 返回文本框类型
+	 * 
 	 * @return
 	 */
-	protected int getInputType(){
+	protected int getInputType() {
 		return InputType.TYPE_CLASS_TEXT;
 	}
-	
+
 	@Override
 	protected void doOkAction() {
 		// TODO 检验值的合法性...
-		
 		// 原Item重新设值
 		item.setValue(et_item.getText());
-
-		// 通知刷新...
-		this.notitifyParentAbsViewItemChanged();
+		
+		// 通知对象条目变更
+		this.notifyAdapterEvent(CommonAdapter.EVT_ITEM_CHANGED, item);
 	}
 
-	
-	
 	@Override
 	protected String getTitle() {
 		return "编辑:" + item.getLabel();

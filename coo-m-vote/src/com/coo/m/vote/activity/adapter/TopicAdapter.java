@@ -2,16 +2,15 @@ package com.coo.m.vote.activity.adapter;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.coo.m.vote.R;
 import com.coo.m.vote.VoteUtil;
-import com.coo.m.vote.activity.view.TopicCommandDialog;
 import com.coo.s.vote.model.Topic;
-import com.kingstar.ngbf.ms.util.android.CommonItemAdapter;
+import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
 
 /**
@@ -21,13 +20,14 @@ import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
  * @author boqing.shen
  * 
  */
-public class TopicAdapter extends CommonItemAdapter<Topic> {
+public class TopicAdapter extends CommonAdapter<Topic> {
 
 	/**
 	 * 构造函数
 	 */
-	public TopicAdapter(List<Topic> items, ListView composite) {
-		super(items, composite);
+	public TopicAdapter(Activity parent, List<Topic> items,
+			ListView composite) {
+		super(parent, items, composite);
 	}
 
 	@Override
@@ -52,19 +52,10 @@ public class TopicAdapter extends CommonItemAdapter<Topic> {
 		TopicRowHolder holder = (TopicRowHolder) ciHolder;
 		holder.tv_title.setText(item.getTitle());
 		// 创建时间
-		holder.tv_createtime.setText(VoteUtil.getTsText(item
-				.get_tsi()));
+		holder.tv_createtime
+				.setText(VoteUtil.getTsText(item.get_tsi()));
 		// 投票数
 		holder.tv_vote.setText("" + item.getVote());
-	}
-
-	@Override
-	public boolean onItemLongClick(AdapterView<?> parentView, View view,
-			int position, long rowId) {
-		Topic topic = this.getItem(position);
-		// 弹出Topic命令对话框
-		new TopicCommandDialog(this.getActivity(), topic).show();
-		return true;
 	}
 }
 

@@ -61,6 +61,16 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <!-- 用于单行的DialogCommand -->
+    <style name="tv_command_row" parent="@android:style/TextAppearance">
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
     <style name="tv_common_small" parent="@android:style/TextAppearance">
         <item name="android:layout_height">30dp</item>
         <item name="android:layout_width">wrap_content</item>
@@ -91,8 +101,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">70dp</item>
         <item name="android:orientation">horizontal</item>
-        <item name="android:paddingLeft">1dp</item>
-        <item name="android:paddingRight">1dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
     </style>
 
     <style name="listview_common">
@@ -104,7 +114,7 @@
         <item name="android:cacheColorHint">@color/black</item>
     </style>
 
-    <!-- 空行样式,用于调整控件之间的竖向间隔控件 -->
+    <!-- 空行样式,用于调整控件之间的竖向间隔控件  <View style="@style/view_space" /> -->
     <style name="view_space">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">15dp</item>

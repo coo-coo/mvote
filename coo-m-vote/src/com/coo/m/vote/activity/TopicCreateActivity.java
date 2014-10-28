@@ -12,7 +12,7 @@ import android.widget.ListView;
 import com.coo.m.vote.Constants;
 import com.coo.m.vote.R;
 import com.coo.m.vote.VoteManager;
-import com.coo.m.vote.activity.adapter.TopicLegCreateArrayAdapter;
+import com.coo.m.vote.activity.adapter.TopicLegCreateAdapter;
 import com.coo.s.vote.model.Account;
 import com.coo.s.vote.model.Topic;
 import com.coo.s.vote.model.TopicLeg;
@@ -45,7 +45,7 @@ public class TopicCreateActivity extends CommonBizActivity implements
 	/**
 	 * 定义数据适配器
 	 */
-	private TopicLegCreateArrayAdapter adapter;
+	private TopicLegCreateAdapter adapter;
 
 	@Override
 	public String getHeaderTitle() {
@@ -65,7 +65,7 @@ public class TopicCreateActivity extends CommonBizActivity implements
 		// 设置Leg ListView
 		lv_legs = (ListView) findViewById(R.id.lv_topic_create_legs);
 		// 初始化adapter
-		adapter = new TopicLegCreateArrayAdapter(this, getDefaultLegs());
+		adapter = new TopicLegCreateAdapter(this, getDefaultLegs());
 		lv_legs.setAdapter(adapter);
 	}
 

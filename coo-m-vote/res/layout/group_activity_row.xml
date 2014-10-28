@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/listview_adapter_common" >
+
+    <TextView
+        android:id="@+id/tv_group_row_name"
+        style="@style/tv_command_row"
+        android:layout_width="0dip"
+        android:layout_weight="3"
+        android:gravity="left|center_vertical" />
+
+    <TextView
+        android:id="@+id/tv_group_row_tsi"
+        style="@style/tv_common_row"
+        android:layout_width="0dip"
+        android:layout_weight="7"
+        android:gravity="right|center_vertical" />
+
+</LinearLayout>
