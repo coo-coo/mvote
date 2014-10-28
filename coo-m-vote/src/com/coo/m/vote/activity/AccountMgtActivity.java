@@ -44,12 +44,11 @@ public class AccountMgtActivity extends CommonBizActivity implements
 	public void response(SimpleMessage<Account> resp) {
 		ListView listView = (ListView) findViewById(R.id.lv_account_mgt);
 		adapter = new AccountMgtListViewAdapter(
-				resp.getRecords(), listView);
-		adapter.initContext(this);
+				this,resp.getRecords(), listView);
 	}
 	
 	@Override
-	public void onAbsViewItemChanged(Object item) {
+	public void onAdapterItemClicked(Object item) {
 		// 更新Adapter
 		adapter.notifyDataSetChanged();
 		// TODO 进行RPC调用

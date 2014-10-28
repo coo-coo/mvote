@@ -14,8 +14,8 @@
         style="@style/tv_common_row"
         android:layout_width="0dip"
         android:layout_weight="3"
-        android:gravity="left" />
-
+        android:gravity="left|center" />
+    
     <TextView
         android:id="@+id/tv_phone_row_mobile"
         style="@style/tv_common_row"

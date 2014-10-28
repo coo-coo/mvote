@@ -22,9 +22,9 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.coo.m.vote.CommonItemAdapter;
 import com.coo.m.vote.Constants;
 import com.coo.m.vote.R;
-import com.coo.m.vote.activity.adapter.CommonItemListAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 import com.kingstar.ngbf.ms.util.android.res.ServiceFactory;
 import com.kingstar.ngbf.ms.util.android.res.ServiceProvider;
@@ -55,7 +55,7 @@ public class SysVersionActivity extends CommonBizActivity {
 	private static final int DOWNLOAD = 1;
 	// 下载结束
 	private static final int DOWNLOAD_FINISH = 2;
-	
+
 	@Override
 	public String getHeaderTitle() {
 		return "版本信息";
@@ -70,9 +70,7 @@ public class SysVersionActivity extends CommonBizActivity {
 	public void loadContent() {
 		ListView listView = (ListView) findViewById(R.id.lv_sys_version);
 		// 定义适配器
-		CommonItemListAdapter adapter = new CommonItemListAdapter(
-				getItems(), listView);
-		adapter.initContext(this);
+		adapter = new CommonItemAdapter(this, getItems(), listView);
 
 		btn_update = (Button) findViewById(R.id.btn_sys_version_update);
 		btn_update.setOnClickListener(this);
@@ -132,7 +130,7 @@ public class SysVersionActivity extends CommonBizActivity {
 	 * @since 0.4.6.0
 	 */
 	private String path = "";
-	
+
 	/**
 	 * 显示软件更新对话框
 	 * 

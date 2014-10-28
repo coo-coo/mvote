@@ -6,10 +6,22 @@ import org.litepal.crud.DataSupport;
  * 本地账号建群,群来MContact
  * 
  */
-public class MGroup extends DataSupport {
+public class MGroup extends DataSupport implements java.io.Serializable{
+
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8416383234460850465L;
 
 	public MGroup() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public MGroup(String name, String accounts0) {
+		this.name = name;
+		this.accounts0 = accounts0;
+		this.tsi = System.currentTimeMillis();
 	}
 
 	private long id = 0l;
@@ -26,9 +38,26 @@ public class MGroup extends DataSupport {
 	 */
 	private String description = "";
 	/**
-	 * 账号组1,记录名称和手机号.... 参见 name|13512210211;name|13512210212;
+	 * 账号组1,记录名称和手机号.... 参见 13512210211,13512210212; 100个电话还是能存的
 	 */
 	private String accounts0 = "";
+	/**
+	 * 创建时间戳
+	 */
+	private long tsi = 0l;
+	/**
+	 * 更新时间戳
+	 */
+	private long tsu = 0l;
+	
+	public long getTsu() {
+		return tsu;
+	}
+
+	public void setTsu(long tsu) {
+		this.tsu = tsu;
+	}
+
 	/**
 	 * 账号组2，备用字段，受SQLite长度限制?
 	 */
@@ -72,5 +101,13 @@ public class MGroup extends DataSupport {
 
 	public void setAccounts0(String accounts0) {
 		this.accounts0 = accounts0;
+	}
+
+	public long getTsi() {
+		return tsi;
+	}
+
+	public void setTsi(long tsi) {
+		this.tsi = tsi;
 	}
 }

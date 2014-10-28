@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.coo.m.vote.R;
 import com.coo.s.vote.model.Account;
-import com.kingstar.ngbf.ms.util.android.CommonItemAdapter;
+import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemDialog;
 import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
 
@@ -20,10 +20,10 @@ import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
  * Account管理行Adapter
  * 
  */
-public class AccountMgtListViewAdapter extends CommonItemAdapter<Account> {
+public class AccountMgtListViewAdapter extends CommonAdapter<Account> {
 
-	public AccountMgtListViewAdapter(List<Account> items, ListView composite) {
-		super(items, composite);
+	public AccountMgtListViewAdapter(Activity parent, List<Account> items, ListView composite) {
+		super(parent,items, composite);
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class AccountMgtListViewAdapter extends CommonItemAdapter<Account> {
 			int position, long rowId) {
 		// 弹出处理对话框
 		Account item = this.getItem(position);
-		new AccountMgtItemHandleDialog(this.getActivity(), item).show();
+		new AccountMgtItemHandleDialog(parent,item).show();
 		return true;
 	}
 
@@ -79,17 +79,16 @@ class AccountMgtItemRowHolder extends CommonItemHolder {
  */
 class AccountMgtItemHandleDialog extends CommonItemDialog<Account> {
 
-	public AccountMgtItemHandleDialog(Activity activity, Account item) {
-		super(activity, item);
+	public AccountMgtItemHandleDialog(Activity parent,Account item) {
+		super(parent,item);
 	}
 
 	@Override
 	public String getTitle() {
 		return "账号处理";
 	}
-	
-	// 指明下一个状态  目前，只有【正常、锁定】两个状态的切换
-	
+
+	// 指明下一个状态 目前，只有【正常、锁定】两个状态的切换
 
 	protected void initControls(LinearLayout layout) {
 		TextView tv = new EditText(parent);
@@ -116,6 +115,6 @@ class AccountMgtItemHandleDialog extends CommonItemDialog<Account> {
 		toast("执行.." + item.getMobile() + "  " + statusTarget);
 		item.setStatus(statusTarget);
 		// 交給Activity來進行RPC调用
-		this.notitifyParentAbsViewItemChanged();
+//		this.notitifyParentAbsViewItemChanged();
 	}
 }

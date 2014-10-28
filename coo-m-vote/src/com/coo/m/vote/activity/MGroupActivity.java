@@ -1,0 +1,96 @@
+package com.coo.m.vote.activity;
+
+import java.util.List;
+
+import android.app.Dialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.ListView;
+
+import com.coo.m.vote.R;
+import com.coo.m.vote.activity.adapter.MGroupAdapter;
+import com.coo.m.vote.activity.view.MGroupCommandDialog;
+import com.coo.m.vote.model.MGroup;
+import com.coo.m.vote.model.MManager;
+import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
+import com.kingstar.ngbf.ms.util.model.CommonItem;
+
+/**
+ * 群组管理
+ */
+public class MGroupActivity extends CommonBizActivity {
+
+	@Override
+	public String getHeaderTitle() {
+		return "群组管理";
+	}
+
+	@Override
+	public int getResViewLayoutId() {
+		return R.layout.group_activity;
+	}
+
+	@Override
+	public int getResMenuId() {
+		return R.menu.group;
+	}
+
+	@Override
+	public void loadContent() {
+		// TODO 列表显示: 组1 (15) 组2 (26) 点击，进入GroupEditActivity
+		// 从SQLLite中获取
+		List<MGroup> list = MManager.findGroupAll();
+		ListView lv_group = (ListView) findViewById(R.id.lv_group_activity);
+		adapter = new MGroupAdapter(this, list, lv_group);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.item_group_create:
+			Intent intent = new Intent(this,
+					MGroupEditorActivity.class);
+			Bundle bundle = new Bundle();
+			bundle.putSerializable("ITEM", null);
+			intent.putExtras(bundle);
+
+			startActivity(intent);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	/**
+	 * 监听Topic的长嗯响应
+	 */
+	@Override
+	public void onAdapterItemClickedLong(Object item) {
+		MGroup group = (MGroup) item;
+		new MGroupCommandDialog(this, group).show();
+	}
+
+	@Override
+	public void onAdapterItemClicked(Object item) {
+		if (item instanceof CommonItem) {
+			CommonItem ci = (CommonItem) item;
+			int uiType = ci.getUiType();
+			switch (uiType) {
+			case CommonItem.UIT_COMMAND_ACTIVITY:
+				Intent intent = (Intent) ci.getValue();
+				startActivity(intent);
+				break;
+			case CommonItem.UIT_COMMAND_ACTION:
+				toast("未实现..");
+				break;
+			case CommonItem.UIT_DIALOG_CANCEL:
+				Dialog dlg = (Dialog)ci.getValue();
+				dlg.cancel();
+				break;
+			default:
+				// 其它，包括Label/Boolean等,不处理
+				break;
+			}
+		}
+	}
+}

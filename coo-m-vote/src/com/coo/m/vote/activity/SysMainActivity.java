@@ -66,7 +66,8 @@ public class SysMainActivity extends FragmentActivity {
 
 		// viewPager.setPageMargin(300);
 		// 加载左滑动屏....
-
+		
+		
 	}
 
 	/**
@@ -140,7 +141,7 @@ public class SysMainActivity extends FragmentActivity {
 			handleNext(this, ContactActivity.class);
 			break;
 		case R.id.item_group:
-			handleNext(this, GroupActivity.class);
+			handleNext(this, MGroupActivity.class);
 			break;
 		case R.id.item_feedback_mgt:
 			handleNext(this, FeedbackMgtActivity.class);

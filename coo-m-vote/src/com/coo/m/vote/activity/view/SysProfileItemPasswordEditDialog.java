@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 
 import com.coo.m.vote.VoteUtil;
 import com.kingstar.ngbf.ms.util.StringUtil;
+import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemDialog;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
 
@@ -21,9 +22,8 @@ import com.kingstar.ngbf.ms.util.model.CommonItem;
 public class SysProfileItemPasswordEditDialog extends
 		CommonItemDialog<CommonItem> {
 
-	public SysProfileItemPasswordEditDialog(Activity activity,
-			CommonItem item) {
-		super(activity, item);
+	public SysProfileItemPasswordEditDialog(Activity parent,CommonItem item) {
+		super(parent,item);
 	}
 
 	protected EditText et_pwd1;
@@ -61,16 +61,17 @@ public class SysProfileItemPasswordEditDialog extends
 			// TODO 不能关闭对话框....
 			return;
 		}
-		if (!pwd1.equals(pwd2)){
+		if (!pwd1.equals(pwd2)) {
 			this.toast("密码输入不一致!");
 			// TODO 不能关闭对话框....
 			return;
 		}
 		item.setValue(pwd1);
-		// 通知刷新...
-		this.notitifyParentAbsViewItemChanged();
+
+		// 通知对象条目变更
+		this.notifyAdapterEvent(CommonAdapter.EVT_ITEM_CHANGED, item);
 	}
-	
+
 	@Override
 	protected String getTitle() {
 		return "密码设置";

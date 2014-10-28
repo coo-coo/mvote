@@ -12,29 +12,24 @@ import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 import com.kingstar.ngbf.ms.util.android.component.IShakeListener;
 
 /**
- * 我的频道，登录账号可以查询、关注指定的频道
- * 从MChannel中获得...
+ * 我的频道，登录账号可以查询、关注指定的频道 从MChannel中获得...
  */
 public class ChannelActivity extends CommonBizActivity implements
 		IShakeListener {
 
 	public static final String TAG = ChannelActivity.class.getSimpleName();
 
-	// 加载所有的channel
+	@Override
 	public void loadContent() {
-		// 从SQLLite中获取
+		// 从SQLLite中获取，加载MChannel对象
 		List<MChannel> list = MManager.findChannelAll();
 		GridView girdView = (GridView) findViewById(R.id.gv_channel);
-		adapter = new ChannelGridItemAdapter(list, girdView);
-		adapter.initContext(this);
-
+		adapter = new ChannelGridItemAdapter(this, list, girdView);
 		// this.registerShakeListener(this);
 	}
 
-	private ChannelGridItemAdapter adapter;
-
 	@Override
-	public void onAbsViewItemChanged(Object item) {
+	public void onAdapterItemChanged(Object item) {
 		// 登录账号对指定的Channel做了关注|解除关注 操作
 		adapter.notifyDataSetChanged();
 		if (item instanceof MChannel) {
@@ -58,7 +53,7 @@ public class ChannelActivity extends CommonBizActivity implements
 
 	@Override
 	public void onShake() {
-		toast("shake....");
+//		toast("shake....");
 	}
 
 }

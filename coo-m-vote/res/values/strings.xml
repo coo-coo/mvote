@@ -16,6 +16,7 @@
     <string name="app_vote">投票</string>
     <string name="app_ok">确定</string>
     <string name="app_more">更多</string>
+    <string name="app_create">创建</string>
 
     <!-- Menu菜单:Common -->
     <string name="item_search_text">查询</string>
@@ -54,7 +55,8 @@
     <string name="item_topic_publish_text">发布</string>
     <string name="item_topic_leg_create_text">增加选项</string>
     
-    
+    <!-- Group 创建 -->
+    <string name="group_create_name_hint">请输入群组名称</string>
     
     
     

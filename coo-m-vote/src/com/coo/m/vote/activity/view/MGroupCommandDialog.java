@@ -10,8 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.coo.m.vote.CommonCommandAdapter;
-import com.coo.m.vote.activity.TopicConfigActivity;
-import com.coo.s.vote.model.Topic;
+import com.coo.m.vote.activity.MGroupEditorActivity;
+import com.coo.m.vote.model.MGroup;
 import com.kingstar.ngbf.ms.util.android.CommonItemDialog;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
 
@@ -22,9 +22,9 @@ import com.kingstar.ngbf.ms.util.model.CommonItem;
  * @author boqing.shen
  * 
  */
-public class TopicCommandDialog extends CommonItemDialog<Topic> {
+public class MGroupCommandDialog extends CommonItemDialog<MGroup> {
 
-	public TopicCommandDialog(Activity parent, Topic item) {
+	public MGroupCommandDialog(Activity parent, MGroup item) {
 		super(parent, item);
 	}
 
@@ -42,7 +42,7 @@ public class TopicCommandDialog extends CommonItemDialog<Topic> {
 
 	@Override
 	protected String getTitle() {
-		return item.getTitle();
+		return item.getName();
 	}
 
 	@Override
@@ -58,17 +58,20 @@ public class TopicCommandDialog extends CommonItemDialog<Topic> {
 	private List<CommonItem> getCommands() {
 		List<CommonItem> items = new ArrayList<CommonItem>();
 		// 建立传递的item信息
-		Intent intent = new Intent(getParent(),
-				TopicConfigActivity.class);
+		Intent intent = new Intent(parent,
+				MGroupEditorActivity.class);
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("ITEM", item);
 		intent.putExtras(bundle);
-		items.add(new CommonItem("topic.config", "设置", intent)
+		items.add(new CommonItem("group.edit", "编辑", intent)
 				.uiType(CommonItem.UIT_COMMAND_ACTIVITY));
 
-		items.add(new CommonItem("topic.share", "分享",
-				"TopicShareAction")
+		items.add(new CommonItem("group.delete", "删除",
+				"GroupDeleteAction")
 				.uiType(CommonItem.UIT_COMMAND_ACTION));
+		// 关闭Dialog
+		items.add(new CommonItem("dialog.cancel", "取消", this)
+				.uiType(CommonItem.UIT_DIALOG_CANCEL));
 		return items;
 	}
 }

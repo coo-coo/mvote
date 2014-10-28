@@ -59,8 +59,6 @@ public final class VoteUtil {
 		return data;
 	}
 
-	
-	
 	@SuppressWarnings({ "unused", "deprecation" })
 	private Bitmap getBitMapFromPath(Display currentDisplay,
 			String imageFilePath) {
@@ -101,7 +99,5 @@ public final class VoteUtil {
 				bmp.getHeight(), matrix, true);
 		return bmp;
 	}
-
-	
 
 }

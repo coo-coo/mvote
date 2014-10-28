@@ -36,9 +36,8 @@ public class FeedbackMgtActivity extends CommonBizActivity implements
 	@Override
 	public void response(SimpleMessage<Feedback> resp) {
 		ListView listView = (ListView) findViewById(R.id.lv_feedback_mgt);
-		FeedbackMgtListViewAdapter adapter = new FeedbackMgtListViewAdapter(
+		adapter = new FeedbackMgtListViewAdapter(this,
 				resp.getRecords(), listView);
-		adapter.initContext(this);
 	}
 
 	@Override

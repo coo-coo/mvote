@@ -2,6 +2,7 @@ package com.coo.m.vote.activity.adapter;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -10,7 +11,7 @@ import android.widget.TextView;
 
 import com.coo.m.vote.R;
 import com.coo.s.vote.model.TopicLeg;
-import com.kingstar.ngbf.ms.util.android.CommonItemAdapter;
+import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
 
 /**
@@ -19,10 +20,10 @@ import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
  * @author boqing.shen
  * 
  */
-public class TopicLegVoteAdapter extends CommonItemAdapter<TopicLeg> {
+public class TopicLegVoteAdapter extends CommonAdapter<TopicLeg> {
 
-	public TopicLegVoteAdapter(List<TopicLeg> items, AbsListView composite) {
-		super(items, composite);
+	public TopicLegVoteAdapter(Activity parent, List<TopicLeg> items, AbsListView composite) {
+		super(parent,items, composite);
 	}
 
 	@Override

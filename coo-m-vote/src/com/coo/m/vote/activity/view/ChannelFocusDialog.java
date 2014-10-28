@@ -3,6 +3,7 @@ package com.coo.m.vote.activity.view;
 import android.app.Activity;
 
 import com.coo.m.vote.model.MChannel;
+import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemDialog;
 
 /**
@@ -14,19 +15,19 @@ import com.kingstar.ngbf.ms.util.android.CommonItemDialog;
  */
 public class ChannelFocusDialog extends CommonItemDialog<MChannel> {
 
-	public ChannelFocusDialog(Activity activity, MChannel item) {
-		super(activity, item);
+	public ChannelFocusDialog(Activity parent, MChannel item) {
+		super(parent, item);
 	}
-
+	
 	protected void doOkAction() {
 		if (item.getStatus() == 0) {
 			item.setStatus(1);
 		} else {
 			item.setStatus(0);
 		}
-		// toast("操作結果:" + item.getLabel() + "-" + item.getStatus());
+		toast("操作結果:" + item.getLabel() + "-" + item.getStatus());
 		// 通知父类Activity对象进行数据的更新
-		this.notitifyParentAbsViewItemChanged();
+		this.notifyAdapterEvent(CommonAdapter.EVT_ITEM_CHANGED, item);
 	}
 
 	@Override

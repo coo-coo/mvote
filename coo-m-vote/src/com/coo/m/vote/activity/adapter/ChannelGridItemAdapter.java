@@ -2,6 +2,7 @@ package com.coo.m.vote.activity.adapter;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -11,7 +12,7 @@ import android.widget.TextView;
 import com.coo.m.vote.R;
 import com.coo.m.vote.activity.view.ChannelFocusDialog;
 import com.coo.m.vote.model.MChannel;
-import com.kingstar.ngbf.ms.util.android.CommonItemAdapter;
+import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
 
 /**
@@ -19,13 +20,13 @@ import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
  * 
  * @since0.4.2.0
  */
-public class ChannelGridItemAdapter extends CommonItemAdapter<MChannel> {
+public class ChannelGridItemAdapter extends CommonAdapter<MChannel> {
 
 	/**
 	 * 构造函数
 	 */
-	public ChannelGridItemAdapter(List<MChannel> items, GridView composite) {
-		super(items, composite);
+	public ChannelGridItemAdapter(Activity parent, List<MChannel> items, GridView composite) {
+		super(parent,items, composite);
 	}
 
 	/**
@@ -71,7 +72,7 @@ public class ChannelGridItemAdapter extends CommonItemAdapter<MChannel> {
 	public boolean onItemLongClick(AdapterView<?> parentView, View view,
 			int position, long rowId) {
 		MChannel item = getItem(position);
-		new ChannelFocusDialog(this.getActivity(), item).show();
+		new ChannelFocusDialog(parent,item).show();
 		return true;
 	}
 }

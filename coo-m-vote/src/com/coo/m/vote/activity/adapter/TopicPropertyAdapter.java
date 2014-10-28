@@ -2,10 +2,12 @@ package com.coo.m.vote.activity.adapter;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.coo.m.vote.CommonItemAdapter;
 import com.coo.m.vote.activity.view.SysProfileItemListEditDialog;
 import com.coo.m.vote.activity.view.SysProfileItemPasswordEditDialog;
 import com.coo.m.vote.activity.view.SysProfileItemTextEditDialog;
@@ -15,14 +17,13 @@ import com.kingstar.ngbf.ms.util.model.CommonItem;
  * 话题属性ListView的填充器
  * 
  */
-public class TopicPropertyAdapter extends CommonItemListAdapter {
+public class TopicPropertyAdapter extends CommonItemAdapter {
 
 	/**
 	 * 构造函数
 	 */
-	public TopicPropertyAdapter(List<CommonItem> items,
-			ListView composite) {
-		super(items, composite);
+	public TopicPropertyAdapter(Activity parent, List<CommonItem> items, ListView composite) {
+		super(parent,items, composite);
 	}
 
 	/**
@@ -39,18 +40,15 @@ public class TopicPropertyAdapter extends CommonItemListAdapter {
 		switch (uiType) {
 		case CommonItem.UIT_TEXT:
 			// 显示文本，修改对话框
-			new SysProfileItemTextEditDialog(this.getActivity(),
-					item).show();
+			new SysProfileItemTextEditDialog(parent,item).show();
 			break;
 		case CommonItem.UIT_PASSWORD:
 			// 显示文本，修改对话框
-			new SysProfileItemPasswordEditDialog(
-					this.getActivity(), item).show();
+			new SysProfileItemPasswordEditDialog(parent,item).show();
 			break;
 		case CommonItem.UIT_LIST:
 			// 显示文本，修改对话框
-			new SysProfileItemListEditDialog(this.getActivity(),
-					item).show();
+			new SysProfileItemListEditDialog(parent,item).show();
 			break;
 		default:
 			// 其它，包括Label/Boolean等,不处理

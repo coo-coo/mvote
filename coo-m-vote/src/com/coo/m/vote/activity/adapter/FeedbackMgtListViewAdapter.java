@@ -7,11 +7,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.coo.m.vote.R;
 import com.coo.s.vote.model.Feedback;
-import com.kingstar.ngbf.ms.util.android.CommonItemAdapter;
+import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemDialog;
 import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
 
@@ -22,11 +21,11 @@ import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
  * @author boqing.shen
  * 
  */
-public class FeedbackMgtListViewAdapter extends CommonItemAdapter<Feedback> {
+public class FeedbackMgtListViewAdapter extends CommonAdapter<Feedback> {
 
-	public FeedbackMgtListViewAdapter(List<Feedback> items,
+	public FeedbackMgtListViewAdapter(Activity parent, List<Feedback> items,
 			ListView composite) {
-		super(items, composite);
+		super(parent,items, composite);
 	}
 
 	/**
@@ -53,7 +52,7 @@ public class FeedbackMgtListViewAdapter extends CommonItemAdapter<Feedback> {
 		FeedbackMgtItemRowHolder holder = (FeedbackMgtItemRowHolder) ciHolder;
 		holder.tv_version.setText(item.getAppVersion());
 		holder.tv_note.setText(item.getNote());
-//		holder.tv_status.setText(item.getStatus());
+		// holder.tv_status.setText(item.getStatus());
 	}
 
 	@Override
@@ -61,7 +60,7 @@ public class FeedbackMgtListViewAdapter extends CommonItemAdapter<Feedback> {
 			int position, long rowId) {
 		// 弹出处理对话框
 		Feedback item = this.getItem(position);
-		new FeedbackMgtItemHandleDialog(this.getActivity(), item).show();
+		new FeedbackMgtItemHandleDialog(parent,item).show();
 		return true;
 	}
 
@@ -75,13 +74,14 @@ class FeedbackMgtItemRowHolder extends CommonItemHolder {
 
 /**
  * 条目长恩处理
+ * 
  * @author boqing.shen
- *
+ * 
  */
 class FeedbackMgtItemHandleDialog extends CommonItemDialog<Feedback> {
 
-	public FeedbackMgtItemHandleDialog(Activity activity, Feedback item) {
-		super(activity, item);
+	public FeedbackMgtItemHandleDialog(Activity parent,Feedback item) {
+		super(parent,item);
 	}
 
 	@Override
@@ -91,11 +91,8 @@ class FeedbackMgtItemHandleDialog extends CommonItemDialog<Feedback> {
 
 	@Override
 	public void doOkAction() {
-		Toast.makeText(getParent(),
-				"doOkAction..." + item.getNote(),
-				Toast.LENGTH_SHORT).show();
 		// TODO 处理,发送请求，改状态0到1
 		item.setStatus(1);
-		this.notitifyParentAbsViewItemChanged();
+//		this.notitifyParentAbsViewItemChanged();
 	}
 }

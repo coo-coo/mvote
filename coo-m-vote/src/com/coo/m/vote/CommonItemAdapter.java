@@ -1,15 +1,15 @@
-package com.coo.m.vote.activity.adapter;
+package com.coo.m.vote;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.text.InputType;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.coo.m.vote.R;
-import com.coo.m.vote.VoteUtil;
-import com.kingstar.ngbf.ms.util.android.CommonItemAdapter;
+import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
 
@@ -21,13 +21,13 @@ import com.kingstar.ngbf.ms.util.model.CommonItem;
  * 
  * @param <T>
  */
-public class CommonItemListAdapter extends CommonItemAdapter<CommonItem> {
+public class CommonItemAdapter extends CommonAdapter<CommonItem> {
 
 	/**
 	 * 构造函数
 	 */
-	public CommonItemListAdapter(List<CommonItem> items, ListView composite) {
-		super(items, composite);
+	public CommonItemAdapter(Activity parent, List<CommonItem> items, ListView composite) {
+		super(parent,items, composite);
 	}
 
 	@Override

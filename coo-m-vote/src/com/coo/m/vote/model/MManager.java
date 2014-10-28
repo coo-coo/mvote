@@ -12,12 +12,23 @@ import com.kingstar.ngbf.ms.util.RegexUtil;
 import com.kingstar.ngbf.ms.util.android.component.ContactBean;
 
 /**
- * M端数据需要原封不动的同步到服务端,以防止应用APP删除之后的重装,进行数据恢复
- * M端数据只和host(Account)有关
+ * M端数据需要原封不动的同步到服务端,以防止应用APP删除之后的重装,进行数据恢复 M端数据只和host(Account)有关
+ * 
  * @author boqing.shen
- *
+ * 
  */
 public final class MManager {
+
+	/**
+	 * 获得所有关注的频道,如遇到新增加的频道（交由同步来实现）
+	 */
+	public static List<MGroup> findGroupAll() {
+		return DataSupport.findAll(MGroup.class);
+	}
+
+	public static MGroup findGroup(long id) {
+		return DataSupport.find(MGroup.class, id);
+	}
 
 	/**
 	 * 获得所有关注的频道,如遇到新增加的频道（交由同步来实现）
@@ -25,7 +36,11 @@ public final class MManager {
 	public static List<MChannel> findChannelAll() {
 		return DataSupport.findAll(MChannel.class);
 	}
-	
+
+	public static void clearGroups() {
+		DataSupport.deleteAll(MGroup.class, "");
+	}
+
 	public static void clearChannels() {
 		DataSupport.deleteAll(MChannel.class, "");
 	}
@@ -81,7 +96,8 @@ public final class MManager {
 	/**
 	 * 获得手机通讯录的信息,进行M端SQLite同步 TODO Focus状态同步??
 	 */
-	public static void syncDeviceContact(List<ContactBean> contacts, String account) {
+	public static void syncDeviceContact(List<ContactBean> contacts,
+			String account) {
 		// 获得本地的全部MChannel列表，转化为Map对象
 		List<MContact> mContacts = findContactAll();
 		Map<String, MContact> map = new HashMap<String, MContact>();

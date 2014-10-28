@@ -13,7 +13,6 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.coo.m.vote.Constants;
 import com.coo.m.vote.Mock;
@@ -87,8 +86,8 @@ public class SysWelcomeActivity extends Activity implements AnimationListener,
 
 		Account account = VoteManager.getAccount();
 		if (account == null) {
-			Toast.makeText(this, "account is null",
-					Toast.LENGTH_SHORT).show();
+			// Toast.makeText(this, "account is null",
+			// Toast.LENGTH_SHORT).show();
 			// 跳转到登录界面
 			if (Constants.MOCK_ACCOUNT) {
 				VoteManager.get().setAccount(Mock.getAccount());
@@ -97,11 +96,14 @@ public class SysWelcomeActivity extends Activity implements AnimationListener,
 			// Intent intent = new Intent(SysWelcomeActivity.this,
 			// SysLoginActivity.class);
 			// 调试用，跳转到指定界面
+			// Intent intent = new Intent(SysWelcomeActivity.this,
+			// GroupEditorActivity.class);
 			Intent intent = new Intent(SysWelcomeActivity.this,
-					SysProfileActivity.class);
+					TopicActivity.class);
 			startActivity(intent);
 			// this.overridePendingTransition(R.anim.fadeout,
 			// R.anim.fadein);
+
 			this.finish();
 		} else {
 			// TODO 登录验证，验证成功之后,转向主界面

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.litepal.LitePalApplication;
 
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -13,7 +14,7 @@ import com.coo.m.vote.model.MContact;
 import com.coo.m.vote.model.MManager;
 import com.coo.s.vote.model.Channel;
 import com.coo.s.vote.model.Contact;
-import com.kingstar.ngbf.ms.util.android.CommonItemConfig;
+import com.kingstar.ngbf.ms.util.android.CommonConfig;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -42,13 +43,23 @@ public class VoteApplication extends LitePalApplication {
 		initMContacts();
 
 		// 初始化ImageLoader
+		initImageLoader();
+
+		
+//		MManager.clearGroups();
+		
+		// 启动后台程序
+	}
+	
+	
+	
+	/**
+	 * 初始化ImageLoader,用于图片显示
+	 */
+	private void initImageLoader() {
 		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
 				this).build();
 		ImageLoader.getInstance().init(config);
-
-		// MManager.clearChannels();
-		// Intent intent = new Intent(this, VoteService.class);
-		// this.startService(intent);
 	}
 
 	/**
@@ -88,15 +99,17 @@ public class VoteApplication extends LitePalApplication {
 	 * 初始化Commom模型,参见CommonItemConfig
 	 */
 	private void initCommonModel() {
-		CommonItemConfig.clearParams();
-		CommonItemConfig.initParam(
-				CommonItemConfig.KEY_CLASS_HOME_ACTIVITY,
+		CommonConfig.clearParams();
+		// 初始化上下文....
+		CommonConfig.setContext(this);
+		CommonConfig.initParam(
+				CommonConfig.KEY_CLASS_HOME_ACTIVITY,
 				SysMainActivity.class);
-		CommonItemConfig.initParam(
-				CommonItemConfig.KEY_INT_DIALOG_VIEW_ID,
+		CommonConfig.initParam(
+				CommonConfig.KEY_INT_DIALOG_VIEW_ID,
 				R.layout.common_dialog);
-		CommonItemConfig.initParam(
-				CommonItemConfig.KEY_INT_DIALOG_LAYOUT_ID,
+		CommonConfig.initParam(
+				CommonConfig.KEY_INT_DIALOG_LAYOUT_ID,
 				R.id.layout_dialog_common);
 	}
 
@@ -134,6 +147,8 @@ public class VoteApplication extends LitePalApplication {
 	@Override
 	public void onTerminate() {
 		super.onTerminate();
+		Intent intent = new Intent(this, VoteService.class);
+		this.stopService(intent);
 	}
 
 	private void toast(String message) {

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/activity_common" >
+
+    <EditText
+        android:id="@+id/et_group_create_name"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="@string/group_create_name_hint"
+        android:singleLine="true" />
+
+    <View style="@style/view_space" />
+
+    <ListView
+        android:id="@+id/lv_group_create"
+        style="@style/listview_common" />
+
+</LinearLayout>
