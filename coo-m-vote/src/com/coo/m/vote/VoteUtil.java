@@ -7,8 +7,11 @@ import java.util.Date;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.os.Message;
 import android.text.InputType;
 import android.view.Display;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.LinearLayout;
 
 import com.kingstar.ngbf.ms.util.DateUtil;
 import com.kingstar.ngbf.s.ntp.SimpleMessage;
@@ -16,6 +19,16 @@ import com.kingstar.ngbf.s.ntp.SimpleMessageHead;
 
 public final class VoteUtil {
 
+	/**
+	 * 创建一个简单的消息
+	 */
+	public static Message buildMessage(int what, Object message) {
+		Message msg = new Message();
+		msg.what = what;
+		msg.obj = message;
+		return msg;
+	}
+	
 	/**
 	 * 返回TS的日期表达式
 	 */
@@ -100,4 +113,8 @@ public final class VoteUtil {
 		return bmp;
 	}
 
+	public static LayoutParams matchLayout() {
+		return new LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+				LayoutParams.MATCH_PARENT);
+	}
 }

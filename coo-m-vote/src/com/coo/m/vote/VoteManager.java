@@ -57,15 +57,7 @@ public class VoteManager {
 		context.startService(intent);
 	}
 	
-	/**
-	 * 创建一个简单的消息
-	 */
-	public static Message buildMessage(int what, Object message) {
-		Message msg = new Message();
-		msg.what = what;
-		msg.obj = message;
-		return msg;
-	}
+	
 
 	/**
 	 * 获得SD下的Profile的IconPath
