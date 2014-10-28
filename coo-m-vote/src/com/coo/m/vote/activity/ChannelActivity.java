@@ -25,6 +25,7 @@ public class ChannelActivity extends CommonBizActivity implements
 		List<MChannel> list = MManager.findChannelAll();
 		GridView girdView = (GridView) findViewById(R.id.gv_channel);
 
+
 		adapter = new ChannelAdapter(this, list, girdView);
 
 		// this.registerShakeListener(this);
@@ -55,7 +56,7 @@ public class ChannelActivity extends CommonBizActivity implements
 
 	@Override
 	public void onShake() {
-		// toast("shake....");
+
 	}
 
 }

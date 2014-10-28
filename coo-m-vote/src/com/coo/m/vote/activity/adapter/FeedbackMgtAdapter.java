@@ -21,9 +21,9 @@ import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
  * @author boqing.shen
  * 
  */
-public class FeedbackMgtListViewAdapter extends CommonAdapter<Feedback> {
+public class FeedbackMgtAdapter extends CommonAdapter<Feedback> {
 
-	public FeedbackMgtListViewAdapter(Activity parent, List<Feedback> items,
+	public FeedbackMgtAdapter(Activity parent, List<Feedback> items,
 			ListView composite) {
 		super(parent,items, composite);
 	}
@@ -37,7 +37,7 @@ public class FeedbackMgtListViewAdapter extends CommonAdapter<Feedback> {
 
 	@Override
 	public CommonItemHolder initHolder(View convertView) {
-		FeedbackMgtItemRowHolder holder = new FeedbackMgtItemRowHolder();
+		FeedbackMgtRowHolder holder = new FeedbackMgtRowHolder();
 		holder.tv_version = (TextView) convertView
 				.findViewById(R.id.tv_feedback_mgt_row_version);
 		holder.tv_status = (TextView) convertView
@@ -49,7 +49,7 @@ public class FeedbackMgtListViewAdapter extends CommonAdapter<Feedback> {
 
 	@Override
 	public void initHolderValue(CommonItemHolder ciHolder, Feedback item) {
-		FeedbackMgtItemRowHolder holder = (FeedbackMgtItemRowHolder) ciHolder;
+		FeedbackMgtRowHolder holder = (FeedbackMgtRowHolder) ciHolder;
 		holder.tv_version.setText(item.getAppVersion());
 		holder.tv_note.setText(item.getNote());
 		// holder.tv_status.setText(item.getStatus());
@@ -66,7 +66,7 @@ public class FeedbackMgtListViewAdapter extends CommonAdapter<Feedback> {
 
 }
 
-class FeedbackMgtItemRowHolder extends CommonItemHolder {
+class FeedbackMgtRowHolder extends CommonItemHolder {
 	public TextView tv_note;
 	public TextView tv_version;
 	public TextView tv_status;

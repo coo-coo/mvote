@@ -33,7 +33,7 @@ public class TopicMgtAdapter extends CommonAdapter<Topic> {
 
 	@Override
 	public CommonItemHolder initHolder(View convertView) {
-		TopicMgtItemRowHolder holder = new TopicMgtItemRowHolder();
+		TopicMgtRowHolder holder = new TopicMgtRowHolder();
 		holder.tv_title = (TextView) convertView
 				.findViewById(R.id.tv_topic_mgt_row_title);
 		holder.tv_owner = (TextView) convertView
@@ -43,7 +43,7 @@ public class TopicMgtAdapter extends CommonAdapter<Topic> {
 
 	@Override
 	public void initHolderValue(CommonItemHolder ciHolder, Topic item) {
-		TopicMgtItemRowHolder holder = (TopicMgtItemRowHolder) ciHolder;
+		TopicMgtRowHolder holder = (TopicMgtRowHolder) ciHolder;
 		holder.tv_title.setText(item.getTitle());
 		holder.tv_owner.setText(item.getOwner());
 	}
@@ -52,6 +52,7 @@ public class TopicMgtAdapter extends CommonAdapter<Topic> {
 	public boolean onItemLongClick(AdapterView<?> parentView, View view,
 			int position, long rowId) {
 		// 弹出处理对话框
+		// TODO 到Activity
 		Topic item = this.getItem(position);
 		new TopicMgtItemHandleDialog(parent,item).show();
 		return true;
@@ -59,10 +60,11 @@ public class TopicMgtAdapter extends CommonAdapter<Topic> {
 
 }
 
-class TopicMgtItemRowHolder extends CommonItemHolder {
+class TopicMgtRowHolder extends CommonItemHolder {
 	public TextView tv_title;
 	public TextView tv_owner;
 }
+
 
 /**
  * 条目长恩处理

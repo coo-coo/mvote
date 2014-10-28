@@ -58,7 +58,7 @@ public class MGroupCommandDialog extends CommonItemDialog<MGroup> {
 	private List<CommonItem> getCommands() {
 		List<CommonItem> items = new ArrayList<CommonItem>();
 		// 建立传递的item信息
-<<<<<<< HEAD
+
 		Intent intent = new Intent(parent, MGroupEditorActivity.class);
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("ITEM", item);
@@ -67,18 +67,6 @@ public class MGroupCommandDialog extends CommonItemDialog<MGroup> {
 				.uiType(CommonItem.UIT_COMMAND_ACTIVITY));
 		// 删除Group对象
 		items.add(new CommonItem("group.delete", "删除", item)
-=======
-		Intent intent = new Intent(parent,
-				MGroupEditorActivity.class);
-		Bundle bundle = new Bundle();
-		bundle.putSerializable("ITEM", item);
-		intent.putExtras(bundle);
-		items.add(new CommonItem("group.edit", "编辑", intent)
-				.uiType(CommonItem.UIT_COMMAND_ACTIVITY));
-
-		items.add(new CommonItem("group.delete", "删除",
-				"GroupDeleteAction")
->>>>>>> refs/remotes/origin/master
 				.uiType(CommonItem.UIT_COMMAND_ACTION));
 		// 关闭Dialog
 		items.add(new CommonItem("dialog.cancel", "取消", this)

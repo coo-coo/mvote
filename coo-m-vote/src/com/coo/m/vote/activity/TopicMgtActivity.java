@@ -42,6 +42,7 @@ public class TopicMgtActivity extends CommonBizActivity implements
 	@Override
 	public void response(SimpleMessage<Topic> resp) {
 		ListView composite = (ListView) findViewById(R.id.lv_topic_mgt);
+
 		adapter = new TopicMgtAdapter(this, resp.getRecords(),
 				composite);
 	}

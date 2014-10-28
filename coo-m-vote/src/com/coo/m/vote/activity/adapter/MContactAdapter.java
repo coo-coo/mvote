@@ -14,8 +14,9 @@ import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
 
 public class MContactAdapter extends CommonAdapter<MContact> {
 
-	public MContactAdapter(Activity parent, List<MContact> items, ListView composite) {
-		super(parent,items, composite);
+	public MContactAdapter(Activity parent, List<MContact> items,
+			ListView composite) {
+		super(parent, items, composite);
 	}
 
 	@Override
@@ -25,7 +26,7 @@ public class MContactAdapter extends CommonAdapter<MContact> {
 
 	@Override
 	protected CommonItemHolder initHolder(View view) {
-		ContactBeanItemHolder holder = new ContactBeanItemHolder();
+		MContactRowHolder holder = new MContactRowHolder();
 		holder.tv_name = (TextView) view
 				.findViewById(R.id.tv_phone_row_name);
 		holder.tv_mobile = (TextView) view
@@ -35,13 +36,13 @@ public class MContactAdapter extends CommonAdapter<MContact> {
 
 	@Override
 	protected void initHolderValue(CommonItemHolder ciHolder, MContact cb) {
-		ContactBeanItemHolder holder = (ContactBeanItemHolder) ciHolder;
+		MContactRowHolder holder = (MContactRowHolder) ciHolder;
 		holder.tv_name.setText(cb.getName());
 		holder.tv_mobile.setText(cb.getMobile());
 	}
 }
 
-class ContactBeanItemHolder extends CommonItemHolder {
+class MContactRowHolder extends CommonItemHolder {
 	public TextView tv_name;
 	public TextView tv_mobile;
 }

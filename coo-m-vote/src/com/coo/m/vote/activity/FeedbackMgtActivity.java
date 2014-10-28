@@ -5,7 +5,7 @@ import android.widget.ListView;
 import com.coo.m.vote.Constants;
 import com.coo.m.vote.Mock;
 import com.coo.m.vote.R;
-import com.coo.m.vote.activity.adapter.FeedbackMgtListViewAdapter;
+import com.coo.m.vote.activity.adapter.FeedbackMgtAdapter;
 import com.coo.s.vote.model.Feedback;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 import com.kingstar.ngbf.ms.util.rpc.HttpAsynCaller;
@@ -36,7 +36,7 @@ public class FeedbackMgtActivity extends CommonBizActivity implements
 	@Override
 	public void response(SimpleMessage<Feedback> resp) {
 		ListView listView = (ListView) findViewById(R.id.lv_feedback_mgt);
-		adapter = new FeedbackMgtListViewAdapter(this,
+		adapter = new FeedbackMgtAdapter(this,
 				resp.getRecords(), listView);
 	}
 

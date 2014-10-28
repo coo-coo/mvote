@@ -37,7 +37,7 @@ public class AccountMgtAdapter extends CommonAdapter<Account> {
 
 	@Override
 	public CommonItemHolder initHolder(View convertView) {
-		AccountMgtItemRowHolder holder = new AccountMgtItemRowHolder();
+		AccountMgtRowHolder holder = new AccountMgtRowHolder();
 		holder.tv_mobile = (TextView) convertView
 				.findViewById(R.id.tv_account_mgt_row_mobile);
 		holder.tv_status = (TextView) convertView
@@ -49,7 +49,7 @@ public class AccountMgtAdapter extends CommonAdapter<Account> {
 
 	@Override
 	public void initHolderValue(CommonItemHolder ciHolder, Account item) {
-		AccountMgtItemRowHolder holder = (AccountMgtItemRowHolder) ciHolder;
+		AccountMgtRowHolder holder = (AccountMgtRowHolder) ciHolder;
 		holder.tv_mobile.setText(item.getMobile());
 		String statusLabel = "有效";
 		int resIcon = R.drawable.status_green;
@@ -70,13 +70,13 @@ public class AccountMgtAdapter extends CommonAdapter<Account> {
 			int position, long rowId) {
 		// 弹出处理对话框
 		Account item = this.getItem(position);
-		new AccountMgtItemHandleDialog(parent, item).show();
+		new AccountMgtItemDialog(parent, item).show();
 		return true;
 	}
 
 }
 
-class AccountMgtItemRowHolder extends CommonItemHolder {
+class AccountMgtRowHolder extends CommonItemHolder {
 	public TextView tv_mobile;
 	public TextView tv_status;
 	public ImageView iv_status_icon;
@@ -89,9 +89,9 @@ class AccountMgtItemRowHolder extends CommonItemHolder {
  * @author boqing.shen
  * 
  */
-class AccountMgtItemHandleDialog extends CommonItemDialog<Account> {
+class AccountMgtItemDialog extends CommonItemDialog<Account> {
 
-	public AccountMgtItemHandleDialog(Activity parent, Account item) {
+	public AccountMgtItemDialog(Activity parent, Account item) {
 		super(parent, item);
 	}
 

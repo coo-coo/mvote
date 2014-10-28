@@ -42,14 +42,13 @@ public class AccountMgtActivity extends CommonBizActivity implements
 	@Override
 	public void response(SimpleMessage<Account> resp) {
 		ListView listView = (ListView) findViewById(R.id.lv_account_mgt);
-
 		adapter = new AccountMgtAdapter(this, resp.getRecords(),
 				listView);
+
 	}
 
 	@Override
 	public void onAdapterItemClicked(Object item) {
-
 		// 更新Adapter
 		adapter.notifyDataSetChanged();
 		// TODO 进行RPC调用
