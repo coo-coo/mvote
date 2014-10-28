@@ -12,7 +12,7 @@ import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 import com.kingstar.ngbf.ms.util.android.component.IShakeListener;
 
 /**
- * 我的频道，登录账号可以查询、关注指定的频道 从MChannel中获得...
+ * 我的频道1，登录账号可以查询、关注指定的频道 从MChannel中获得...
  */
 public class ChannelActivity extends CommonBizActivity implements
 		IShakeListener {
