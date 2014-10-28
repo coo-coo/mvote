@@ -28,7 +28,7 @@ public class MGroupActivity extends CommonBizActivity {
 
 	@Override
 	public int getResViewLayoutId() {
-		return R.layout.group_activity;
+		return R.layout.mgroup_activity;
 	}
 
 	@Override

@@ -20,15 +20,15 @@ import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
  * @author boqing.shen
  * 
  */
-public class MContactSelectAdapter extends CommonAdapter<MContact> {
+public class MGroupContactSelectAdapter extends CommonAdapter<MContact> {
 
-	public MContactSelectAdapter(Activity parent, List<MContact> items, ListView composite) {
+	public MGroupContactSelectAdapter(Activity parent, List<MContact> items, ListView composite) {
 		super(parent,items, composite);
 	}
 
 	@Override
 	public int getItemConvertViewId() {
-		return R.layout.group_editor_activity_row;
+		return R.layout.mgroup_editor_activity_row;
 	}
 
 	@Override

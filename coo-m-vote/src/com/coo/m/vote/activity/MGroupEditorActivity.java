@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.coo.m.vote.R;
-import com.coo.m.vote.activity.adapter.MContactSelectAdapter;
+import com.coo.m.vote.activity.adapter.MGroupContactSelectAdapter;
 import com.coo.m.vote.model.MContact;
 import com.coo.m.vote.model.MGroup;
 import com.coo.m.vote.model.MManager;
@@ -24,7 +24,7 @@ import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
  */
 public class MGroupEditorActivity extends CommonBizActivity {
 
-	private MContactSelectAdapter adapter;
+	private MGroupContactSelectAdapter adapter;
 
 	private EditText et_name = null;
 	
@@ -35,7 +35,7 @@ public class MGroupEditorActivity extends CommonBizActivity {
 
 	@Override
 	public int getResViewLayoutId() {
-		return R.layout.group_editor_activity;
+		return R.layout.mgroup_editor_activity;
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class MGroupEditorActivity extends CommonBizActivity {
 			}
 		}
 		ListView lv_contacts = (ListView) findViewById(R.id.lv_group_create);
-		adapter = new MContactSelectAdapter(this,list, lv_contacts);
+		adapter = new MGroupContactSelectAdapter(this,list, lv_contacts);
 
 		
 		et_name = (EditText) findViewById(R.id.et_group_create_name);

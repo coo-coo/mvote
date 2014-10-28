@@ -27,7 +27,7 @@ public class MGroupAdapter extends CommonAdapter<MGroup> {
 
 	@Override
 	public int getItemConvertViewId() {
-		return R.layout.group_activity_row;
+		return R.layout.mgroup_activity_row;
 	}
 
 	@Override
