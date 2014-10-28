@@ -99,7 +99,7 @@ public class SysWelcomeActivity extends Activity implements AnimationListener,
 			// Intent intent = new Intent(SysWelcomeActivity.this,
 			// GroupEditorActivity.class);
 			Intent intent = new Intent(SysWelcomeActivity.this,
-					TopicActivity.class);
+					SysMainActivity.class);
 			startActivity(intent);
 			// this.overridePendingTransition(R.anim.fadeout,
 			// R.anim.fadein);

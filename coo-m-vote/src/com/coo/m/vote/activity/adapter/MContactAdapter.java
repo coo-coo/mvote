@@ -21,7 +21,7 @@ public class MContactAdapter extends CommonAdapter<MContact> {
 
 	@Override
 	public int getItemConvertViewId() {
-		return R.layout.contact_activity_row;
+		return R.layout.mcontact_activity_row;
 	}
 
 	@Override

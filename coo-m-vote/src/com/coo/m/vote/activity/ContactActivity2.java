@@ -37,7 +37,7 @@ public class ContactActivity2 extends CommonBizActivity implements
 
 	@Override
 	public int getResViewLayoutId() {
-		return R.layout.contact_activity;
+		return R.layout.mcontact_activity;
 	}
 
 	@Override
