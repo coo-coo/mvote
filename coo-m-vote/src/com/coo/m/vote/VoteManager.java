@@ -10,13 +10,15 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Environment;
 import android.util.Log;
 
-import com.coo.m.vote.activity.ProfileActivity;
+import com.coo.m.vote.activity.TopicActivity;
+import com.coo.m.vote.model.MGroup;
+import com.coo.m.vote.model.MManager;
 import com.coo.s.vote.model.Account;
 import com.coo.s.vote.model.Channel;
 import com.coo.s.vote.model.Topic;
 import com.kingstar.ngbf.ms.util.StringUtil;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
-import com.kingstar.ngbf.ms.util.model.CommonItemOption;
+import com.kingstar.ngbf.ms.util.model.CommonOption;
 import com.kingstar.ngbf.ms.util.storage.SharedManager;
 
 /**
@@ -26,7 +28,7 @@ public class VoteManager {
 
 	private String TAG = VoteManager.class.getName();
 
-	public static Class<?> LOGIN_CLASS = ProfileActivity.class;
+	public static Class<?> LOGIN_CLASS = TopicActivity.class;
 	// public static Class<?> LOGIN_CLASS_BACKUP = SysLoginActivity.class;
 
 	private static SharedManager sharedManager = null;
@@ -114,10 +116,10 @@ public class VoteManager {
 		// 其它属性
 		items.add(new CommonItem("p_nickname", "昵称", "")
 				.uiType(CommonItem.UIT_TEXT));
-		List<CommonItemOption> genders = new ArrayList<CommonItemOption>();
-		genders.add(new CommonItemOption("男", "男"));
-		genders.add(new CommonItemOption("女", "女"));
-		genders.add(new CommonItemOption("保密", "保密"));
+		List<CommonOption> genders = new ArrayList<CommonOption>();
+		genders.add(new CommonOption("男", "男"));
+		genders.add(new CommonOption("女", "女"));
+		genders.add(new CommonOption("保密", "保密"));
 		items.add(new CommonItem("p_gender", "性别", "保密").uiType(
 				CommonItem.UIT_LIST).options(genders));
 		return items;
@@ -141,12 +143,16 @@ public class VoteManager {
 		items.add(new CommonItem("icon", "图标", "暂未实现"));
 		items.add(new CommonItem("qrcode", "二维码", "暂未实现"));
 
-		// TODO 本地动态获得,即朋友群:MGroup
-		List<CommonItemOption> groups = new ArrayList<CommonItemOption>();
-		groups.add(new CommonItemOption("完全公开", "public"));
-		groups.add(new CommonItemOption("同学组", "classmates"));
-		groups.add(new CommonItemOption("朋友组", "friends"));
-		items.add(new CommonItem("public", "公开范围", "TODO").uiType(
+		// 本地动态获得,即朋友群:MGroup
+		List<MGroup> mgroups = MManager.findGroupAll();
+		List<CommonOption> groups = new ArrayList<CommonOption>();
+		groups.add(new CommonOption("全部", "ALL"));
+		for (MGroup g : mgroups) {
+			groups.add(new CommonOption(g.getName(), g
+					.getName()));
+		}
+		// 支持单选
+		items.add(new CommonItem("public", "公开范围", "").uiType(
 				CommonItem.UIT_LIST).options(groups));
 		return items;
 	}

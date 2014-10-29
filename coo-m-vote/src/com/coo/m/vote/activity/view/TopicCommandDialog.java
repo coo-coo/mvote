@@ -69,6 +69,9 @@ public class TopicCommandDialog extends CommonItemDialog<Topic> {
 		items.add(new CommonItem("topic.share", "分享",
 				"TopicShareAction")
 				.uiType(CommonItem.UIT_COMMAND_ACTION));
+		// 关闭Dialog
+		items.add(new CommonItem("dialog.cancel", "取消", this)
+						.uiType(CommonItem.UIT_DIALOG_CANCEL));
 		return items;
 	}
 }

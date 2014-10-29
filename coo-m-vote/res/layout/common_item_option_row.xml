@@ -4,17 +4,17 @@
 
     <ImageView
         android:id="@+id/common_item_option_row_selected"
-        android:layout_height="60dp"
         android:layout_width="0dip"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:contentDescription="@string/app_blank" />
+        android:contentDescription="@string/app_blank"
+        android:gravity="left|center_vertical" />
 
     <TextView
         android:id="@+id/common_item_option_row_value"
         style="@style/tv_common_row"
-        android:layout_height="60dp"
         android:layout_width="0dip"
-        android:gravity="center_vertical"
-        android:layout_weight="9" />
+        android:layout_weight="5"
+        android:gravity="center|center_vertical" />
 
 </LinearLayout>

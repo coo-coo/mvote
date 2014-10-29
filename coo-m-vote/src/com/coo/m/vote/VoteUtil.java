@@ -3,6 +3,7 @@ package com.coo.m.vote;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.UUID;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,12 +22,17 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 public final class VoteUtil {
 
 	private static DisplayImageOptions imageLoadOptions = null;
+	
+	/**
+	 * 生成UUID
+	 */
+	public static String uuid(){
+		return UUID.randomUUID().toString();
+	}
 
 	/**
 	 * 获得图片加载策略,参见ImageLoader
 	 * http://blog.csdn.net/juyo_ch/article/details/26493119
-	 * 
-	 * @return
 	 */
 	public static DisplayImageOptions imageLoadOptions() {
 		if (imageLoadOptions == null) {
