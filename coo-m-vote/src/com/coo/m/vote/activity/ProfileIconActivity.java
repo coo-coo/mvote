@@ -1,8 +1,6 @@
 package com.coo.m.vote.activity;
 
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
@@ -26,11 +24,12 @@ import com.kingstar.ngbf.ms.util.update.FileUploadOptions;
 
 /**
  * Profile
+ * 
  * @deprecated 参见SysProfileActivity,调用系统的图片选取和剪裁
  * @author boqing.shen
  * 
  */
-public class SysProfileIconActivity extends CommonBizActivity{
+public class ProfileIconActivity extends CommonBizActivity {
 
 	private CropImageView civIcon;
 	private Button btnMore;
@@ -80,9 +79,9 @@ public class SysProfileIconActivity extends CommonBizActivity{
 		FileUtil.saveBitmap(bitmap, filePath);
 		// 文件上传,网络存储
 		uploadFile(filePath);
-		
+
 		// TODO 跳转
-		
+
 	}
 
 	private static int REQUEST_ALBUM = 0;
@@ -96,9 +95,9 @@ public class SysProfileIconActivity extends CommonBizActivity{
 		loadSysAlbum.setType("image/jpeg");
 		startActivityForResult(loadSysAlbum, REQUEST_ALBUM);
 
-//		String filePath = VoteManager.getSdProfileIconPath();
-//		uploadFile(filePath);
-		
+		// String filePath = VoteManager.getSdProfileIconPath();
+		// uploadFile(filePath);
+
 		// TODO 拍照....
 		// Uri uri = Uri.fromFile(vFile);
 		// Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -138,23 +137,19 @@ public class SysProfileIconActivity extends CommonBizActivity{
 	private void uploadFile(String filePath) {
 		FileUploadManager fum = new FileUploadManager();
 		String actionUrl = Constants.HOST_SERVLET + "/icon2";
-		
+
 		// TODO 文件上传参数
-		Map<String, String> params = new HashMap<String, String>();
-//		params.put("orderId", "11111");
-//		params.put("orderId2", "22222");
-		FileUploadOptions op = FileUploadOptions.blank().handler(handler);
-		fum.upload(actionUrl, filePath, params, op);
+		FileUploadOptions op = FileUploadOptions.blank().handler(
+				handler);
+		fum.upload(actionUrl, filePath, op);
 	}
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-//			toast(msg.what + "-" + msg.obj);
+			// toast(msg.what + "-" + msg.obj);
 		}
 	};
-	
-	
 
 }

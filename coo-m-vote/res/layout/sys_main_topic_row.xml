@@ -4,32 +4,28 @@
     android:layout_height="match_parent"
     android:orientation="horizontal" >
 
-    <TextView
-        android:id="@+id/tv_topic_row_title"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_alignParentTop="true"
-        android:gravity="left"
-        android:textColor="@color/blue"
-        android:textSize="20sp" />
-
     <RelativeLayout
         style="@style/listview_adapter_common"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@id/tv_topic_row_title" >
+        android:layout_alignParentLeft="true" >
 
-        <com.kingstar.ngbf.ms.mpchart.CommonPieChart
-            android:id="@+id/cpc_topic_result"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_width="120dp"
-            android:layout_height="120dp" />
+        <TextView
+            android:id="@+id/tv_topic_row_title"
+            style="@style/tv_command_row"
+            android:layout_height="80dp"
+            android:layout_marginTop="5dp"
+            android:gravity="left" />
 
         <LinearLayout
-            style="@style/listview_adapter_common"
-            android:layout_alignBaseline="@id/cpc_topic_result"
-            android:layout_alignParentBottom="true" >
+            android:id="@+id/ll_topic_row_base"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/tv_topic_row_title"
+            android:gravity="left"
+            android:orientation="horizontal"
+            android:paddingLeft="1dp"
+            android:paddingRight="5dp" >
 
             <TextView
                 android:id="@+id/tv_topic_row_vote"
@@ -44,5 +40,12 @@
                 style="@style/tv_common_small" />
         </LinearLayout>
     </RelativeLayout>
+
+    <com.kingstar.ngbf.ms.mpchart.CommonPieChart
+        android:id="@+id/cpc_topic_result"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true" />
 
 </RelativeLayout>

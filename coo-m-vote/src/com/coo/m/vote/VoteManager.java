@@ -10,7 +10,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Environment;
 import android.util.Log;
 
-import com.coo.m.vote.activity.TopicMgtActivity;
+import com.coo.m.vote.activity.ProfileActivity;
 import com.coo.s.vote.model.Account;
 import com.coo.s.vote.model.Channel;
 import com.coo.s.vote.model.Topic;
@@ -26,7 +26,7 @@ public class VoteManager {
 
 	private String TAG = VoteManager.class.getName();
 
-	public static Class<?> LOGIN_CLASS = TopicMgtActivity.class;
+	public static Class<?> LOGIN_CLASS = ProfileActivity.class;
 	// public static Class<?> LOGIN_CLASS_BACKUP = SysLoginActivity.class;
 
 	private static SharedManager sharedManager = null;
@@ -62,16 +62,11 @@ public class VoteManager {
 	}
 
 	/**
-	 * 获得SD下的Profile的IconPath
+	 * 获得SD下的Profile的IconPath: /storage/sdcard0/PACKAGE_NAME/
 	 */
 	public static String getSdProfileIconPath() {
 		return PACKAGE_Path + "/" + VoteManager.getStrAccount()
 				+ "_icon.png";
-	}
-
-	public static String getSdProfileIconPath2() {
-		return "file:///mnt/sdcard/com.coo.vote/"
-				+ VoteManager.getStrAccount() + "_icon.png";
 	}
 
 	/**

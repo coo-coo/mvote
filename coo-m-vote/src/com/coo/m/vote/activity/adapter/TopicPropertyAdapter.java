@@ -8,9 +8,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.coo.m.vote.CommonItemAdapter;
-import com.coo.m.vote.activity.view.SysProfileItemListEditDialog;
-import com.coo.m.vote.activity.view.SysProfileItemPasswordEditDialog;
-import com.coo.m.vote.activity.view.SysProfileItemTextEditDialog;
+import com.coo.m.vote.activity.view.ProfileItemListDialog;
+import com.coo.m.vote.activity.view.ProfileItemPasswordDialog;
+import com.coo.m.vote.activity.view.ProfileItemTextDialog;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
 
 /**
@@ -40,15 +40,15 @@ public class TopicPropertyAdapter extends CommonItemAdapter {
 		switch (uiType) {
 		case CommonItem.UIT_TEXT:
 			// 显示文本，修改对话框
-			new SysProfileItemTextEditDialog(parent,item).show();
+			new ProfileItemTextDialog(parent,item).show();
 			break;
 		case CommonItem.UIT_PASSWORD:
 			// 显示文本，修改对话框
-			new SysProfileItemPasswordEditDialog(parent,item).show();
+			new ProfileItemPasswordDialog(parent,item).show();
 			break;
 		case CommonItem.UIT_LIST:
 			// 显示文本，修改对话框
-			new SysProfileItemListEditDialog(parent,item).show();
+			new ProfileItemListDialog(parent,item).show();
 			break;
 		default:
 			// 其它，包括Label/Boolean等,不处理

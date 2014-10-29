@@ -19,10 +19,10 @@ import com.kingstar.ngbf.ms.util.model.CommonItem;
  * @author boqing.shen
  * 
  */
-public class SysProfileItemPasswordEditDialog extends
+public class ProfileItemPasswordDialog extends
 		CommonItemDialog<CommonItem> {
 
-	public SysProfileItemPasswordEditDialog(Activity parent,CommonItem item) {
+	public ProfileItemPasswordDialog(Activity parent,CommonItem item) {
 		super(parent,item);
 	}
 

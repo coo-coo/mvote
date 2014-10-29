@@ -57,9 +57,9 @@
         </activity>
         <activity android:name="com.coo.m.vote.activity.SysConfigActivity" >
         </activity>
-        <activity android:name="com.coo.m.vote.activity.SysProfileActivity" >
+        <activity android:name="com.coo.m.vote.activity.ProfileActivity" >
         </activity>
-        <activity android:name="com.coo.m.vote.activity.SysProfileIconActivity" >
+        <activity android:name="com.coo.m.vote.activity.ProfileIconActivity" >
         </activity>
         <activity android:name="com.coo.m.vote.activity.SysVersionActivity" >
         </activity>

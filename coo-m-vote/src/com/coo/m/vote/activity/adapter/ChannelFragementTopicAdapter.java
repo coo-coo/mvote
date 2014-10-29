@@ -216,7 +216,7 @@ public class ChannelFragementTopicAdapter extends CommonAdapter<Topic>
 		holder.tv_title.setText(item.getTitle());
 		String BLANK = "    ";
 		// TODO 多数据多屏幕，被遮盖之后有问题 参见M-20
-		holder.tv_vote.setText(BLANK + "投票数:" + item.getVote());
+		holder.tv_vote.setText("投票数:" + item.getVote());
 		holder.tv_createtime.setText(BLANK + "创建日期:"
 				+ VoteUtil.getTsDateText(item.get_tsi()));
 		// TODO 作者账号|昵称

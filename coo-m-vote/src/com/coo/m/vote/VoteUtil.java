@@ -16,8 +16,35 @@ import android.widget.LinearLayout;
 import com.kingstar.ngbf.ms.util.DateUtil;
 import com.kingstar.ngbf.s.ntp.SimpleMessage;
 import com.kingstar.ngbf.s.ntp.SimpleMessageHead;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 public final class VoteUtil {
+
+	private static DisplayImageOptions imageLoadOptions = null;
+
+	/**
+	 * 获得图片加载策略,参见ImageLoader
+	 * http://blog.csdn.net/juyo_ch/article/details/26493119
+	 * 
+	 * @return
+	 */
+	public static DisplayImageOptions imageLoadOptions() {
+		if (imageLoadOptions == null) {
+			imageLoadOptions = new DisplayImageOptions.Builder()
+					.showImageOnLoading(
+							R.drawable.status_orange)
+					.showImageForEmptyUri(
+							R.drawable.status_gray)
+					.showImageOnFail(R.drawable.status_red)
+					.cacheInMemory(false)
+					.cacheOnDisk(false)
+					.considerExifParams(false)
+					.resetViewBeforeLoading(false)
+					.bitmapConfig(Bitmap.Config.RGB_565)
+					.build();
+		}
+		return imageLoadOptions;
+	}
 
 	/**
 	 * 创建一个简单的消息
@@ -28,7 +55,7 @@ public final class VoteUtil {
 		msg.obj = message;
 		return msg;
 	}
-	
+
 	/**
 	 * 返回TS的日期表达式
 	 */

@@ -123,7 +123,7 @@ public class SysMainActivity extends FragmentActivity {
 			handleNext(this, TopicCreateActivity.class);
 			break;
 		case R.id.item_profile:
-			handleNext(this, SysProfileActivity.class);
+			handleNext(this, ProfileActivity.class);
 			break;
 		case R.id.item_sys_config:
 			handleNext(this, SysConfigActivity.class);

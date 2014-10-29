@@ -18,9 +18,9 @@ import com.kingstar.ngbf.ms.util.model.CommonItemOption;
  * @author boqing.shen
  * 
  */
-public class SysProfileItemListEditDialog extends CommonItemDialog<CommonItem> {
+public class ProfileItemListDialog extends CommonItemDialog<CommonItem> {
 
-	public SysProfileItemListEditDialog(Activity parent, CommonItem item) {
+	public ProfileItemListDialog(Activity parent, CommonItem item) {
 		super(parent, item);
 	}
 

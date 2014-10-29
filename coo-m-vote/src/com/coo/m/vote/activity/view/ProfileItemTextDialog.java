@@ -18,14 +18,14 @@ import com.kingstar.ngbf.ms.util.model.CommonItem;
  * @author boqing.shen
  * 
  */
-public class SysProfileItemTextEditDialog extends CommonItemDialog<CommonItem> {
+public class ProfileItemTextDialog extends CommonItemDialog<CommonItem> {
 
 	/**
 	 * 定义单文本编辑框
 	 */
 	private EditText et_item;
 
-	public SysProfileItemTextEditDialog(Activity parent, CommonItem item) {
+	public ProfileItemTextDialog(Activity parent, CommonItem item) {
 		super(parent, item);
 	}
 
