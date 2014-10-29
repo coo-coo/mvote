@@ -132,6 +132,8 @@ public class Mock {
 				// 设置投过票了....
 				item.setVoted(true);
 			}
+			// 设置所有者...
+			item.setOwner("13917081673");
 			resp.addRecord(item);
 		}
 		return resp;

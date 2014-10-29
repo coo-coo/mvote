@@ -4,16 +4,24 @@
 
     <TextView
         android:id="@+id/tv_topic_mgt_row_title"
-        style="@style/tv_common_row"
+        style="@style/tv_command_row"
         android:layout_width="0dip"
-        android:layout_weight="3"
-        android:gravity="left|center" />
+        android:layout_weight="6"
+        android:gravity="left|center_vertical" />
     
     <TextView
         android:id="@+id/tv_topic_mgt_row_owner"
         style="@style/tv_common_row"
         android:layout_width="0dip"
         android:layout_weight="3"
-        android:gravity="left|center" />
+        android:gravity="left|center_vertical" />
+    
+     <ImageView
+        android:id="@+id/iv_topic_mgt_row_status_icon"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:contentDescription="@string/app_blank"
+        android:gravity="right|center_vertical" />
     
 </LinearLayout>

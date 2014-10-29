@@ -3,24 +3,25 @@
     style="@style/listview_adapter_common" >
 
     <TextView
+        android:id="@+id/tv_feedback_mgt_row_note"
+        style="@style/tv_command_row"
+        android:layout_width="0dip"
+        android:layout_weight="6"
+        android:gravity="left|center_vertical" />
+
+    <TextView
         android:id="@+id/tv_feedback_mgt_row_version"
         style="@style/tv_common_row"
         android:layout_width="0dip"
         android:layout_weight="3"
-        android:gravity="left|center" />
+        android:gravity="left|center_vertical" />
 
-    <TextView
-        android:id="@+id/tv_feedback_mgt_row_status"
-        style="@style/tv_common_row"
+     <ImageView
+        android:id="@+id/tv_feedback_mgt_row_status_icon"
         android:layout_width="0dip"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center" />
-    
-    <TextView
-        android:id="@+id/tv_feedback_mgt_row_note"
-        style="@style/tv_common_row"
-        android:layout_width="0dip"
-        android:layout_weight="6"
-        android:gravity="right|center" />
+        android:contentDescription="@string/app_blank"
+        android:gravity="right|center_vertical" />
 
 </LinearLayout>

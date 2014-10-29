@@ -93,13 +93,9 @@ public class SysWelcomeActivity extends Activity implements AnimationListener,
 				VoteManager.get().setAccount(Mock.getAccount());
 			}
 			// 跳转到登录界面
-			// Intent intent = new Intent(SysWelcomeActivity.this,
-			// SysLoginActivity.class);
-			// 调试用，跳转到指定界面
-			// Intent intent = new Intent(SysWelcomeActivity.this,
-			// GroupEditorActivity.class);
 			Intent intent = new Intent(SysWelcomeActivity.this,
-					AccountMgtActivity.class);
+					VoteManager.LOGIN_CLASS);
+			// 调试用，跳转到指定界面
 			startActivity(intent);
 			// this.overridePendingTransition(R.anim.fadeout,
 			// R.anim.fadein);

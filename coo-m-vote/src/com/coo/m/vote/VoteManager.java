@@ -8,9 +8,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Environment;
-import android.os.Message;
 import android.util.Log;
 
+import com.coo.m.vote.activity.TopicMgtActivity;
 import com.coo.s.vote.model.Account;
 import com.coo.s.vote.model.Channel;
 import com.coo.s.vote.model.Topic;
@@ -26,12 +26,15 @@ public class VoteManager {
 
 	private String TAG = VoteManager.class.getName();
 
+	public static Class<?> LOGIN_CLASS = TopicMgtActivity.class;
+	// public static Class<?> LOGIN_CLASS_BACKUP = SysLoginActivity.class;
+
 	private static SharedManager sharedManager = null;
 
 	public static String SD_Path = Environment
 			.getExternalStorageDirectory().getPath();
 	public static String PACKAGE_Path = SD_Path + "/com.coo.vote";
-	
+
 	/**
 	 * 管理器初始化，在VoteApplication中进行
 	 */
@@ -42,22 +45,21 @@ public class VoteManager {
 		// https://github.com/suzlwang/LitePal/
 
 		sharedManager = new SharedManager(app, "vote");
-		
+
 		// 启动后台程序
-//		startBackgound(app);
+		// startBackgound(app);
 	}
-	
+
 	/**
 	 * 启动后台服务
+	 * 
 	 * @param context
 	 */
-	public static void startBackgound(Context context){
+	public static void startBackgound(Context context) {
 		// 启动后台程序
 		Intent intent = new Intent(context, VoteService.class);
 		context.startService(intent);
 	}
-	
-	
 
 	/**
 	 * 获得SD下的Profile的IconPath
@@ -66,10 +68,10 @@ public class VoteManager {
 		return PACKAGE_Path + "/" + VoteManager.getStrAccount()
 				+ "_icon.png";
 	}
-	
+
 	public static String getSdProfileIconPath2() {
-		return "file:///mnt/sdcard/com.coo.vote/" + VoteManager.getStrAccount()
-				+ "_icon.png";
+		return "file:///mnt/sdcard/com.coo.vote/"
+				+ VoteManager.getStrAccount() + "_icon.png";
 	}
 
 	/**
@@ -105,7 +107,7 @@ public class VoteManager {
 		List<CommonItem> items = new ArrayList<CommonItem>();
 		// 基础属性
 		String account = getStrAccount();
-//		items.add(new CommonItem("account", "用户名", account));
+		// items.add(new CommonItem("account", "用户名", account));
 		items.add(new CommonItem("mobile", "手机号", account));
 		items.add(new CommonItem("password", "登录密码", "")
 				.uiType(CommonItem.UIT_PASSWORD));
@@ -128,6 +130,7 @@ public class VoteManager {
 
 	/**
 	 * 获得Topic的骨架
+	 * 
 	 * @return
 	 */
 	public static List<CommonItem> getTopicSkeletonItems(Topic topic) {
@@ -263,6 +266,5 @@ public class VoteManager {
 	private VoteManager() {
 
 	}
-	
-	
+
 }
