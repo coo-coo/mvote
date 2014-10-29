@@ -96,6 +96,7 @@ public class ProfileActivity extends CommonBizActivity implements
 	 */
 	@Override
 	@Reference(override = CommonBizActivity.class)
+
 	public void onAdapterItemClicked(Object object) {
 		if (object instanceof CommonItem) {
 			CommonItem item = (CommonItem) object;
@@ -107,6 +108,7 @@ public class ProfileActivity extends CommonBizActivity implements
 			case CommonItem.UIT_PASSWORD:
 				// 显示文本，修改对话框
 				new CommonItemPasswordDialog(this, item).show();
+
 				break;
 			case CommonItem.UIT_LIST:
 				// 显示文本，修改对话框

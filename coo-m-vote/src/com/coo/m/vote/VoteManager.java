@@ -29,7 +29,8 @@ public class VoteManager {
 	private String TAG = VoteManager.class.getName();
 
 	public static Class<?> LOGIN_CLASS = SysMainActivity.class;
-	// public static Class<?> LOGIN_CLASS_BACKUP = SysLoginActivity.class;
+
+//	public static Class<?> LOGIN_CLASS = TopicActivity.class;
 
 	private static SharedManager sharedManager = null;
 
