@@ -9,14 +9,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.coo.m.vote.CommonItemAdapter;
+import com.coo.m.vote.CommonOptionDialog;
 import com.coo.m.vote.Constants;
 import com.coo.m.vote.R;
 import com.coo.m.vote.VoteManager;
 import com.coo.m.vote.VoteUtil;
-import com.coo.m.vote.activity.view.ProfileItemListDialog;
-import com.coo.m.vote.activity.view.ProfileItemPasswordDialog;
-import com.coo.m.vote.activity.view.ProfileItemTextDialog;
+import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
+import com.kingstar.ngbf.ms.util.android.view.CommonItemPasswordDialog;
+import com.kingstar.ngbf.ms.util.android.view.CommonItemTextDialog;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
 import com.kingstar.ngbf.ms.util.rpc.HttpAsynCaller;
 import com.kingstar.ngbf.ms.util.rpc.IHttpCallback;
@@ -26,7 +27,9 @@ import com.kingstar.ngbf.s.ntp.SimpleMessage;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
- * 人员信息Activity
+ * 人员信息Activity，Profile信息先不在本地进行存储，或者是不以本地存储为标准，将来网络会进行存储
+ * 
+ * Profile 本地存储是辅助，存在网页端更新的可能....
  * 
  * @author boqing.shen
  * 
@@ -56,13 +59,11 @@ public class ProfileActivity extends CommonBizActivity implements
 			String account = VoteManager.getStrAccount();
 			String uri = Constants.HOST_REST
 					+ "/profile/get/account/" + account;
-			toast("uri=" + uri);
 			HttpAsynCaller.doGet(uri, null, this);
 		}
 
-		// 初始化图片Icon
+		// 初始化Icon
 		ivIcon = (ImageView) findViewById(R.id.iv_sys_profile_icon);
-
 		String iconPath = VoteManager.getSdProfileIconPath();
 		// 加载SDCard上的图片,需要加前缀
 		String iconUrl = "file://" + iconPath;
@@ -70,7 +71,7 @@ public class ProfileActivity extends CommonBizActivity implements
 				VoteUtil.imageLoadOptions());
 		ivIcon.setOnClickListener(this);
 
-		// TODO 位置
+		// 初始化账号
 		tvAccount = (TextView) findViewById(R.id.iv_sys_profile_account);
 		tvAccount.setText(VoteManager.getStrAccount());
 
@@ -93,22 +94,23 @@ public class ProfileActivity extends CommonBizActivity implements
 	/**
 	 * AdapterItem改变时调用，对应EVT_ITEM_CLICKED事件
 	 */
+	@Override
+	@Reference(override = CommonBizActivity.class)
 	public void onAdapterItemClicked(Object object) {
 		if (object instanceof CommonItem) {
 			CommonItem item = (CommonItem) object;
 			int uiType = item.getUiType();
 			switch (uiType) {
 			case CommonItem.UIT_TEXT:
-				new ProfileItemTextDialog(this, item).show();
+				new CommonItemTextDialog(this, item).show();
 				break;
 			case CommonItem.UIT_PASSWORD:
 				// 显示文本，修改对话框
-				new ProfileItemPasswordDialog(this, item)
-						.show();
+				new CommonItemPasswordDialog(this, item).show();
 				break;
 			case CommonItem.UIT_LIST:
 				// 显示文本，修改对话框
-				new ProfileItemListDialog(this, item).show();
+				new CommonOptionDialog(this, item).show();
 				break;
 			default:
 				// 其它，包括Label/Boolean等,不处理
@@ -118,6 +120,7 @@ public class ProfileActivity extends CommonBizActivity implements
 	}
 
 	@Override
+	@Reference(override = CommonBizActivity.class)
 	public void onAdapterItemChanged(Object item) {
 		// 交由子类实现
 		adapter.notifyDataSetChanged();

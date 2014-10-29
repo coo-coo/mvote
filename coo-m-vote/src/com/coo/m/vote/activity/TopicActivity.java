@@ -1,5 +1,6 @@
 package com.coo.m.vote.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.widget.ListView;
 
@@ -75,6 +76,10 @@ public class TopicActivity extends CommonBizActivity implements
 				break;
 			case CommonItem.UIT_COMMAND_ACTION:
 				toast("未实现..");
+				break;
+			case CommonItem.UIT_DIALOG_CANCEL:
+				Dialog dlg = (Dialog)ci.getValue();
+				dlg.cancel();
 				break;
 			default:
 				// 其它，包括Label/Boolean等,不处理

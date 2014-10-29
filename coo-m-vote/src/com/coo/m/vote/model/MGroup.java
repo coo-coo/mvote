@@ -22,8 +22,14 @@ public class MGroup extends DataSupport implements java.io.Serializable{
 		this.name = name;
 		this.accounts0 = accounts0;
 		this.tsi = System.currentTimeMillis();
+//		this.uuid = VoteUtil.uuid();
 	}
-
+	
+//	/**
+//	 * 作为唯一识别,不用id作为识别
+//	 */
+//	private String uuid = "";
+	
 	private long id = 0l;
 	/**
 	 * 本机账号，即account
@@ -110,4 +116,5 @@ public class MGroup extends DataSupport implements java.io.Serializable{
 	public void setTsi(long tsi) {
 		this.tsi = tsi;
 	}
+	
 }

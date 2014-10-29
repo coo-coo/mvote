@@ -2,6 +2,7 @@ package com.coo.m.vote.model;
 
 /**
  * TODO 个人账号属性信息 M端存储...
+ * 暂不在M端存储，可能会有网页端修改的可能....
  * @author boqing.shen
  *
  */

@@ -1,4 +1,4 @@
-package com.coo.m.vote.activity.adapter;
+package com.coo.m.vote;
 
 import java.util.List;
 
@@ -9,37 +9,29 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.coo.m.vote.R;
 import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemDialog;
 import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
-import com.kingstar.ngbf.ms.util.model.CommonItemOption;
+import com.kingstar.ngbf.ms.util.model.CommonOption;
 
 /**
  * 
  * CommonItem的Option填充器,主要是完成针对CommonItem的value值的设定
  * 
- * @since 0.5.4.0
- * @author boqing.shen
- * 
  */
-public class SysProfilePropertyOptionAdapter extends
-		CommonAdapter<CommonItemOption> {
+public class CommonOptionAdapter extends CommonAdapter<CommonOption> {
 
 	/**
 	 * 构造函数
 	 */
-	public SysProfilePropertyOptionAdapter(Activity parent, List<CommonItemOption> items,
+	public CommonOptionAdapter(Activity parent, List<CommonOption> items,
 			ListView composite) {
-		super(parent,items, composite);
+		super(parent, items, composite);
 	}
 
 	/**
-	 * TODO 再考虑 初始化对象,用于对象的选中,值的回写 
-	 * 
-	 * @param dialog
-	 * @param item
+	 * TODO 再考虑 初始化对象,用于对象的选中,值的回写
 	 */
 	public void initParams(CommonItemDialog<?> dialog, CommonItem item) {
 		this.dialog = dialog;
@@ -58,10 +50,10 @@ public class SysProfilePropertyOptionAdapter extends
 	public void onItemClick(AdapterView<?> parentView, View view,
 			int position, long rowId) {
 		// 更改指定的CommonItem对象的value值
-		CommonItemOption current = getItem(position);
+		CommonOption option = getItem(position);
 		// 设置原有的Item的值
-		item.setValue(current.getValue());
-
+		item.setValue(option.getValue());
+		
 		// 通知父类Activity对象进行数据的更新
 		dialog.notifyAdapterEvent(CommonAdapter.EVT_ITEM_CHANGED, item);
 		// 关闭对话框
@@ -79,8 +71,7 @@ public class SysProfilePropertyOptionAdapter extends
 	}
 
 	@Override
-	public void initHolderValue(CommonItemHolder ciHolder,
-			CommonItemOption item) {
+	public void initHolderValue(CommonItemHolder ciHolder, CommonOption item) {
 		CommonItemOptionRowHolder holder = (CommonItemOptionRowHolder) ciHolder;
 		holder.tv_value.setText(item.getValue());
 		ImageView icon = holder.iv_selected;

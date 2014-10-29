@@ -10,7 +10,7 @@ import com.coo.s.vote.model.Feedback;
 import com.coo.s.vote.model.Topic;
 import com.coo.s.vote.model.TopicLeg;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
-import com.kingstar.ngbf.ms.util.model.CommonItemOption;
+import com.kingstar.ngbf.ms.util.model.CommonOption;
 import com.kingstar.ngbf.s.ntp.SimpleMessage;
 
 /**
@@ -59,10 +59,10 @@ public class Mock {
 		items.add(new CommonItem("profile.mobile", "手机号", "13917081673"));
 		items.add(new CommonItem("profile.nickname", "昵称", "zhangsan")
 				.uiType(CommonItem.UIT_TEXT));
-		List<CommonItemOption> genders = new ArrayList<CommonItemOption>();
-		genders.add(new CommonItemOption("男", "男"));
-		genders.add(new CommonItemOption("女", "女"));
-		genders.add(new CommonItemOption("未知", "未知"));
+		List<CommonOption> genders = new ArrayList<CommonOption>();
+		genders.add(new CommonOption("男", "男"));
+		genders.add(new CommonOption("女", "女"));
+		genders.add(new CommonOption("未知", "未知"));
 		CommonItem ci04 = new CommonItem("profile.gender", "性别", "未知")
 				.uiType(CommonItem.UIT_LIST).options(genders);
 		items.add(ci04);
