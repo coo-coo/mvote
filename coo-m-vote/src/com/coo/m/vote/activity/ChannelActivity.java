@@ -24,10 +24,7 @@ public class ChannelActivity extends CommonBizActivity implements
 		// 从SQLLite中获取，加载MChannel对象
 		List<MChannel> list = MManager.findChannelAll();
 		GridView girdView = (GridView) findViewById(R.id.gv_channel);
-
-
 		adapter = new ChannelAdapter(this, list, girdView);
-
 		// this.registerShakeListener(this);
 	}
 

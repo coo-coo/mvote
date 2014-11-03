@@ -13,7 +13,6 @@ import com.coo.m.vote.model.MChannel;
 import com.coo.m.vote.model.MContact;
 import com.coo.m.vote.model.MManager;
 import com.coo.s.vote.model.Channel;
-import com.coo.s.vote.model.Contact;
 import com.kingstar.ngbf.ms.util.android.CommonConfig;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -85,11 +84,10 @@ public class VoteApplication extends LitePalApplication {
 	private void initMContacts() {
 		List<MContact> list = MManager.findContactAll();
 		if (list.size() == 0) {
-			List<Contact> contacts = Mock.CONTACTS;
-			for (Contact c : contacts) {
+			for (int i = 10; i < 20; i++) {
 				// 添加静态的频道信息
-				MContact mc = new MContact(c.getMobile(),
-						c.getName());
+				MContact mc = new MContact("139170816" + i,
+						"MOBILE-" + i);
 				mc.save();
 			}
 		}

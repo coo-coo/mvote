@@ -5,13 +5,10 @@ import java.util.List;
 
 import com.coo.s.vote.model.Account;
 import com.coo.s.vote.model.Channel;
-import com.coo.s.vote.model.Contact;
-import com.coo.s.vote.model.Feedback;
 import com.coo.s.vote.model.Topic;
 import com.coo.s.vote.model.TopicLeg;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
 import com.kingstar.ngbf.ms.util.model.CommonOption;
-import com.kingstar.ngbf.s.ntp.SimpleMessage;
 
 /**
  * 提供测试数据，供界面调试用
@@ -23,8 +20,6 @@ public class Mock {
 
 	public static List<Channel> CHANNNELS = new ArrayList<Channel>();
 
-	public static List<Contact> CONTACTS = new ArrayList<Contact>();
-
 	static {
 		CHANNNELS.add(new Channel("yinyue", "音乐"));
 		CHANNNELS.add(new Channel("tiyu", "体育"));
@@ -34,23 +29,10 @@ public class Mock {
 		CHANNNELS.add(new Channel("guoji", "国际"));
 		CHANNNELS.add(new Channel("minsheng", "民生"));
 		CHANNNELS.add(new Channel("youxi", "游戏"));
-
-		CONTACTS.add(new Contact("13917081671", "SBQ1"));
-		CONTACTS.add(new Contact("13917081672", "SBQ2"));
-		CONTACTS.add(new Contact("13917081673", "SBQ3"));
-		CONTACTS.add(new Contact("13917081674", "SBQ4"));
-		CONTACTS.add(new Contact("13917081675", "SBQ5"));
-		CONTACTS.add(new Contact("13917081676", "SBQ6"));
-		CONTACTS.add(new Contact("13917081677", "SBQ7"));
-		CONTACTS.add(new Contact("13917081678", "SBQ8"));
-		CONTACTS.add(new Contact("13917081679", "SBQ9"));
 	}
 
 	/**
 	 * 模拟产生Profile的属性条目对象,用于集中展现
-	 * 
-	 * @deprecated
-	 * @return
 	 */
 	public static List<CommonItem> getProfileItems() {
 		// TODO 向服务端获得个人信息
@@ -75,8 +57,6 @@ public class Mock {
 
 	/**
 	 * 获得模拟账号
-	 * 
-	 * @return
 	 */
 	public static Account getAccount() {
 		Account account = new Account();
@@ -87,29 +67,18 @@ public class Mock {
 		return account;
 	}
 
-	public static SimpleMessage<Feedback> feedbacks() {
-		SimpleMessage<Feedback> resp = new SimpleMessage<Feedback>();
-		for (int i = 0; i < 10; i++) {
-			Feedback item = new Feedback();
-			item.setAppVersion("0." + i);
-			item.setNote("note-" + i);
-			resp.addRecord(item);
-		}
-		return resp;
-	}
-
-	public static SimpleMessage<Account> accounts() {
-		SimpleMessage<Account> resp = new SimpleMessage<Account>();
+	public static List<Account> accounts() {
+		List<Account> list = new ArrayList<Account>();
 		for (int i = 0; i < 10; i++) {
 			Account item = new Account();
 			item.setMobile("139-00000-" + i);
-			resp.addRecord(item);
+			list.add(item);
 		}
-		return resp;
+		return list;
 	}
 
-	public static SimpleMessage<Topic> topicshots(String code) {
-		SimpleMessage<Topic> resp = new SimpleMessage<Topic>();
+	public static List<Topic> topicshots(String code) {
+		List<Topic> list = new ArrayList<Topic>();
 		for (int i = 0; i < 30; i++) {
 			Topic item = new Topic();
 			item.setTitle(code + "-Topic Title-" + i);
@@ -134,17 +103,9 @@ public class Mock {
 			}
 			// 设置所有者...
 			item.setOwner("13917081673");
-			resp.addRecord(item);
+			list.add(item);
 		}
-		return resp;
-	}
-
-	public static SimpleMessage<Channel> channels() {
-		SimpleMessage<Channel> resp = new SimpleMessage<Channel>();
-		for (Channel record : CHANNNELS) {
-			resp.addRecord(record);
-		}
-		return resp;
+		return list;
 	}
 
 }

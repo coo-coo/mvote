@@ -8,7 +8,7 @@ import org.litepal.crud.DataSupport;
  * @author boqing.shen
  * 
  */
-public class MChannel extends DataSupport implements java.io.Serializable{
+public class MChannel extends DataSupport implements java.io.Serializable {
 
 	/**
 	 * 
@@ -25,16 +25,24 @@ public class MChannel extends DataSupport implements java.io.Serializable{
 		this.tsi = System.currentTimeMillis();
 	}
 
+	public static final int STATUS_FOCUSD = 1;
+	public static final int STATUS_UNFOCUS = 0;
+	/**
+	 * SQLite ID
+	 */
 	private long id = 0l;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
+	/**
+	 * 本机账号，即account
+	 */
+	private String host = "";
+	/**
+	 * 创建时间戳
+	 */
+	private long tsi = 0l;
+	/**
+	 * 更新时间戳
+	 */
+	private long tsu = 0l;
 	/**
 	 * 頻道代码
 	 */
@@ -44,31 +52,14 @@ public class MChannel extends DataSupport implements java.io.Serializable{
 	 */
 	private String label = "";
 	/**
-	 * 是否已关注:0 未关注,1 已关注
-	 */
-	private int status = STATUS_UNFOCUS;
-
-	public static final int STATUS_FOCUSD = 1;
-	public static final int STATUS_UNFOCUS = 0;
-	/**
 	 * 是否删除:0 未删除,1 已删除
 	 */
 	private int deleted = 0;
 	/**
-	 * 本机账号，即account
+	 * 是否已关注:0 未关注,1 已关注
 	 */
-	private String host = "";
-	
-	/**
-	 * 创建时间戳
-	 */
-	private long tsi = 0l;
-	/**
-	 * 更新时间戳
-	 */
-	private long tsu = 0l;
-	
-	
+	private int status = STATUS_UNFOCUS;
+
 	public long getTsi() {
 		return tsi;
 	}
@@ -123,5 +114,13 @@ public class MChannel extends DataSupport implements java.io.Serializable{
 
 	public void setHost(String host) {
 		this.host = host;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 }

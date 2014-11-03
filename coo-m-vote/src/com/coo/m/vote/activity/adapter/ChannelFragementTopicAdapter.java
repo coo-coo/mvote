@@ -26,9 +26,6 @@ import com.kingstar.ngbf.ms.mpchart.CommonBarChart;
 import com.kingstar.ngbf.ms.mpchart.CommonPieChart;
 import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
-import com.kingstar.ngbf.ms.util.rpc.HttpAsynCaller;
-import com.kingstar.ngbf.ms.util.rpc.IHttpCallback;
-import com.kingstar.ngbf.s.ntp.SimpleMessage;
 
 /**
  * 我的主题的ListView的填充器
@@ -38,17 +35,16 @@ import com.kingstar.ngbf.s.ntp.SimpleMessage;
  * 
  */
 public class ChannelFragementTopicAdapter extends CommonAdapter<Topic>
-		implements OnClickListener, IHttpCallback<SimpleMessage<?>> {
+		implements OnClickListener {
 
 	/**
 	 * 构造函数
 	 */
 	public ChannelFragementTopicAdapter(Activity parent, List<Topic> items,
 			ListView composite) {
-		super(parent,items, composite);
+		super(parent, items, composite);
 	}
-	
-	
+
 	@Override
 	public int getItemConvertViewId() {
 		// TODO 返回Topic的布局
@@ -67,8 +63,8 @@ public class ChannelFragementTopicAdapter extends CommonAdapter<Topic>
 			int position, long rowId) {
 
 		if (linearLayoutRight == null) {
-			linearLayoutRight = (LinearLayout) getParent().findViewById(
-							R.id.ll_sys_main_right);
+			linearLayoutRight = (LinearLayout) getParent()
+					.findViewById(R.id.ll_sys_main_right);
 		}
 		// 清除右侧滑动界面，动态加载布局...
 		linearLayoutRight.removeAllViews();
@@ -144,9 +140,9 @@ public class ChannelFragementTopicAdapter extends CommonAdapter<Topic>
 				R.id.lv_inc_topic_vote_legs);
 
 		// 初始化适配器...
-		topicLegVoteAdapter = new TopicLegVoteAdapter(parent,item.getLegs(),
-				lv_legs);
-		
+		topicLegVoteAdapter = new TopicLegVoteAdapter(parent,
+				item.getLegs(), lv_legs);
+
 		Button btn_vote = (Button) getParent().findViewById(
 				R.id.btn_topic_vote);
 		btn_vote.setOnClickListener(this);
@@ -181,18 +177,18 @@ public class ChannelFragementTopicAdapter extends CommonAdapter<Topic>
 		String uri = Constants.HOST_REST + "/topic/vote/account/"
 				+ account + "/topic/" + topicId + "/legSeq/"
 				+ topicLeg.getSeq();
-		toast(uri);
+		toast("投票RPC未实现:" + uri);
 		// 异步请求
-		HttpAsynCaller.doGet(uri, Constants.TYPE_NONE, this);
+//		 HttpAsynCaller.doGet(uri, Constants.TYPE_NONE, this);
 		// 关闭界面
 		drawerLayout.closeDrawer(Gravity.RIGHT);
 	}
 
-	@Override
-	public void response(SimpleMessage<?> resp) {
-		this.toast(Constants.MSG_RPC_OK);
-
-	}
+	// @Override
+	// public void response(SimpleMessage<?> resp) {
+	// this.toast(Constants.MSG_RPC_OK);
+	//
+	// }
 
 	@Override
 	public CommonItemHolder initHolder(View convertView) {

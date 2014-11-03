@@ -18,10 +18,13 @@ import com.coo.m.vote.Constants;
 import com.coo.m.vote.Mock;
 import com.coo.m.vote.R;
 import com.coo.m.vote.VoteManager;
+import com.coo.m.vote.VoteUtil;
 import com.coo.s.vote.model.Account;
-import com.kingstar.ngbf.ms.util.rpc.HttpAsynCaller;
-import com.kingstar.ngbf.ms.util.rpc.IHttpCallback;
-import com.kingstar.ngbf.s.ntp.SimpleMessage;
+import com.kingstar.ngbf.ms.util.Reference;
+import com.kingstar.ngbf.ms.util.rpc2.IRpcCallback;
+import com.kingstar.ngbf.ms.util.rpc2.RpcCallHandler;
+import com.kingstar.ngbf.ms.util.rpc2.RpcCaller;
+import com.kingstar.ngbf.s.ntp.NtpMessage;
 
 /**
  * 欢迎界面,如果没有登录,则进行登录
@@ -29,8 +32,7 @@ import com.kingstar.ngbf.s.ntp.SimpleMessage;
  * @since 0.5.0.0
  * 
  */
-public class SysWelcomeActivity extends Activity implements AnimationListener,
-		IHttpCallback<SimpleMessage<?>> {
+public class SysWelcomeActivity extends Activity implements AnimationListener,IRpcCallback {
 
 	private static String TAG = SysWelcomeActivity.class.getName();
 
@@ -76,6 +78,7 @@ public class SysWelcomeActivity extends Activity implements AnimationListener,
 		tv_copyright = (TextView) findViewById(R.id.tv_sys_welcome_copyright);
 		tv_copyright.setAnimation(animation);
 
+		httpCaller = new RpcCaller(new RpcCallHandler(this));
 		// 设置动画监听
 		animation.setAnimationListener(this);
 	}
@@ -124,28 +127,34 @@ public class SysWelcomeActivity extends Activity implements AnimationListener,
 		String mobile = account.getMobile();
 		String password = account.getPassword();
 		// 参见AccountRestService.accountLogin
-		String params = "/account/login/mobile/" + mobile
-				+ "/password/" + password;
-		String uri = Constants.HOST_REST + params;
+		String uri = "/account/login/mobile/" + mobile + "/password/"
+				+ password;
 		// 同步調用不可以,需要异步调用
-		HttpAsynCaller.doGet(uri, null, this);
+		httpCaller.doGet(Constants.BIZ_ACCOUNT_LOGIN,
+				Constants.rest(uri));
 	}
+	
+	// 异步调用
+	private RpcCaller httpCaller;
 
 	@Override
-	public void response(SimpleMessage<?> resp) {
-		if (resp.getHead().getRep_code().equals(Constants.REP_OK)) {
-			// 登录成功，证明用户名和密码正确, 不再进行信息的保存
-			// 跳转主界面
-			Intent intent = new Intent(SysWelcomeActivity.this,
-					SysMainActivity.class);
-			startActivity(intent);
-			this.finish();
-		} else {
-			// 登录不成功，证明用户名和密码不正确, 需要重新登录
-			Intent intent = new Intent(SysWelcomeActivity.this,
-					SysLoginActivity.class);
-			startActivity(intent);
-			this.finish();
+	@Reference(override=IRpcCallback.class)
+	public void onHttpCallback(int what, NtpMessage resp) {
+		if (what == Constants.BIZ_ACCOUNT_LOGIN) {
+			if (VoteUtil.isRespOK(resp)) {
+				// 登录成功，证明用户名和密码正确, 不再进行信息的保存
+				// 跳转主界面
+				Intent intent = new Intent(SysWelcomeActivity.this,
+						SysMainActivity.class);
+				startActivity(intent);
+				this.finish();
+			} else {
+				// 登录不成功，证明用户名和密码不正确, 需要重新登录
+				Intent intent = new Intent(SysWelcomeActivity.this,
+						SysLoginActivity.class);
+				startActivity(intent);
+				this.finish();
+			}
 		}
 	}
 }

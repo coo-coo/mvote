@@ -1,7 +1,6 @@
 package com.coo.m.vote.activity;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,12 +9,10 @@ import com.coo.m.vote.Constants;
 import com.coo.m.vote.R;
 import com.coo.m.vote.VoteManager;
 import com.coo.s.vote.model.Account;
+import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.StringUtil;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
-import com.kingstar.ngbf.ms.util.rpc.HttpAsynCaller;
-import com.kingstar.ngbf.ms.util.rpc.IHttpCallback;
-import com.kingstar.ngbf.s.ntp.SimpleMessage;
-import com.kingstar.ngbf.s.ntp.SimpleMessageHead;
+import com.kingstar.ngbf.s.ntp.NtpMessage;
 
 /**
  * 【意见反馈】创建
@@ -23,10 +20,7 @@ import com.kingstar.ngbf.s.ntp.SimpleMessageHead;
  * @since 0.4.3.0
  * @author boqing.shen
  */
-public class FeedbackCreateActivity extends CommonBizActivity implements
-		IHttpCallback<SimpleMessage<?>> {
-	private static final String TAG = FeedbackCreateActivity.class
-			.getSimpleName();
+public class FeedbackCreateActivity extends CommonBizActivity {
 
 	/**
 	 * note文本编辑框
@@ -47,6 +41,25 @@ public class FeedbackCreateActivity extends CommonBizActivity implements
 		et_note = (EditText) findViewById(R.id.et_feedback_create_note);
 		btn_save = (Button) findViewById(R.id.btn_feedback_create_save);
 		btn_save.setOnClickListener(this);
+	}
+
+	/**
+	 * 参见HttpCallHandler的消息处理...
+	 * 
+	 * @since 2.4.9.0
+	 */
+	@Override
+	@Reference(override = CommonBizActivity.class)
+	public void onHttpCallback(int what, NtpMessage sm) {
+		// 通过HttpAsynCaller2来进行Http请求,发送消息之后进行获得消息的反馈
+		// httpCaller.doGet(1, restUrl);
+		// httpCaller.doPost(2, restUrl, SimpleMessage2);
+		// toast("" + what + "-" + sm.toJson());
+		if (what == Constants.BIZ_FEEDBACK_CREATE) {
+			Intent intent = new Intent(FeedbackCreateActivity.this,
+					SysMainActivity.class);
+			startActivity(intent);
+		}
 	}
 
 	@Override
@@ -72,35 +85,19 @@ public class FeedbackCreateActivity extends CommonBizActivity implements
 		if (StringUtil.isNullOrSpace(note)) {
 			toast("反馈信息不能为空");
 		} else {
-			// 以SimpleMessage封装意见反馈消息体
-			SimpleMessage<?> sm = new SimpleMessage<Object>();
 			Account account = VoteManager.getAccount();
-			
-			String app_version = VoteManager.get().getAppVersion(
-					this);
+			String app_version = VoteManager.getVersionName();
+
+			// 以NtpMessage封装意见反馈消息体
+			NtpMessage sm = new NtpMessage();
 			sm.set("owner", account.getMobile());
-			sm.set("owner_id", account.get_id());
 			sm.set("note", note);
 			sm.set("app_version", app_version);
 
-			String uri = Constants.HOST_REST + "/feedback/create/";
-			Log.i(TAG, uri);
 			// 异步调用
-			HttpAsynCaller.doPost(uri, sm, this);
-		}
-	}
-
-	@Override
-	public void response(SimpleMessage<?> resp) {
-		// 获得反馈消息,处理业务
-		if (resp.getHead().getRep_code()
-				.equals(SimpleMessageHead.REP_OK)) {
-			toast("感谢您的反馈,我们会尽快对您的反馈做出响应!");
-			Intent intent = new Intent(FeedbackCreateActivity.this,
-					SysMainActivity.class);
-			startActivity(intent);
-		} else {
-			toast(resp.toJson());
+			String uri = Constants.HOST_REST + "/feedback/create/";
+			httpCaller.doPost(Constants.BIZ_FEEDBACK_CREATE, uri,
+					sm);
 		}
 	}
 }

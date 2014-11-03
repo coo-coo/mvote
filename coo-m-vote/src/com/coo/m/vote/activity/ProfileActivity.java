@@ -19,11 +19,9 @@ import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 import com.kingstar.ngbf.ms.util.android.view.CommonItemPasswordDialog;
 import com.kingstar.ngbf.ms.util.android.view.CommonItemTextDialog;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
-import com.kingstar.ngbf.ms.util.rpc.HttpAsynCaller;
-import com.kingstar.ngbf.ms.util.rpc.IHttpCallback;
 import com.kingstar.ngbf.ms.util.update.IconSettingManager;
 import com.kingstar.ngbf.ms.util.update.IconSettingOptions;
-import com.kingstar.ngbf.s.ntp.SimpleMessage;
+import com.kingstar.ngbf.s.ntp.NtpMessage;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
@@ -34,8 +32,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  * @author boqing.shen
  * 
  */
-public class ProfileActivity extends CommonBizActivity implements
-		IHttpCallback<SimpleMessage<?>> {
+public class ProfileActivity extends CommonBizActivity {
 
 	private ImageView ivIcon = null;
 
@@ -57,9 +54,9 @@ public class ProfileActivity extends CommonBizActivity implements
 		} else {
 			// 异步调用数据
 			String account = VoteManager.getStrAccount();
-			String uri = Constants.HOST_REST
-					+ "/profile/get/account/" + account;
-			HttpAsynCaller.doGet(uri, null, this);
+			String uri = "/account/info/mobile/" + account;
+			httpCaller.doGet(Constants.BIZ_ACCOUNT_INFO,
+					Constants.rest(uri));
 		}
 
 		// 初始化Icon
@@ -96,7 +93,6 @@ public class ProfileActivity extends CommonBizActivity implements
 	 */
 	@Override
 	@Reference(override = CommonBizActivity.class)
-
 	public void onAdapterItemClicked(Object object) {
 		if (object instanceof CommonItem) {
 			CommonItem item = (CommonItem) object;
@@ -131,15 +127,39 @@ public class ProfileActivity extends CommonBizActivity implements
 			String id = VoteManager.getAccount().get_id();
 			// toast(id + "-" + ci.getCode() + "-" + ci.getValue());
 
+			NtpMessage nm = new NtpMessage();
+			nm.set("_id", id);
+			nm.set("key", ci.getCode());
+			nm.set("value", ci.getValue());
 			// 发送更新请求...
-			String uri = Constants.HOST_REST
-					+ "/profile/update/id/" + id
-					+ "/param/" + ci.getCode() + "/value/"
-					+ ci.getValue() + "/type/0";
-			toast("uri=" + uri);
-			// TODO 中文？GET?
+			String uri = "/account/update/param";
 			// 修改信息，參見topicUpdate
-			HttpAsynCaller.doGet(uri, null, this);
+			httpCaller.doPost(Constants.BIZ_ACCOUNT_UPDATE_PARAM,
+					Constants.rest(uri), nm);
+		}
+	}
+
+	@Override
+	@Reference(override = CommonBizActivity.class)
+	public void onHttpCallback(int what, NtpMessage resp) {
+		if (what == Constants.BIZ_ACCOUNT_UPDATE_PARAM) {
+			toast("更新属性成功....");
+		} else if (what == Constants.BIZ_ACCOUNT_INFO) {
+			ListView listView = (ListView) findViewById(R.id.lv_sys_profile);
+			// 获得服务器的值，有些Key是没有设定的，则为空，空表示服务器没有
+			List<CommonItem> items = VoteManager
+					.getProfileSkeletonItems();
+			for (CommonItem ci : items) {
+				// 通过code，获得Mongo条目信息的属性值
+				Object value = resp.get(ci.getCode());
+				if (value != null) {
+					// TODO 暂定都是字符串
+					ci.setValue(value.toString());
+				}
+			}
+			adapter = new CommonItemAdapter(this, items, listView);
+		} else {
+
 		}
 	}
 
@@ -161,41 +181,4 @@ public class ProfileActivity extends CommonBizActivity implements
 				data);
 		super.onActivityResult(requestCode, resultCode, data);
 	}
-
-	@Override
-	public void response(SimpleMessage<?> resp) {
-		if (VoteUtil.isRespOK(resp)) {
-			// 获得业务请求代码
-			String api_code = resp.getHead().getApi_code();
-			if (api_code.equals("profile_get")) {
-				responseProfileGet(resp);
-			} else if (api_code.equals("profile_update")) {
-				toast("更新属性成功....");
-			} else {
-
-			}
-		} else {
-			toast(Constants.MSG_RPC_ERROR);
-		}
-	}
-
-	/**
-	 * 
-	 * @param resp
-	 */
-	private void responseProfileGet(SimpleMessage<?> resp) {
-		ListView listView = (ListView) findViewById(R.id.lv_sys_profile);
-		// 获得服务器的值，有些Key是没有设定的，则为空，空表示服务器没有
-		List<CommonItem> items = VoteManager.getProfileSkeletonItems();
-		for (CommonItem ci : items) {
-			// 通过code，获得Mongo条目信息的属性值
-			String value = resp.getData(ci.getCode());
-			if (value != null) {
-				// TODO 暂定都是字符串
-				ci.setValue(value);
-			}
-		}
-		adapter = new CommonItemAdapter(this, items, listView);
-	}
-
 }

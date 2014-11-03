@@ -13,12 +13,14 @@ import com.coo.m.vote.Constants;
 import com.coo.m.vote.Mock;
 import com.coo.m.vote.R;
 import com.coo.m.vote.VoteManager;
+import com.coo.m.vote.VoteUtil;
 import com.coo.s.vote.model.Account;
+import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.RegexUtil;
 import com.kingstar.ngbf.ms.util.android.GenericActivity;
-import com.kingstar.ngbf.ms.util.rpc.HttpAsynCaller;
-import com.kingstar.ngbf.ms.util.rpc.IHttpCallback;
-import com.kingstar.ngbf.s.ntp.SimpleMessage;
+import com.kingstar.ngbf.ms.util.rpc2.IRpcCallback;
+import com.kingstar.ngbf.ms.util.rpc2.RpcCaller;
+import com.kingstar.ngbf.s.ntp.NtpMessage;
 
 /**
  * 登陆界面activity
@@ -26,7 +28,7 @@ import com.kingstar.ngbf.s.ntp.SimpleMessage;
  * @author Bingjue.Sun
  */
 public class SysLoginActivity extends GenericActivity implements
-		OnClickListener, IHttpCallback<SimpleMessage<?>> {
+		OnClickListener, IRpcCallback {
 
 	@SuppressWarnings("unused")
 	private static String TAG = SysLoginActivity.class.getName();
@@ -117,13 +119,15 @@ public class SysLoginActivity extends GenericActivity implements
 			return;
 		}
 		// 参见AccountRestService.accountLogin
-		String params = "/account/login/mobile/" + mobile
-				+ "/password/" + password;
-		String uri = Constants.HOST_REST + params;
-		// 同步調用?不可以,需要异步调用
-		// SimpleMessage<?> sm = HttpUtils2.doGet(uri, null);
-		HttpAsynCaller.doGet(uri, null, this);
+		String uri = "/account/login/mobile/" + mobile + "/password/"
+				+ password;
+		// 同步調用不可以,需要异步调用
+		httpCaller.doGet(Constants.BIZ_ACCOUNT_LOGIN,
+				Constants.rest(uri));
 	}
+
+	// 异步调用
+	private RpcCaller httpCaller;
 
 	// 手机号
 	private String mobile = "";
@@ -131,21 +135,26 @@ public class SysLoginActivity extends GenericActivity implements
 	private String password = "";
 
 	@Override
-	public void response(SimpleMessage<?> resp) {
-		if (resp.getHead().getRep_code().equals(Constants.REP_OK)) {
-			// 登录成功
-			toast("登录成功");
-			String id = resp.getData("id");
-			String type = resp.getData("type");
-			// 再次保存账号信息,可能前面因APP删除SR不存在用户信息
-			VoteManager.get().saveAccount(id, mobile, password,
-					type);
-			// 跳转注册
-			Intent intent = new Intent(SysLoginActivity.this,
-					SysMainActivity.class);
-			startActivity(intent);
-		} else {
-			toast("用户名或密码不正确!");
+	@Reference(override = IRpcCallback.class)
+	public void onHttpCallback(int what, NtpMessage resp) {
+		if (what == Constants.BIZ_ACCOUNT_LOGIN) {
+			if (VoteUtil.isRespOK(resp)) {
+				// 登录成功
+				toast("登录成功");
+				String id = (String) resp.get("id");
+				String type = (String) resp.get("type");
+				// 再次保存账号信息,可能前面因APP删除SR不存在用户信息
+				VoteManager.get().saveAccount(id, mobile,
+						password, type);
+				// 跳转注册
+				Intent intent = new Intent(
+						SysLoginActivity.this,
+						SysMainActivity.class);
+				startActivity(intent);
+			} else {
+				toast("用户名或密码不正确!");
+			}
 		}
 	}
+
 }

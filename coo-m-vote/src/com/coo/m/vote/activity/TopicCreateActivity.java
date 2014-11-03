@@ -16,12 +16,10 @@ import com.coo.m.vote.activity.adapter.TopicLegCreateAdapter;
 import com.coo.s.vote.model.Account;
 import com.coo.s.vote.model.Topic;
 import com.coo.s.vote.model.TopicLeg;
+import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.StringUtil;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
-import com.kingstar.ngbf.ms.util.rpc.HttpAsynCaller;
-import com.kingstar.ngbf.ms.util.rpc.IHttpCallback;
-import com.kingstar.ngbf.s.ntp.NtpHelper;
-import com.kingstar.ngbf.s.ntp.SimpleMessage;
+import com.kingstar.ngbf.s.ntp.NtpMessage;
 
 /**
  * Topic创建的activity
@@ -30,8 +28,7 @@ import com.kingstar.ngbf.s.ntp.SimpleMessage;
  * @author shulai.zhang
  * 
  */
-public class TopicCreateActivity extends CommonBizActivity implements
-		IHttpCallback<SimpleMessage<?>> {
+public class TopicCreateActivity extends CommonBizActivity {
 
 	protected static final String TAG = TopicCreateActivity.class.getName();
 	/**
@@ -128,20 +125,35 @@ public class TopicCreateActivity extends CommonBizActivity implements
 			topic.add(leg);
 		}
 
+		NtpMessage nm = new NtpMessage();
+		// TODO 将Topic转化成为NtpMessage....
+		
 		// 提示信息... toJson有问题?
-		String json = NtpHelper.toJson(topic);
-		toast(json);
-		String restUrl = Constants.HOST_REST + "/topic/create";
-		HttpAsynCaller.doPost(restUrl, json, this);
+		toast("提交信息:" + nm.toJson());
+		// 异步调用
+		String uri = "/topic/create/";
+		httpCaller.doPost(Constants.BIZ_FEEDBACK_CREATE,
+				Constants.rest(uri), nm);
 	}
 
 	@Override
-	public void response(SimpleMessage<?> resp) {
-		toast("创建成功....");
-		// TODO 跳转到我的话题Activity
-		Intent intent = new Intent();
-		intent.setClass(this, TopicActivity.class);
-		startActivity(intent);
+	@Reference(override = CommonBizActivity.class)
+	public void onHttpCallback(int what, NtpMessage resp) {
+		if (what == Constants.BIZ_TOPIC_CREATE) {
+			toast("创建成功....");
+			Intent intent = new Intent();
+			intent.setClass(this, TopicActivity.class);
+			startActivity(intent);
+		}
 	}
+
+	// @Override
+	// public void response(SimpleMessage<?> resp) {
+	// toast("创建成功....");
+	// // TODO 跳转到我的话题Activity
+	// Intent intent = new Intent();
+	// intent.setClass(this, TopicActivity.class);
+	// startActivity(intent);
+	// }
 
 }

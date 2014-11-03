@@ -51,7 +51,7 @@ public class TopicMgtAdapter extends CommonAdapter<Topic> {
 		holder.tv_owner.setText(item.getOwner());
 		ImageView icon = holder.iv_status_icon;
 		int resIcon = R.drawable.status_gray;
-		if (item.getStatus() == Topic.STATUS_VALID) {
+		if (item.getStatus() == Topic.STATUS_VALID.code) {
 			resIcon = R.drawable.status_green;
 		}
 		icon.setAdjustViewBounds(false);

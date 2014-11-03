@@ -1,5 +1,7 @@
 package com.coo.m.vote.activity;
 
+import java.util.List;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -13,8 +15,7 @@ import com.coo.s.vote.model.Account;
 import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
-import com.kingstar.ngbf.ms.util.rpc.IHttpCallback;
-import com.kingstar.ngbf.s.ntp.SimpleMessage;
+import com.kingstar.ngbf.s.ntp.NtpMessage;
 
 /**
  * 【账号管理】
@@ -23,7 +24,7 @@ import com.kingstar.ngbf.s.ntp.SimpleMessage;
  * @author boqing.shen
  */
 public class AccountMgtActivity extends CommonBizActivity implements
-		IHttpCallback<SimpleMessage<Account>>, OnClickListener {
+		OnClickListener {
 
 	@Override
 	public int getResViewLayoutId() {
@@ -33,9 +34,14 @@ public class AccountMgtActivity extends CommonBizActivity implements
 	@Override
 	public void loadContent() {
 		if (Constants.MOCK_DATA) {
-			response(Mock.accounts());
+			ListView composite = (ListView) findViewById(R.id.lv_account_mgt);
+			adapter = new AccountMgtAdapter(this,
+					Mock.accounts(), composite);
+			// onHttpCallback(Constants.BIZ_ACCOUNT_ALL,Mock.accounts());
 		} else {
-			toast("暂未实现");
+			String uri = "/account/list/all";
+			httpCaller.doGet(Constants.BIZ_ACCOUNT_ALL,
+					Constants.rest(uri));
 		}
 	}
 
@@ -45,11 +51,13 @@ public class AccountMgtActivity extends CommonBizActivity implements
 	}
 
 	@Override
-	@Reference(override = IHttpCallback.class)
-	public void response(SimpleMessage<Account> resp) {
-		ListView listView = (ListView) findViewById(R.id.lv_account_mgt);
-		adapter = new AccountMgtAdapter(this, resp.getRecords(),
-				listView);
+	@Reference(override = CommonBizActivity.class)
+	public void onHttpCallback(int what, NtpMessage resp) {
+		if (what == Constants.BIZ_ACCOUNT_ALL) {
+			List<Account> list = resp.getItems(Account.class);
+			ListView composite = (ListView) findViewById(R.id.lv_account_mgt);
+			adapter = new AccountMgtAdapter(this, list, composite);
+		}
 	}
 
 	private Account clicked = null;
@@ -95,9 +103,14 @@ public class AccountMgtActivity extends CommonBizActivity implements
 
 	@Override
 	@Reference(override = CommonBizActivity.class)
-	public void onAdapterItemChanged(Object item) {
+	public void onAdapterItemChanged(Object object) {
 		adapter.notifyDataSetChanged();
-		// TODO 进行RPC调用
+		// 进行RPC调用
+		Account item = (Account) object;
+		String uri = "/account/update/_id/" + item.get_id()
+				+ "/status/" + item.getStatus();
+		httpCaller.doGet(Constants.BIZ_ACCOUNT_UPDATE_STATUS,
+				Constants.rest(uri));
 	}
 
 }

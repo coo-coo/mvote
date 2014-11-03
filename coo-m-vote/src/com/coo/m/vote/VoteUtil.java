@@ -15,18 +15,18 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 
 import com.kingstar.ngbf.ms.util.DateUtil;
-import com.kingstar.ngbf.s.ntp.SimpleMessage;
-import com.kingstar.ngbf.s.ntp.SimpleMessageHead;
+import com.kingstar.ngbf.s.ntp.NtpHead;
+import com.kingstar.ngbf.s.ntp.NtpMessage;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 public final class VoteUtil {
 
 	private static DisplayImageOptions imageLoadOptions = null;
-	
+
 	/**
 	 * 生成UUID
 	 */
-	public static String uuid(){
+	public static String uuid() {
 		return UUID.randomUUID().toString();
 	}
 
@@ -79,10 +79,9 @@ public final class VoteUtil {
 	/**
 	 * 判断返回信息是否OK
 	 */
-	public static boolean isRespOK(SimpleMessage<?> resp) {
-		boolean tof = resp.getHead().getRep_code()
-				.equals(SimpleMessageHead.REP_OK);
-		return tof;
+	public static boolean isRespOK(NtpMessage resp) {
+		return resp.getHead().getRep_code()
+				.equals(NtpHead.REP_OK);
 	}
 
 	public static int getPwdInputType() {

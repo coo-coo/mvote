@@ -1,21 +1,20 @@
 package com.coo.m.vote.activity;
 
+import java.util.List;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.widget.ListView;
 
 import com.coo.m.vote.Constants;
-import com.coo.m.vote.Mock;
 import com.coo.m.vote.R;
 import com.coo.m.vote.activity.adapter.FeedbackMgtAdapter;
 import com.coo.s.vote.model.Feedback;
 import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
-import com.kingstar.ngbf.ms.util.rpc.HttpAsynCaller;
-import com.kingstar.ngbf.ms.util.rpc.IHttpCallback;
-import com.kingstar.ngbf.s.ntp.SimpleMessage;
+import com.kingstar.ngbf.s.ntp.NtpMessage;
 
 /**
  * 反馈管理
@@ -24,25 +23,30 @@ import com.kingstar.ngbf.s.ntp.SimpleMessage;
  * @since 0.4.7.0
  */
 public class FeedbackMgtActivity extends CommonBizActivity implements
-		IHttpCallback<SimpleMessage<Feedback>>, OnClickListener {
+		OnClickListener {
+
+	protected static final String TAG = FeedbackMgtActivity.class.getName();
 
 	@Override
 	public void loadContent() {
-		if (Constants.MOCK_DATA) {
-			response(Mock.feedbacks());
-		} else {
-			// 异步调用数据
-			String URL = Constants.HOST_REST
-					+ "/feedback/latest/20";
-			HttpAsynCaller.doGet(URL, Constants.TYPE_FEEDBACK, this);
-		}
+		// if (Constants.MOCK_DATA) {
+		// response(Mock.feedbacks());
+		// } else {
+		String uri = "/feedback/latest/20";
+		httpCaller.doGet(Constants.BIZ_FEEDBACK_LATEST,
+				Constants.rest(uri));
+		// }
 	}
 
 	@Override
-	public void response(SimpleMessage<Feedback> resp) {
-		ListView listView = (ListView) findViewById(R.id.lv_feedback_mgt);
-		adapter = new FeedbackMgtAdapter(this, resp.getRecords(),
-				listView);
+	@Reference(override = CommonBizActivity.class)
+	public void onHttpCallback(int what, NtpMessage resp) {
+		// toast("" + what + "-" + resp.toJson());
+		if (what == Constants.BIZ_FEEDBACK_LATEST) {
+			List<Feedback> list = resp.getItems(Feedback.class);
+			ListView composite = (ListView) findViewById(R.id.lv_feedback_mgt);
+			adapter = new FeedbackMgtAdapter(this, list, composite);
+		}
 	}
 
 	@Override
@@ -74,7 +78,7 @@ public class FeedbackMgtActivity extends CommonBizActivity implements
 	public void onClick(DialogInterface dialog, int whichButton) {
 		if (whichButton == AlertDialog.BUTTON_POSITIVE) {
 			// 改状态0到1
-			clicked.setStatus(Feedback.STATUS_READED);
+			clicked.setStatus(Feedback.STATUS_SOLVED.code);
 			// 通知对象变更
 			notifyAdapterEvent(CommonAdapter.EVT_ITEM_CHANGED,
 					clicked);
@@ -83,8 +87,13 @@ public class FeedbackMgtActivity extends CommonBizActivity implements
 
 	@Override
 	@Reference(override = CommonBizActivity.class)
-	public void onAdapterItemChanged(Object item) {
+	public void onAdapterItemChanged(Object obj) {
 		adapter.notifyDataSetChanged();
-		// TODO 进行RPC调用
+		// 进行RPC调用
+		Feedback item = (Feedback) obj;
+		String uri = "/feedback/update/_id/" + item.get_id()
+				+ "/status/" + item.getStatus();
+		httpCaller.doGet(Constants.BIZ_FEEDBACK_UPDATE_STATUS,
+				Constants.rest(uri));
 	}
 }

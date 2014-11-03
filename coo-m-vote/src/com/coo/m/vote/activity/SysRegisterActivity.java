@@ -11,13 +11,12 @@ import android.widget.TextView;
 import com.coo.m.vote.Constants;
 import com.coo.m.vote.R;
 import com.coo.m.vote.VoteManager;
+import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.RegexUtil;
 import com.kingstar.ngbf.ms.util.StringUtil;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 import com.kingstar.ngbf.ms.util.model.NgbfRuntimeException;
-import com.kingstar.ngbf.ms.util.rpc.HttpAsynCaller;
-import com.kingstar.ngbf.ms.util.rpc.IHttpCallback;
-import com.kingstar.ngbf.s.ntp.SimpleMessage;
+import com.kingstar.ngbf.s.ntp.NtpMessage;
 
 /**
  * 【注册界面】
@@ -25,8 +24,7 @@ import com.kingstar.ngbf.s.ntp.SimpleMessage;
  * @since0.1.0.0
  * @author Bingjue.Sun
  */
-public class SysRegisterActivity extends CommonBizActivity implements
-		IHttpCallback<SimpleMessage<?>> {
+public class SysRegisterActivity extends CommonBizActivity {
 
 	protected static String TAG = SysRegisterActivity.class.getName();
 
@@ -130,9 +128,12 @@ public class SysRegisterActivity extends CommonBizActivity implements
 			toast("请正确填写手机号，我们将向您发送一条验证码短信");
 		} else {
 			// 参见AccountRestService.accountVerifyCode
-			String params = "/account/sms/mobile/" + mobile;
-			String uri = Constants.HOST_REST + params;
-			HttpAsynCaller.doGet(uri, null, this);
+			String uri = "/account/sms/mobile/" + mobile;
+			// 同步調用不可以,需要异步调用
+			httpCaller.doGet(Constants.BIZ_ACCOUNT_SMS,
+					Constants.rest(uri));
+
+			// HttpAsynCaller.doGet(uri, null, this);
 		}
 	}
 
@@ -167,46 +168,37 @@ public class SysRegisterActivity extends CommonBizActivity implements
 
 			// 验证结束,提交请求...
 			// 参见AccountRestService.accountRegister
-			String params = "/account/register/mobile/" + mobile
+			String uri = "/account/register/mobile/" + mobile
 					+ "/sms/" + sms + "/password/"
 					+ password;
-			String uri = Constants.HOST_REST + params;
-			// toast(uri);
-			HttpAsynCaller.doGet(uri, null, this);
-
+			httpCaller.doGet(Constants.BIZ_ACCOUNT_REGISTER,
+					Constants.rest(uri));
 		} catch (NgbfRuntimeException e) {
 			toast(e.getMessage());
 		}
 	}
 
 	@Override
-	public void response(SimpleMessage<?> resp) {
-		if (resp.getHead().getRep_code().equals(Constants.REP_OK)) {
-			// 此Activity会向服务器发送两次请求,返回不同的信息,需要服务器进行api_code的设定
-			// M客户端依据api_code分别进行响应
-			String apiCode = resp.getHead().getApi_code();
-			if (apiCode.equals("account_sms")) {
-				toast("已经向您手机发送验证码,请注意查收");
-				String sms = resp.getData("sms");
-				toast("调试用:验证码是:" + sms);
-			} else if (apiCode.equals("account_register")) {
-				// 获得服务器端生成的id,作為uuid
-				String id = resp.getData("id");
-				String type = resp.getData("type");
-				// 保存账号信息
-				VoteManager.get().saveAccount(id, mobile,
-						password, type);
-				toast("注册成功");
-				// 跳转到主界面
-				Intent intent = new Intent(
-						SysRegisterActivity.this,
-						SysMainActivity.class);
-				startActivity(intent);
-			} else {
-				// do nothing...
-			}
+	@Reference(override = CommonBizActivity.class)
+	public void onHttpCallback(int what, NtpMessage resp) {
+		if (what == Constants.BIZ_ACCOUNT_SMS) {
+			toast("已经向您手机发送验证码,请注意查收");
+			String sms = (String) resp.get("sms");
+			toast("调试用:验证码是:" + sms);
+		} else if (what == Constants.BIZ_ACCOUNT_REGISTER) {
+			// 获得服务器端生成的id,作為uuid
+			String id = (String) resp.get("id");
+			String type = (String) resp.get("type");
+			// 保存账号信息
+			VoteManager.get().saveAccount(id, mobile, password,
+					type);
+			toast("注册成功");
+			// 跳转到主界面
+			Intent intent = new Intent(SysRegisterActivity.this,
+					SysMainActivity.class);
+			startActivity(intent);
 		} else {
-			toast(resp.getHead().getRep_message());
+
 		}
 	}
 

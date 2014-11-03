@@ -1,5 +1,7 @@
 package com.coo.m.vote.activity;
 
+import java.util.List;
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.widget.ListView;
@@ -11,19 +13,17 @@ import com.coo.m.vote.VoteManager;
 import com.coo.m.vote.activity.adapter.TopicAdapter;
 import com.coo.m.vote.activity.view.TopicCommandDialog;
 import com.coo.s.vote.model.Topic;
+import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
-import com.kingstar.ngbf.ms.util.rpc.HttpAsynCaller;
-import com.kingstar.ngbf.ms.util.rpc.IHttpCallback;
-import com.kingstar.ngbf.s.ntp.SimpleMessage;
+import com.kingstar.ngbf.s.ntp.NtpMessage;
 
 /**
  * 我(创建)的Topic管理，列表展示?
  * 
  * @since 0.4.0
  */
-public class TopicActivity extends CommonBizActivity implements
-		IHttpCallback<SimpleMessage<Topic>> {
+public class TopicActivity extends CommonBizActivity {
 
 	@Override
 	public String getHeaderTitle() {
@@ -38,22 +38,34 @@ public class TopicActivity extends CommonBizActivity implements
 	@Override
 	public void loadContent() {
 		if (Constants.MOCK_DATA) {
-			response(Mock.topicshots("my"));
+			List<Topic> list = Mock.topicshots("my");
+			ListView listView = (ListView) findViewById(R.id.lv_topic);
+			adapter = new TopicAdapter(this, list, listView);
 		} else {
 			// 异步调用数据
 			String account = VoteManager.getStrAccount();
-			toast("account=" + account);
-			String URL = Constants.HOST_REST
-					+ "/topic/mine/account/" + account;
-			HttpAsynCaller.doGet(URL, Constants.TYPE_TOPIC, this);
+			String uri = "/topic/list/mine?op=" + account;
+			toast(uri);
+			httpCaller.doGet(Constants.BIZ_TOPIC_LIST_MINE,
+					Constants.rest(uri));
 		}
 	}
 
 	@Override
-	public void response(SimpleMessage<Topic> resp) {
-		ListView listView = (ListView) findViewById(R.id.lv_topic);
-		adapter = new TopicAdapter(this, resp.getRecords(), listView);
+	@Reference(override = CommonBizActivity.class)
+	public void onHttpCallback(int what, NtpMessage resp) {
+		if (what == Constants.BIZ_TOPIC_LIST_MINE) {
+			List<Topic> list = resp.getItems(Topic.class);
+			ListView listView = (ListView) findViewById(R.id.lv_topic);
+			adapter = new TopicAdapter(this, list, listView);
+		}
 	}
+
+	// @Override
+	// public void response(SimpleMessage<Topic> resp) {
+	// ListView listView = (ListView) findViewById(R.id.lv_topic);
+	// adapter = new TopicAdapter(this, resp.getRecords(), listView);
+	// }
 
 	/**
 	 * 监听Topic的长嗯响应
@@ -78,7 +90,7 @@ public class TopicActivity extends CommonBizActivity implements
 				toast("未实现..");
 				break;
 			case CommonItem.UIT_DIALOG_CANCEL:
-				Dialog dlg = (Dialog)ci.getValue();
+				Dialog dlg = (Dialog) ci.getValue();
 				dlg.cancel();
 				break;
 			default:

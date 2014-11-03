@@ -1,5 +1,7 @@
 package com.coo.m.vote.activity;
 
+import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,9 +18,11 @@ import com.coo.m.vote.R;
 import com.coo.m.vote.VoteManager;
 import com.coo.m.vote.activity.adapter.ChannelFragementTopicAdapter;
 import com.coo.s.vote.model.Topic;
-import com.kingstar.ngbf.ms.util.rpc.HttpAsynCaller;
-import com.kingstar.ngbf.ms.util.rpc.IHttpCallback;
-import com.kingstar.ngbf.s.ntp.SimpleMessage;
+import com.kingstar.ngbf.ms.util.Reference;
+import com.kingstar.ngbf.ms.util.rpc2.IRpcCallback;
+import com.kingstar.ngbf.ms.util.rpc2.RpcCallHandler;
+import com.kingstar.ngbf.ms.util.rpc2.RpcCaller;
+import com.kingstar.ngbf.s.ntp.NtpMessage;
 
 /**
  * 主界面的每一个Channel的Fragment
@@ -27,8 +31,7 @@ import com.kingstar.ngbf.s.ntp.SimpleMessage;
  * @author Bingjue.Sun
  */
 @SuppressLint({ "ValidFragment", "HandlerLeak" })
-public class SysMainChannel extends Fragment implements
-		IHttpCallback<SimpleMessage<Topic>> {
+public class SysMainChannel extends Fragment implements IRpcCallback {
 
 	// parent
 	private FragmentActivity parent;
@@ -55,6 +58,8 @@ public class SysMainChannel extends Fragment implements
 		this.label = label;
 	}
 
+	private RpcCaller httpCaller;
+
 	/**
 	 * 覆盖此函数，先通过inflater inflate函数得到view最后返回
 	 */
@@ -64,29 +69,41 @@ public class SysMainChannel extends Fragment implements
 		fragementView = inflater.inflate(R.layout.sys_main_fragment,
 				container, false);
 
+		httpCaller = new RpcCaller(new RpcCallHandler(this));
+
 		if (Constants.MOCK_DATA) {
-			response(Mock.topicshots(this.code));
+			// 获得Fragement视图内的ListView,加载数据
+			List<Topic> list = Mock.topicshots(this.code);
+			ListView lv_topics = (ListView) fragementView
+					.findViewById(R.id.lv_sys_main_fragment);
+			@SuppressWarnings("unused")
+			ChannelFragementTopicAdapter adapter = new ChannelFragementTopicAdapter(
+					parent, list, lv_topics);
 		} else {
 			// 异步加载获得的数据
-			String uri = Constants.HOST_REST + "/topic/code/"
-					+ code + "/account/"
+			String uri = "/topic/code/" + code + "/account/"
 					+ VoteManager.getStrAccount();
-			HttpAsynCaller.doGet(uri, Constants.TYPE_TOPIC, this);
+			httpCaller.doGet(Constants.BIZ_TOPIC_LIST_CODE,
+					Constants.rest(uri));
+
 		}
 
 		// TODO 根据频道代码来加载数据,应根据手势滑动来加载数据，效率为高
 		return fragementView;
 	}
-
-	// @Override
-	public void response(SimpleMessage<Topic> resp) {
-		// 获得Fragement视图内的ListView,加载数据
-		ListView lv_topics = (ListView) fragementView
-				.findViewById(R.id.lv_sys_main_fragment);
-		// toast("msg-" + code + "-" + label);
-		@SuppressWarnings("unused")
-		ChannelFragementTopicAdapter adapter = new ChannelFragementTopicAdapter(
-				parent, resp.getRecords(), lv_topics);
+	
+	@Override
+	@Reference(override=IRpcCallback.class)
+	public void onHttpCallback(int what, NtpMessage resp) {
+		if (what == Constants.BIZ_TOPIC_LIST_CODE) {
+			// 获得Fragement视图内的ListView,加载数据
+			List<Topic> list = resp.getItems(Topic.class);
+			ListView lv_topics = (ListView) fragementView
+					.findViewById(R.id.lv_sys_main_fragment);
+			@SuppressWarnings("unused")
+			ChannelFragementTopicAdapter adapter = new ChannelFragementTopicAdapter(
+					parent, list, lv_topics);
+		}
 	}
 
 	public String getLabel() {

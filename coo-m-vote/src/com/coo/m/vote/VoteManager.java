@@ -10,13 +10,14 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Environment;
 import android.util.Log;
 
-import com.coo.m.vote.activity.SysMainActivity;
+import com.coo.m.vote.activity.AccountMgtActivity;
 import com.coo.m.vote.model.MGroup;
 import com.coo.m.vote.model.MManager;
 import com.coo.s.vote.model.Account;
 import com.coo.s.vote.model.Channel;
 import com.coo.s.vote.model.Topic;
 import com.kingstar.ngbf.ms.util.StringUtil;
+import com.kingstar.ngbf.ms.util.android.res.ServiceProvider;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
 import com.kingstar.ngbf.ms.util.model.CommonOption;
 import com.kingstar.ngbf.ms.util.storage.SharedManager;
@@ -28,15 +29,17 @@ public class VoteManager {
 
 	private String TAG = VoteManager.class.getName();
 
-	public static Class<?> LOGIN_CLASS = SysMainActivity.class;
+	public static Class<?> LOGIN_CLASS = AccountMgtActivity.class;
 
-//	public static Class<?> LOGIN_CLASS = TopicActivity.class;
+	// public static Class<?> LOGIN_CLASS = TopicActivity.class;
 
 	private static SharedManager sharedManager = null;
 
 	public static String SD_Path = Environment
 			.getExternalStorageDirectory().getPath();
 	public static String PACKAGE_Path = SD_Path + "/com.coo.vote";
+
+	private static Application appContext;
 
 	/**
 	 * 管理器初始化，在VoteApplication中进行
@@ -46,7 +49,7 @@ public class VoteManager {
 
 		// 初始化数据库,参见LitePay架构
 		// https://github.com/suzlwang/LitePal/
-
+		appContext = app;
 		sharedManager = new SharedManager(app, "vote");
 
 		// 启动后台程序
@@ -231,7 +234,7 @@ public class VoteManager {
 	}
 
 	/**
-	 * 获得当前应用的版本 TODO 参见 ms-util.resourceProvider
+	 * 
 	 * 
 	 * @since 0.4.5.0
 	 */
@@ -241,6 +244,21 @@ public class VoteManager {
 					context.getPackageName(), 0).versionName;
 		} catch (NameNotFoundException e) {
 			Log.e(TAG, e.getMessage());
+			return "";
+		}
+	}
+
+	/**
+	 * 获得当前应用的版本 TODO 参见 ms-util.resourceProvider
+	 * 
+	 * @return
+	 */
+	public static String getVersionName() {
+		try {
+			return ServiceProvider.getAppVersionName(appContext);
+			// return appContext.getPackageManager().getPackageInfo(
+			// appContext.getPackageName(), 0).versionName;
+		} catch (Exception e) {
 			return "";
 		}
 	}

@@ -12,7 +12,7 @@ import com.kingstar.ngbf.ms.util.RegexUtil;
 import com.kingstar.ngbf.ms.util.android.component.ContactBean;
 
 /**
- * M端数据需要原封不动的同步到服务端,以防止应用APP删除之后的重装,进行数据恢复 M端数据只和host(Account)有关
+ * M端数据需要[原封不动]的同步到服务端,以防止应用APP删除之后的重装,进行数据恢复 M端数据只和host(Account)有关
  * 
  * @author boqing.shen
  * 
@@ -115,7 +115,6 @@ public final class MManager {
 				MContact mc = new MContact();
 				mc.setName(cb.getName());
 				mc.setMobile(phone);
-				mc.setAlias(cb.getName());
 				mc.setHost(account);
 				// 本地保存
 				mc.save();
@@ -143,10 +142,6 @@ public final class MManager {
 			if (map.containsKey(mobile)) {
 				// 如果M存在，此Mobile已经注册了账号
 				MContact mc = map.get(mobile);
-				mc.setAccount(mobile);
-				// TODO 地区、微信ID等同步
-				mc.setArea("");
-				mc.setWxId("");
 				// 更新执行....
 				mc.update(mc.getId());
 			} else {

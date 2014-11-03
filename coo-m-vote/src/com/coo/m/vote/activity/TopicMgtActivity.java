@@ -1,5 +1,7 @@
 package com.coo.m.vote.activity;
 
+import java.util.List;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -13,8 +15,7 @@ import com.coo.s.vote.model.Topic;
 import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
-import com.kingstar.ngbf.ms.util.rpc.IHttpCallback;
-import com.kingstar.ngbf.s.ntp.SimpleMessage;
+import com.kingstar.ngbf.s.ntp.NtpMessage;
 
 /**
  * admin 话题管理
@@ -23,7 +24,7 @@ import com.kingstar.ngbf.s.ntp.SimpleMessage;
  * 
  */
 public class TopicMgtActivity extends CommonBizActivity implements
-		IHttpCallback<SimpleMessage<Topic>>, OnClickListener {
+		OnClickListener {
 
 	@Override
 	public int getResViewLayoutId() {
@@ -33,9 +34,14 @@ public class TopicMgtActivity extends CommonBizActivity implements
 	@Override
 	public void loadContent() {
 		if (Constants.MOCK_DATA) {
-			response(Mock.topicshots("all"));
+			List<Topic> list = Mock.topicshots("latest");
+			ListView composite = (ListView) findViewById(R.id.lv_topic_mgt);
+			adapter = new TopicMgtAdapter(this, list, composite);
 		} else {
-			toast("暂未实现");
+			// TODO 获得全部最新创建的...
+			String uri = "/topic/list/code/c.topic.latest";
+			httpCaller.doGet(Constants.BIZ_TOPIC_LIST_LATEST,
+					Constants.rest(uri));
 		}
 	}
 
@@ -45,10 +51,13 @@ public class TopicMgtActivity extends CommonBizActivity implements
 	}
 
 	@Override
-	public void response(SimpleMessage<Topic> resp) {
-		ListView composite = (ListView) findViewById(R.id.lv_topic_mgt);
-		adapter = new TopicMgtAdapter(this, resp.getRecords(),
-				composite);
+	@Reference(override = CommonBizActivity.class)
+	public void onHttpCallback(int what, NtpMessage resp) {
+		if (what == Constants.BIZ_TOPIC_LIST_LATEST) {
+			List<Topic> list = resp.getItems(Topic.class);
+			ListView composite = (ListView) findViewById(R.id.lv_topic_mgt);
+			adapter = new TopicMgtAdapter(this, list, composite);
+		}
 	}
 
 	private Topic clicked = null;
@@ -61,7 +70,7 @@ public class TopicMgtActivity extends CommonBizActivity implements
 		// new AccountMgtItemDialog(this, item).show();
 		int status = clicked.getStatus();
 		String msg = "";
-		if (status == Topic.STATUS_VALID) {
+		if (status == Topic.STATUS_VALID.code) {
 			msg = "确定要[锁定]" + clicked.getTitle() + "么?";
 		} else {
 			msg = "确定要[解锁]" + clicked.getTitle() + "么?";
@@ -78,10 +87,10 @@ public class TopicMgtActivity extends CommonBizActivity implements
 	public void onClick(DialogInterface dialog, int whichButton) {
 		if (whichButton == AlertDialog.BUTTON_POSITIVE) {
 			int status = clicked.getStatus();
-			if (status == Topic.STATUS_VALID) {
-				status = Topic.STATUS_LOCKED;
+			if (status == Topic.STATUS_VALID.code) {
+				status = Topic.STATUS_LOCKED.code;
 			} else {
-				status = Topic.STATUS_VALID;
+				status = Topic.STATUS_VALID.code;
 			}
 			clicked.setStatus(status);
 			// 通知对象变更
