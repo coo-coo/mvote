@@ -8,7 +8,6 @@
         android:id="@+id/rb_topic_leg_vote_row_seq"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:layout_gravity="center_vertical"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:clickable="false"
@@ -18,13 +17,7 @@
         android:id="@+id/tv_topic_leg_vote_row_title"
         style="@style/tv_common"
         android:layout_width="0dip"
-        android:layout_weight="7"
-        android:gravity="left|center" />
-
-    <TextView
-        style="@style/tv_common"
-        android:layout_width="0dip"
-        android:layout_weight="1"
-        android:gravity="right|center" />
-
+        android:layout_weight="5"
+        android:gravity="left|center_vertical" />
+    
 </LinearLayout>

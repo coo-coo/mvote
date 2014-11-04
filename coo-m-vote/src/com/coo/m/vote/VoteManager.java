@@ -10,7 +10,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Environment;
 import android.util.Log;
 
-import com.coo.m.vote.activity.AccountMgtActivity;
 import com.coo.m.vote.model.MGroup;
 import com.coo.m.vote.model.MManager;
 import com.coo.s.vote.model.Account;
@@ -28,10 +27,6 @@ import com.kingstar.ngbf.ms.util.storage.SharedManager;
 public class VoteManager {
 
 	private String TAG = VoteManager.class.getName();
-
-	public static Class<?> LOGIN_CLASS = AccountMgtActivity.class;
-
-	// public static Class<?> LOGIN_CLASS = TopicActivity.class;
 
 	private static SharedManager sharedManager = null;
 
@@ -53,7 +48,7 @@ public class VoteManager {
 		sharedManager = new SharedManager(app, "vote");
 
 		// 启动后台程序
-		// startBackgound(app);
+		startVoteService(app);
 	}
 
 	/**
@@ -61,7 +56,7 @@ public class VoteManager {
 	 * 
 	 * @param context
 	 */
-	public static void startBackgound(Context context) {
+	public static void startVoteService(Context context) {
 		// 启动后台程序
 		Intent intent = new Intent(context, VoteService.class);
 		context.startService(intent);
@@ -80,9 +75,9 @@ public class VoteManager {
 	 */
 	public static List<Channel> getStaticChannels() {
 		List<Channel> list = new ArrayList<Channel>();
-		list.add(new Channel("c.topic.top", "最热")); // 投票最多
-		list.add(new Channel("c.topic.latest", "最新")); // 最新创建
-		String focus = "c.account.focus." + VoteManager.getStrAccount();
+		list.add(new Channel("channel_top", "最热")); // 投票最多
+		list.add(new Channel("channel_latest", "最新")); // 最新创建
+		String focus = "channel_focus_" + VoteManager.getStrAccount();
 		list.add(new Channel(focus, "关注")); // 我的关注
 		return list;
 	}

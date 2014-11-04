@@ -8,7 +8,6 @@ import android.widget.EditText;
 import com.coo.m.vote.Constants;
 import com.coo.m.vote.R;
 import com.coo.m.vote.VoteManager;
-import com.coo.s.vote.model.Account;
 import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.StringUtil;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
@@ -51,11 +50,7 @@ public class FeedbackCreateActivity extends CommonBizActivity {
 	@Override
 	@Reference(override = CommonBizActivity.class)
 	public void onHttpCallback(int what, NtpMessage sm) {
-		// 通过HttpAsynCaller2来进行Http请求,发送消息之后进行获得消息的反馈
-		// httpCaller.doGet(1, restUrl);
-		// httpCaller.doPost(2, restUrl, SimpleMessage2);
-		// toast("" + what + "-" + sm.toJson());
-		if (what == Constants.BIZ_FEEDBACK_CREATE) {
+		if (what == Constants.RPC_FEEDBACK_CREATE) {
 			Intent intent = new Intent(FeedbackCreateActivity.this,
 					SysMainActivity.class);
 			startActivity(intent);
@@ -85,19 +80,16 @@ public class FeedbackCreateActivity extends CommonBizActivity {
 		if (StringUtil.isNullOrSpace(note)) {
 			toast("反馈信息不能为空");
 		} else {
-			Account account = VoteManager.getAccount();
-			String app_version = VoteManager.getVersionName();
-
 			// 以NtpMessage封装意见反馈消息体
 			NtpMessage sm = new NtpMessage();
-			sm.set("owner", account.getMobile());
+			sm.set("owner", VoteManager.getStrAccount());
 			sm.set("note", note);
-			sm.set("app_version", app_version);
+			sm.set("app_version", VoteManager.getVersionName());
 
 			// 异步调用
-			String uri = Constants.HOST_REST + "/feedback/create/";
-			httpCaller.doPost(Constants.BIZ_FEEDBACK_CREATE, uri,
-					sm);
+			String uri = "/feedback/create/";
+			httpCaller.doPost(Constants.RPC_FEEDBACK_CREATE,
+					Constants.rest(uri), sm);
 		}
 	}
 }

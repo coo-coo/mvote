@@ -2,6 +2,8 @@ package com.coo.m.vote;
 
 import android.os.Environment;
 
+import com.coo.m.vote.activity.TopicMgtActivity;
+
 /**
  * 常量类
  * 
@@ -10,24 +12,35 @@ import android.os.Environment;
  */
 public final class Constants {
 
+	public static boolean MOCK_ACCOUNT = true;
+
+	public static boolean MOCK_DATA = false;
+
+	public static Class<?> LOGIN_CLASS = TopicMgtActivity.class;
+
+	// public static Class<?> LOGIN_CLASS = SysLoginActivity.class;
+
 	// TODO BIZ->RPC
-	public final static int BIZ_FEEDBACK_CREATE = 2000;
-	public final static int BIZ_FEEDBACK_LATEST = 2001;
-	public final static int BIZ_FEEDBACK_UPDATE_STATUS = 2002;
+	public final static int RPC_FEEDBACK_CREATE = 2000;
+	public final static int RPC_FEEDBACK_LATEST = 2001;
+	public final static int RPC_FEEDBACK_UPDATE_STATUS = 2002;
 
-	public final static int BIZ_ACCOUNT_ALL = 2010;
-	public final static int BIZ_ACCOUNT_UPDATE_STATUS = 2011;
-	public final static int BIZ_ACCOUNT_UPDATE_PARAM = 2012;
-	public final static int BIZ_ACCOUNT_INFO = 2013;
-	public final static int BIZ_ACCOUNT_LOGIN = 2014;
-	public final static int BIZ_ACCOUNT_SMS = 2015;
-	public final static int BIZ_ACCOUNT_REGISTER = 2015;
+	public final static int RPC_ACCOUNT_ALL = 2010;
+	public final static int RPC_ACCOUNT_UPDATE_STATUS = 2011;
+	public final static int RPC_ACCOUNT_UPDATE_PARAM = 2012;
+	public final static int RPC_ACCOUNT_INFO = 2013;
+	public final static int RPC_ACCOUNT_LOGIN = 2014;
+	public final static int RPC_ACCOUNT_SMS = 2015;
+	public final static int RPC_ACCOUNT_REGISTER = 2016;
 
-	public final static int BIZ_TOPIC_LIST_MINE = 2020;
-	public final static int BIZ_TOPIC_LIST_CODE = 2021;
-	public final static int BIZ_TOPIC_LIST_LATEST = 2022; // 最新创建的,供管理
-	public final static int BIZ_TOPIC_CREATE = 2023;
-
+	public final static int RPC_TOPIC_LIST_MINE = 2020;
+	public final static int RPC_TOPIC_LIST_CODE = 2021;
+	public final static int RPC_TOPIC_LIST_ADMIN = 2022; // [管理]获取最新创建
+	public final static int RPC_TOPIC_UPDATE_STATUS = 2023; // [管理]更新状态
+	public final static int RPC_TOPIC_CREATE = 2024;
+	public final static int RPC_TOPIC_VOTE = 2025;
+	
+	// TODO...
 	public final static int BIZ_MCONTACT_SYNC_REMOTE = 2090;
 	public final static int BIZ_MCHANNEL_SYNC_REMOTE = 2091;
 
@@ -43,15 +56,6 @@ public final class Constants {
 	public static String rest(String relativeUrl) {
 		return HOST_REST + relativeUrl;
 	}
-
-	/**
-	 * 模拟账号
-	 */
-	public static boolean MOCK_ACCOUNT = true;
-	/**
-	 * 模拟数据
-	 */
-	public static boolean MOCK_DATA = true;
 
 	/**
 	 * 数据库存储文件?

@@ -130,7 +130,7 @@ public class SysRegisterActivity extends CommonBizActivity {
 			// 参见AccountRestService.accountVerifyCode
 			String uri = "/account/sms/mobile/" + mobile;
 			// 同步調用不可以,需要异步调用
-			httpCaller.doGet(Constants.BIZ_ACCOUNT_SMS,
+			httpCaller.doGet(Constants.RPC_ACCOUNT_SMS,
 					Constants.rest(uri));
 
 			// HttpAsynCaller.doGet(uri, null, this);
@@ -171,7 +171,7 @@ public class SysRegisterActivity extends CommonBizActivity {
 			String uri = "/account/register/mobile/" + mobile
 					+ "/sms/" + sms + "/password/"
 					+ password;
-			httpCaller.doGet(Constants.BIZ_ACCOUNT_REGISTER,
+			httpCaller.doGet(Constants.RPC_ACCOUNT_REGISTER,
 					Constants.rest(uri));
 		} catch (NgbfRuntimeException e) {
 			toast(e.getMessage());
@@ -181,11 +181,11 @@ public class SysRegisterActivity extends CommonBizActivity {
 	@Override
 	@Reference(override = CommonBizActivity.class)
 	public void onHttpCallback(int what, NtpMessage resp) {
-		if (what == Constants.BIZ_ACCOUNT_SMS) {
+		if (what == Constants.RPC_ACCOUNT_SMS) {
 			toast("已经向您手机发送验证码,请注意查收");
 			String sms = (String) resp.get("sms");
 			toast("调试用:验证码是:" + sms);
-		} else if (what == Constants.BIZ_ACCOUNT_REGISTER) {
+		} else if (what == Constants.RPC_ACCOUNT_REGISTER) {
 			// 获得服务器端生成的id,作為uuid
 			String id = (String) resp.get("id");
 			String type = (String) resp.get("type");
@@ -201,5 +201,4 @@ public class SysRegisterActivity extends CommonBizActivity {
 
 		}
 	}
-
 }

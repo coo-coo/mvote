@@ -2,7 +2,6 @@ package com.coo.m.vote.activity.adapter;
 
 import java.util.List;
 
-import android.app.Activity;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,6 +17,7 @@ import com.coo.m.vote.Constants;
 import com.coo.m.vote.R;
 import com.coo.m.vote.VoteManager;
 import com.coo.m.vote.VoteUtil;
+import com.coo.m.vote.activity.SysMainChannel;
 import com.coo.s.vote.model.Topic;
 import com.coo.s.vote.model.TopicLeg;
 import com.kingstar.ngbf.ms.mpchart.ChartFactory;
@@ -34,20 +34,22 @@ import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
  * @author boqing.shen
  * 
  */
-public class ChannelFragementTopicAdapter extends CommonAdapter<Topic>
-		implements OnClickListener {
+public class SysMainChannelAdapter extends CommonAdapter<Topic> implements
+		OnClickListener {
+
+	private SysMainChannel channel;
 
 	/**
 	 * 构造函数
 	 */
-	public ChannelFragementTopicAdapter(Activity parent, List<Topic> items,
+	public SysMainChannelAdapter(SysMainChannel channel, List<Topic> items,
 			ListView composite) {
-		super(parent, items, composite);
+		super(channel.getParent(), items, composite);
+		this.channel = channel;
 	}
 
 	@Override
 	public int getItemConvertViewId() {
-		// TODO 返回Topic的布局
 		return R.layout.sys_main_topic_row;
 	}
 
@@ -164,31 +166,21 @@ public class ChannelFragementTopicAdapter extends CommonAdapter<Topic>
 	 * 投票操作
 	 */
 	private void doTopicVote() {
-		TopicLeg topicLeg = topicLegVoteAdapter.getSelected();
-		if (topicLeg == null) {
+		TopicLeg leg = topicLegVoteAdapter.getSelected();
+		if (leg == null) {
 			toast("请选择一项!");
 			return;
 		}
 
-		// 进行投票请求
-		String account = VoteManager.getStrAccount();
-		String topicId = selected.get_id();
-
-		String uri = Constants.HOST_REST + "/topic/vote/account/"
-				+ account + "/topic/" + topicId + "/legSeq/"
-				+ topicLeg.getSeq();
-		toast("投票RPC未实现:" + uri);
-		// 异步请求
-//		 HttpAsynCaller.doGet(uri, Constants.TYPE_NONE, this);
+		// 异步请求,参见SysMainChannel
+		String uri = "/topic/vote/topic_id/" + selected.get_id()
+				+ "/legSeq/" + leg.getSeq() + "?op="
+				+ VoteManager.getStrAccount();
+		channel.getHttpCaller().doGet(Constants.RPC_TOPIC_VOTE,
+				Constants.rest(uri));
 		// 关闭界面
 		drawerLayout.closeDrawer(Gravity.RIGHT);
 	}
-
-	// @Override
-	// public void response(SimpleMessage<?> resp) {
-	// this.toast(Constants.MSG_RPC_OK);
-	//
-	// }
 
 	@Override
 	public CommonItemHolder initHolder(View convertView) {
@@ -224,7 +216,6 @@ public class ChannelFragementTopicAdapter extends CommonAdapter<Topic>
 			cs.add(leg.getTitle(), leg.getVote());
 		}
 		ChartFactory.init(cs, holder.cpc_chart);
-
 	}
 
 }

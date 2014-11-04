@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.coo.s.vote.model.Account;
 import com.coo.s.vote.model.Channel;
+import com.coo.s.vote.model.Feedback;
 import com.coo.s.vote.model.Topic;
 import com.coo.s.vote.model.TopicLeg;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
@@ -72,6 +73,17 @@ public class Mock {
 		for (int i = 0; i < 10; i++) {
 			Account item = new Account();
 			item.setMobile("139-00000-" + i);
+			list.add(item);
+		}
+		return list;
+	}
+	
+	public static List<Feedback> feedbacks() {
+		List<Feedback> list = new ArrayList<Feedback>();
+		for (int i = 0; i < 10; i++) {
+			Feedback item = new Feedback();
+			item.setNote("issue-" + i);
+			item.setAppVersion("1.0.0");
 			list.add(item);
 		}
 		return list;

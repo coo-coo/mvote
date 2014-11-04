@@ -45,8 +45,7 @@ public class TopicActivity extends CommonBizActivity {
 			// 异步调用数据
 			String account = VoteManager.getStrAccount();
 			String uri = "/topic/list/mine?op=" + account;
-			toast(uri);
-			httpCaller.doGet(Constants.BIZ_TOPIC_LIST_MINE,
+			httpCaller.doGet(Constants.RPC_TOPIC_LIST_MINE,
 					Constants.rest(uri));
 		}
 	}
@@ -54,18 +53,12 @@ public class TopicActivity extends CommonBizActivity {
 	@Override
 	@Reference(override = CommonBizActivity.class)
 	public void onHttpCallback(int what, NtpMessage resp) {
-		if (what == Constants.BIZ_TOPIC_LIST_MINE) {
+		if (what == Constants.RPC_TOPIC_LIST_MINE) {
 			List<Topic> list = resp.getItems(Topic.class);
 			ListView listView = (ListView) findViewById(R.id.lv_topic);
 			adapter = new TopicAdapter(this, list, listView);
 		}
 	}
-
-	// @Override
-	// public void response(SimpleMessage<Topic> resp) {
-	// ListView listView = (ListView) findViewById(R.id.lv_topic);
-	// adapter = new TopicAdapter(this, resp.getRecords(), listView);
-	// }
 
 	/**
 	 * 监听Topic的长嗯响应

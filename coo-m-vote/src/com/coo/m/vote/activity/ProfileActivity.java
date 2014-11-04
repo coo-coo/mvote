@@ -46,7 +46,6 @@ public class ProfileActivity extends CommonBizActivity {
 		// 定义控件 & 定义适配器
 		if (Constants.MOCK_DATA) {
 			ListView listView = (ListView) findViewById(R.id.lv_sys_profile);
-
 			// TODO 需要数据的服务器端Merge处理...
 			adapter = new CommonItemAdapter(this,
 					VoteManager.getProfileSkeletonItems(),
@@ -55,7 +54,8 @@ public class ProfileActivity extends CommonBizActivity {
 			// 异步调用数据
 			String account = VoteManager.getStrAccount();
 			String uri = "/account/info/mobile/" + account;
-			httpCaller.doGet(Constants.BIZ_ACCOUNT_INFO,
+			toast(uri);
+			httpCaller.doGet(Constants.RPC_ACCOUNT_INFO,
 					Constants.rest(uri));
 		}
 
@@ -126,15 +126,15 @@ public class ProfileActivity extends CommonBizActivity {
 			CommonItem ci = (CommonItem) item;
 			String id = VoteManager.getAccount().get_id();
 			// toast(id + "-" + ci.getCode() + "-" + ci.getValue());
-
 			NtpMessage nm = new NtpMessage();
 			nm.set("_id", id);
 			nm.set("key", ci.getCode());
-			nm.set("value", ci.getValue());
+			// TODO 暂定都是字符串
+			nm.set("value", ci.getValue().toString());
 			// 发送更新请求...
 			String uri = "/account/update/param";
 			// 修改信息，參見topicUpdate
-			httpCaller.doPost(Constants.BIZ_ACCOUNT_UPDATE_PARAM,
+			httpCaller.doPost(Constants.RPC_ACCOUNT_UPDATE_PARAM,
 					Constants.rest(uri), nm);
 		}
 	}
@@ -142,9 +142,9 @@ public class ProfileActivity extends CommonBizActivity {
 	@Override
 	@Reference(override = CommonBizActivity.class)
 	public void onHttpCallback(int what, NtpMessage resp) {
-		if (what == Constants.BIZ_ACCOUNT_UPDATE_PARAM) {
+		if (what == Constants.RPC_ACCOUNT_UPDATE_PARAM) {
 			toast("更新属性成功....");
-		} else if (what == Constants.BIZ_ACCOUNT_INFO) {
+		} else if (what == Constants.RPC_ACCOUNT_INFO) {
 			ListView listView = (ListView) findViewById(R.id.lv_sys_profile);
 			// 获得服务器的值，有些Key是没有设定的，则为空，空表示服务器没有
 			List<CommonItem> items = VoteManager

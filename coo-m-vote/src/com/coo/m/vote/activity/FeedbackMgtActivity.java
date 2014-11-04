@@ -8,6 +8,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.widget.ListView;
 
 import com.coo.m.vote.Constants;
+import com.coo.m.vote.Mock;
 import com.coo.m.vote.R;
 import com.coo.m.vote.activity.adapter.FeedbackMgtAdapter;
 import com.coo.s.vote.model.Feedback;
@@ -29,20 +30,22 @@ public class FeedbackMgtActivity extends CommonBizActivity implements
 
 	@Override
 	public void loadContent() {
-		// if (Constants.MOCK_DATA) {
-		// response(Mock.feedbacks());
-		// } else {
-		String uri = "/feedback/latest/20";
-		httpCaller.doGet(Constants.BIZ_FEEDBACK_LATEST,
-				Constants.rest(uri));
-		// }
+		if (Constants.MOCK_DATA) {
+			List<Feedback> list = Mock.feedbacks();
+			ListView composite = (ListView) findViewById(R.id.lv_feedback_mgt);
+			adapter = new FeedbackMgtAdapter(this, list, composite);
+		} else {
+			String uri = "/feedback/latest/20";
+			httpCaller.doGet(Constants.RPC_FEEDBACK_LATEST,
+					Constants.rest(uri));
+		}
 	}
 
 	@Override
 	@Reference(override = CommonBizActivity.class)
 	public void onHttpCallback(int what, NtpMessage resp) {
 		// toast("" + what + "-" + resp.toJson());
-		if (what == Constants.BIZ_FEEDBACK_LATEST) {
+		if (what == Constants.RPC_FEEDBACK_LATEST) {
 			List<Feedback> list = resp.getItems(Feedback.class);
 			ListView composite = (ListView) findViewById(R.id.lv_feedback_mgt);
 			adapter = new FeedbackMgtAdapter(this, list, composite);
@@ -78,7 +81,7 @@ public class FeedbackMgtActivity extends CommonBizActivity implements
 	public void onClick(DialogInterface dialog, int whichButton) {
 		if (whichButton == AlertDialog.BUTTON_POSITIVE) {
 			// 改状态0到1
-			clicked.setStatus(Feedback.STATUS_SOLVED.code);
+			clicked.setStatus(Feedback.STATUS_SOLVED);
 			// 通知对象变更
 			notifyAdapterEvent(CommonAdapter.EVT_ITEM_CHANGED,
 					clicked);
@@ -93,7 +96,7 @@ public class FeedbackMgtActivity extends CommonBizActivity implements
 		Feedback item = (Feedback) obj;
 		String uri = "/feedback/update/_id/" + item.get_id()
 				+ "/status/" + item.getStatus();
-		httpCaller.doGet(Constants.BIZ_FEEDBACK_UPDATE_STATUS,
+		httpCaller.doGet(Constants.RPC_FEEDBACK_UPDATE_STATUS,
 				Constants.rest(uri));
 	}
 }

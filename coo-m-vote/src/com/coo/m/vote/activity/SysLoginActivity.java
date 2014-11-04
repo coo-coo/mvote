@@ -19,6 +19,7 @@ import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.RegexUtil;
 import com.kingstar.ngbf.ms.util.android.GenericActivity;
 import com.kingstar.ngbf.ms.util.rpc2.IRpcCallback;
+import com.kingstar.ngbf.ms.util.rpc2.RpcCallHandler;
 import com.kingstar.ngbf.ms.util.rpc2.RpcCaller;
 import com.kingstar.ngbf.s.ntp.NtpMessage;
 
@@ -56,6 +57,7 @@ public class SysLoginActivity extends GenericActivity implements
 
 	@Override
 	public void loadContent() {
+
 		et_account = (EditText) findViewById(R.id.et_sys_login_account);
 		et_pwd = (EditText) findViewById(R.id.et_sys_login_pwd);
 
@@ -77,6 +79,7 @@ public class SysLoginActivity extends GenericActivity implements
 		btn_login.setOnClickListener(this);
 		btn_login_test.setOnClickListener(this);
 
+		httpCaller = new RpcCaller(new RpcCallHandler(this));
 		// FancyButton fb =
 		// (FancyButton)findViewById(R.id.fb_sys_login_icon);
 		// fb.setIconResource(R.drawable.ic_launcher);
@@ -121,8 +124,9 @@ public class SysLoginActivity extends GenericActivity implements
 		// 参见AccountRestService.accountLogin
 		String uri = "/account/login/mobile/" + mobile + "/password/"
 				+ password;
+		toast(uri);
 		// 同步調用不可以,需要异步调用
-		httpCaller.doGet(Constants.BIZ_ACCOUNT_LOGIN,
+		httpCaller.doGet(Constants.RPC_ACCOUNT_LOGIN,
 				Constants.rest(uri));
 	}
 
@@ -137,7 +141,7 @@ public class SysLoginActivity extends GenericActivity implements
 	@Override
 	@Reference(override = IRpcCallback.class)
 	public void onHttpCallback(int what, NtpMessage resp) {
-		if (what == Constants.BIZ_ACCOUNT_LOGIN) {
+		if (what == Constants.RPC_ACCOUNT_LOGIN) {
 			if (VoteUtil.isRespOK(resp)) {
 				// 登录成功
 				toast("登录成功");

@@ -3,7 +3,6 @@ package com.coo.m.vote.task;
 import java.util.List;
 import java.util.Map;
 
-import com.coo.m.vote.Constants;
 import com.coo.m.vote.VoteService;
 import com.coo.m.vote.model.MContact;
 import com.coo.m.vote.model.MManager;
@@ -34,9 +33,9 @@ public class MContactRemoteSyncTask extends CommonTask {
 		// String host = VoteManager.getStrAccount();
 		String host = "13917081673";
 		sm.set("host", host);
-		String uri = "/mcontact/sync";
+//		String uri = "/mcontact/sync";
 		// 提交到服务器端....
-		rpcCaller.doPost(Constants.BIZ_MCONTACT_SYNC_REMOTE,
-				Constants.rest(uri), sm);
+//		rpcCaller.doPost(Constants.BIZ_MCONTACT_SYNC_REMOTE,
+//				Constants.rest(uri), sm);
 	}
 }

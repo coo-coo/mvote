@@ -13,6 +13,7 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.coo.m.vote.Constants;
 import com.coo.m.vote.Mock;
@@ -32,7 +33,8 @@ import com.kingstar.ngbf.s.ntp.NtpMessage;
  * @since 0.5.0.0
  * 
  */
-public class SysWelcomeActivity extends Activity implements AnimationListener,IRpcCallback {
+public class SysWelcomeActivity extends Activity implements AnimationListener,
+		IRpcCallback {
 
 	private static String TAG = SysWelcomeActivity.class.getName();
 
@@ -89,15 +91,14 @@ public class SysWelcomeActivity extends Activity implements AnimationListener,IR
 
 		Account account = VoteManager.getAccount();
 		if (account == null) {
-			// Toast.makeText(this, "account is null",
-			// Toast.LENGTH_SHORT).show();
+			toast("account IS NULL");
 			// 跳转到登录界面
 			if (Constants.MOCK_ACCOUNT) {
 				VoteManager.get().setAccount(Mock.getAccount());
 			}
 			// 跳转到登录界面
 			Intent intent = new Intent(SysWelcomeActivity.this,
-					VoteManager.LOGIN_CLASS);
+					Constants.LOGIN_CLASS);
 			// 调试用，跳转到指定界面
 			startActivity(intent);
 			// this.overridePendingTransition(R.anim.fadeout,
@@ -129,32 +130,39 @@ public class SysWelcomeActivity extends Activity implements AnimationListener,IR
 		// 参见AccountRestService.accountLogin
 		String uri = "/account/login/mobile/" + mobile + "/password/"
 				+ password;
+		toast(uri);
 		// 同步調用不可以,需要异步调用
-		httpCaller.doGet(Constants.BIZ_ACCOUNT_LOGIN,
+		httpCaller.doGet(Constants.RPC_ACCOUNT_LOGIN,
 				Constants.rest(uri));
 	}
-	
+
 	// 异步调用
 	private RpcCaller httpCaller;
 
 	@Override
-	@Reference(override=IRpcCallback.class)
+	@Reference(override = IRpcCallback.class)
 	public void onHttpCallback(int what, NtpMessage resp) {
-		if (what == Constants.BIZ_ACCOUNT_LOGIN) {
+		if (what == Constants.RPC_ACCOUNT_LOGIN) {
 			if (VoteUtil.isRespOK(resp)) {
 				// 登录成功，证明用户名和密码正确, 不再进行信息的保存
 				// 跳转主界面
-				Intent intent = new Intent(SysWelcomeActivity.this,
+				Intent intent = new Intent(
+						SysWelcomeActivity.this,
 						SysMainActivity.class);
 				startActivity(intent);
 				this.finish();
 			} else {
 				// 登录不成功，证明用户名和密码不正确, 需要重新登录
-				Intent intent = new Intent(SysWelcomeActivity.this,
+				Intent intent = new Intent(
+						SysWelcomeActivity.this,
 						SysLoginActivity.class);
 				startActivity(intent);
 				this.finish();
 			}
 		}
+	}
+
+	public void toast(String message) {
+		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 	}
 }

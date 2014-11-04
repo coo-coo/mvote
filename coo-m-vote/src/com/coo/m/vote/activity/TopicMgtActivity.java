@@ -10,6 +10,7 @@ import android.widget.ListView;
 import com.coo.m.vote.Constants;
 import com.coo.m.vote.Mock;
 import com.coo.m.vote.R;
+import com.coo.m.vote.VoteManager;
 import com.coo.m.vote.activity.adapter.TopicMgtAdapter;
 import com.coo.s.vote.model.Topic;
 import com.kingstar.ngbf.ms.util.Reference;
@@ -39,8 +40,9 @@ public class TopicMgtActivity extends CommonBizActivity implements
 			adapter = new TopicMgtAdapter(this, list, composite);
 		} else {
 			// TODO 获得全部最新创建的...
-			String uri = "/topic/list/code/c.topic.latest";
-			httpCaller.doGet(Constants.BIZ_TOPIC_LIST_LATEST,
+			String uri = "/topic/list/admin?op="
+					+ VoteManager.getStrAccount();
+			httpCaller.doGet(Constants.RPC_TOPIC_LIST_ADMIN,
 					Constants.rest(uri));
 		}
 	}
@@ -53,10 +55,16 @@ public class TopicMgtActivity extends CommonBizActivity implements
 	@Override
 	@Reference(override = CommonBizActivity.class)
 	public void onHttpCallback(int what, NtpMessage resp) {
-		if (what == Constants.BIZ_TOPIC_LIST_LATEST) {
+		if (what == Constants.RPC_TOPIC_LIST_ADMIN) {
 			List<Topic> list = resp.getItems(Topic.class);
 			ListView composite = (ListView) findViewById(R.id.lv_topic_mgt);
 			adapter = new TopicMgtAdapter(this, list, composite);
+		}
+		else if (what == Constants.RPC_TOPIC_UPDATE_STATUS) {
+			toast("操作成功!");
+		}
+		else{
+			
 		}
 	}
 
@@ -70,7 +78,7 @@ public class TopicMgtActivity extends CommonBizActivity implements
 		// new AccountMgtItemDialog(this, item).show();
 		int status = clicked.getStatus();
 		String msg = "";
-		if (status == Topic.STATUS_VALID.code) {
+		if (status == Topic.STATUS_VALID) {
 			msg = "确定要[锁定]" + clicked.getTitle() + "么?";
 		} else {
 			msg = "确定要[解锁]" + clicked.getTitle() + "么?";
@@ -87,10 +95,10 @@ public class TopicMgtActivity extends CommonBizActivity implements
 	public void onClick(DialogInterface dialog, int whichButton) {
 		if (whichButton == AlertDialog.BUTTON_POSITIVE) {
 			int status = clicked.getStatus();
-			if (status == Topic.STATUS_VALID.code) {
-				status = Topic.STATUS_LOCKED.code;
+			if (status == Topic.STATUS_VALID) {
+				status = Topic.STATUS_LOCKED;
 			} else {
-				status = Topic.STATUS_VALID.code;
+				status = Topic.STATUS_VALID;
 			}
 			clicked.setStatus(status);
 			// 通知对象变更
@@ -101,8 +109,13 @@ public class TopicMgtActivity extends CommonBizActivity implements
 
 	@Override
 	@Reference(override = CommonBizActivity.class)
-	public void onAdapterItemChanged(Object item) {
+	public void onAdapterItemChanged(Object object) {
 		adapter.notifyDataSetChanged();
-		// TODO 进行RPC调用
+		// 进行RPC调用
+		Topic item = (Topic) object;
+		String uri = "/topic/update/_id/" + item.get_id()
+				+ "/status/" + item.getStatus();
+		httpCaller.doGet(Constants.RPC_TOPIC_UPDATE_STATUS,
+				Constants.rest(uri));
 	}
 }

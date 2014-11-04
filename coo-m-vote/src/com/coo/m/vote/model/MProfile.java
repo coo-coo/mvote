@@ -4,7 +4,7 @@ package com.coo.m.vote.model;
  * TODO 个人账号属性信息(即Account的部分信息)不在M端存储，可能会有网页端修改的可能....
  * 通过本地的MContact账号列表获取服务器端的Account信息,加工成为MProfile信息
  * MProfile仅仅是服务器端Account信息的子集,M端暂时不能修改，备注名什么的..
- * 
+ * @deprecated 
  * @author boqing.shen
  * 
  */

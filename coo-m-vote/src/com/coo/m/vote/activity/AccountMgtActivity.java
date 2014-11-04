@@ -35,12 +35,12 @@ public class AccountMgtActivity extends CommonBizActivity implements
 	public void loadContent() {
 		if (Constants.MOCK_DATA) {
 			ListView composite = (ListView) findViewById(R.id.lv_account_mgt);
-			adapter = new AccountMgtAdapter(this,
-					Mock.accounts(), composite);
+			adapter = new AccountMgtAdapter(this, Mock.accounts(),
+					composite);
 			// onHttpCallback(Constants.BIZ_ACCOUNT_ALL,Mock.accounts());
 		} else {
 			String uri = "/account/list/all";
-			httpCaller.doGet(Constants.BIZ_ACCOUNT_ALL,
+			httpCaller.doGet(Constants.RPC_ACCOUNT_ALL,
 					Constants.rest(uri));
 		}
 	}
@@ -53,7 +53,7 @@ public class AccountMgtActivity extends CommonBizActivity implements
 	@Override
 	@Reference(override = CommonBizActivity.class)
 	public void onHttpCallback(int what, NtpMessage resp) {
-		if (what == Constants.BIZ_ACCOUNT_ALL) {
+		if (what == Constants.RPC_ACCOUNT_ALL) {
 			List<Account> list = resp.getItems(Account.class);
 			ListView composite = (ListView) findViewById(R.id.lv_account_mgt);
 			adapter = new AccountMgtAdapter(this, list, composite);
@@ -109,8 +109,7 @@ public class AccountMgtActivity extends CommonBizActivity implements
 		Account item = (Account) object;
 		String uri = "/account/update/_id/" + item.get_id()
 				+ "/status/" + item.getStatus();
-		httpCaller.doGet(Constants.BIZ_ACCOUNT_UPDATE_STATUS,
+		httpCaller.doGet(Constants.RPC_ACCOUNT_UPDATE_STATUS,
 				Constants.rest(uri));
 	}
-
 }

@@ -16,7 +16,7 @@ import com.coo.m.vote.Constants;
 import com.coo.m.vote.Mock;
 import com.coo.m.vote.R;
 import com.coo.m.vote.VoteManager;
-import com.coo.m.vote.activity.adapter.ChannelFragementTopicAdapter;
+import com.coo.m.vote.activity.adapter.SysMainChannelAdapter;
 import com.coo.s.vote.model.Topic;
 import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.rpc2.IRpcCallback;
@@ -46,8 +46,6 @@ public class SysMainChannel extends Fragment implements IRpcCallback {
 
 	private View fragementView;
 
-	// private ViewGroup container;
-
 	/**
 	 * 构造函数
 	 */
@@ -59,6 +57,8 @@ public class SysMainChannel extends Fragment implements IRpcCallback {
 	}
 
 	private RpcCaller httpCaller;
+
+	private SysMainChannelAdapter channelAdapter;
 
 	/**
 	 * 覆盖此函数，先通过inflater inflate函数得到view最后返回
@@ -76,33 +76,43 @@ public class SysMainChannel extends Fragment implements IRpcCallback {
 			List<Topic> list = Mock.topicshots(this.code);
 			ListView lv_topics = (ListView) fragementView
 					.findViewById(R.id.lv_sys_main_fragment);
-			@SuppressWarnings("unused")
-			ChannelFragementTopicAdapter adapter = new ChannelFragementTopicAdapter(
-					parent, list, lv_topics);
+			channelAdapter = new SysMainChannelAdapter(this, list,
+					lv_topics);
 		} else {
 			// 异步加载获得的数据
-			String uri = "/topic/code/" + code + "/account/"
+			String uri = "/topic/list/code/" + code + "?op="
 					+ VoteManager.getStrAccount();
-			httpCaller.doGet(Constants.BIZ_TOPIC_LIST_CODE,
+			httpCaller.doGet(Constants.RPC_TOPIC_LIST_CODE,
 					Constants.rest(uri));
-
 		}
 
 		// TODO 根据频道代码来加载数据,应根据手势滑动来加载数据，效率为高
 		return fragementView;
 	}
-	
+
+	public RpcCaller getHttpCaller() {
+		return httpCaller;
+	}
+
+	public FragmentActivity getParent() {
+		return parent;
+	}
+
 	@Override
-	@Reference(override=IRpcCallback.class)
+	@Reference(override = IRpcCallback.class)
 	public void onHttpCallback(int what, NtpMessage resp) {
-		if (what == Constants.BIZ_TOPIC_LIST_CODE) {
+		if (what == Constants.RPC_TOPIC_LIST_CODE) {
 			// 获得Fragement视图内的ListView,加载数据
 			List<Topic> list = resp.getItems(Topic.class);
 			ListView lv_topics = (ListView) fragementView
 					.findViewById(R.id.lv_sys_main_fragment);
-			@SuppressWarnings("unused")
-			ChannelFragementTopicAdapter adapter = new ChannelFragementTopicAdapter(
-					parent, list, lv_topics);
+			channelAdapter = new SysMainChannelAdapter(this, list,
+					lv_topics);
+		} else if (what == Constants.RPC_TOPIC_VOTE) {
+			toast("投票成功");
+			channelAdapter.getSelected().setVoted(Boolean.TRUE);
+		} else {
+
 		}
 	}
 
@@ -110,8 +120,7 @@ public class SysMainChannel extends Fragment implements IRpcCallback {
 		return label;
 	}
 
-	@SuppressWarnings("unused")
-	private void toast(String msg) {
+	public void toast(String msg) {
 		Toast.makeText(parent, msg, Toast.LENGTH_SHORT).show();
 	}
 

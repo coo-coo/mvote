@@ -1,13 +1,12 @@
 package com.coo.m.vote.task;
 
 import java.util.List;
-import java.util.Map;
 
 import com.coo.m.vote.Constants;
 import com.coo.m.vote.VoteService;
 import com.coo.m.vote.model.MChannel;
 import com.coo.m.vote.model.MManager;
-import com.kingstar.ngbf.ms.util.GenericsUtil;
+import com.coo.s.vote.model.SChannel;
 import com.kingstar.ngbf.s.ntp.NtpMessage;
 
 /**
@@ -26,17 +25,26 @@ public class MChannelRemoteSyncTask extends CommonTask {
 	public void execute() {
 		// 获取所有的MChannel同步到服务器端
 		List<MChannel> list = MManager.findChannelAll();
+
+		// 组织消息
 		NtpMessage sm = new NtpMessage();
-		for (MChannel item : list) {
-			Map<String, Object> map = GenericsUtil.change2map(item);
-			sm.add(map);
-		}
 		// String host = VoteManager.getStrAccount();
 		String host = "13917081673";
-		String uri = "/mchannel/sync/";
 		sm.set("host", host);
+		for (MChannel item : list) {
+			SChannel c = new SChannel();
+			c.setCode(item.getCode());
+			c.setHost(host);
+			c.setLabel(item.getLabel());
+			c.setId(""+item.getId());
+			sm.add(c);
+		}
+		
+		String uri = "/mchannel/sync";
+//		toast(uri + "-" + sm.toJson());
 		// 提交到服务器端....
-		rpcCaller.doPost(Constants.BIZ_MCHANNEL_SYNC_REMOTE,
+		service.getRpcCaller().doPost(
+				Constants.BIZ_MCHANNEL_SYNC_REMOTE,
 				Constants.rest(uri), sm);
 	}
 

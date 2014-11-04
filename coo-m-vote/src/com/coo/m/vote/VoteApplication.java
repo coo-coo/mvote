@@ -46,7 +46,6 @@ public class VoteApplication extends LitePalApplication {
 
 		
 //		MManager.clearGroups();
-		
 		// 启动后台程序
 	}
 	

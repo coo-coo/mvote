@@ -14,7 +14,6 @@ import com.coo.m.vote.R;
 import com.coo.m.vote.VoteManager;
 import com.coo.m.vote.activity.adapter.TopicLegCreateAdapter;
 import com.coo.s.vote.model.Account;
-import com.coo.s.vote.model.Topic;
 import com.coo.s.vote.model.TopicLeg;
 import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.StringUtil;
@@ -118,42 +117,28 @@ public class TopicCreateActivity extends CommonBizActivity {
 			toast("请输入投票主题!");
 			return;
 		}
-		// 创建Topic对象
-		Topic topic = new Topic(title, account.getAccount());
+		
+		// 创建NtpMessage消息
+		NtpMessage nm = new NtpMessage();
+		nm.set("title", title);
+		nm.set("owner", account.getAccount());
 		for (int i = 0; i < adapter.getCount(); i++) {
 			TopicLeg leg = adapter.getItem(i);
-			topic.add(leg);
+			nm.add(leg);
 		}
-
-		NtpMessage nm = new NtpMessage();
-		// TODO 将Topic转化成为NtpMessage....
-		
-		// 提示信息... toJson有问题?
-		toast("提交信息:" + nm.toJson());
-		// 异步调用
 		String uri = "/topic/create/";
-		httpCaller.doPost(Constants.BIZ_FEEDBACK_CREATE,
+		httpCaller.doPost(Constants.RPC_TOPIC_CREATE,
 				Constants.rest(uri), nm);
 	}
 
 	@Override
 	@Reference(override = CommonBizActivity.class)
 	public void onHttpCallback(int what, NtpMessage resp) {
-		if (what == Constants.BIZ_TOPIC_CREATE) {
-			toast("创建成功....");
+		if (what == Constants.RPC_TOPIC_CREATE) {
+			toast("话题创建成功....");
 			Intent intent = new Intent();
 			intent.setClass(this, TopicActivity.class);
 			startActivity(intent);
 		}
 	}
-
-	// @Override
-	// public void response(SimpleMessage<?> resp) {
-	// toast("创建成功....");
-	// // TODO 跳转到我的话题Activity
-	// Intent intent = new Intent();
-	// intent.setClass(this, TopicActivity.class);
-	// startActivity(intent);
-	// }
-
 }
