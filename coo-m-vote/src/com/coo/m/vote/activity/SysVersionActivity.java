@@ -296,7 +296,7 @@ public class SysVersionActivity extends CommonBizActivity {
 	private boolean isNetworkAble() {
 		// 获取手机所有连接管理对象（包括对wi-fi,net等连接的管理）
 		return ServiceProvider.isNetworkConnected(ServiceFactory
-				.connectivityManager(this));
+				.getConnectivityManager(this));
 	}
 
 	// /**
