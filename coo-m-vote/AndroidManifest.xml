@@ -55,6 +55,8 @@
         </activity>
         <activity android:name="com.coo.m.vote.activity.TopicConfigActivity" >
         </activity>
+         <activity android:name="com.coo.m.vote.activity.TopicQrcodeActivity" >
+        </activity>
         <activity android:name="com.coo.m.vote.activity.SysConfigActivity" >
         </activity>
         <activity android:name="com.coo.m.vote.activity.ProfileActivity" >

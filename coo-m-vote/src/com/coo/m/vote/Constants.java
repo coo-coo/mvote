@@ -2,7 +2,7 @@ package com.coo.m.vote;
 
 import android.os.Environment;
 
-import com.coo.m.vote.activity.TopicMgtActivity;
+import com.coo.m.vote.activity.SysLoginActivity;
 
 /**
  * 常量类
@@ -14,11 +14,11 @@ public final class Constants {
 
 	public static boolean MOCK_ACCOUNT = true;
 
-	public static boolean MOCK_DATA = false;
+	public static boolean MOCK_DATA = true;
 
-	public static Class<?> LOGIN_CLASS = TopicMgtActivity.class;
+//	public static Class<?> LOGIN_CLASS = TopicActivity.class;
 
-	// public static Class<?> LOGIN_CLASS = SysLoginActivity.class;
+	public static Class<?> LOGIN_CLASS = SysLoginActivity.class;
 
 	// TODO BIZ->RPC
 	public final static int RPC_FEEDBACK_CREATE = 2000;
@@ -39,7 +39,7 @@ public final class Constants {
 	public final static int RPC_TOPIC_UPDATE_STATUS = 2023; // [管理]更新状态
 	public final static int RPC_TOPIC_CREATE = 2024;
 	public final static int RPC_TOPIC_VOTE = 2025;
-	
+
 	// TODO...
 	public final static int BIZ_MCONTACT_SYNC_REMOTE = 2090;
 	public final static int BIZ_MCHANNEL_SYNC_REMOTE = 2091;

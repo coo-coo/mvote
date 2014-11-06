@@ -54,6 +54,8 @@
     <!-- topic 创建 -->
     <string name="item_topic_publish_text">发布</string>
     <string name="item_topic_leg_create_text">增加选项</string>
+    <string name="item_topic_share_text">分享</string>
+    <string name="item_topic_qrcode_text">生成</string>
     
     <!-- Group 创建 -->
     <string name="group_create_name_hint">请输入群组名称</string>

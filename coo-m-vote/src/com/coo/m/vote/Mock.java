@@ -96,7 +96,8 @@ public class Mock {
 			item.setTitle(code + "-Topic Title-" + i);
 			item.setVote(i);
 			item.set_tsi(System.currentTimeMillis());
-			item.set_id(System.currentTimeMillis() + "-ID");
+//			item.set_id(System.currentTimeMillis() + "-ID");
+			item.set_id("topic-" + i + "-ID");
 			TopicLeg tl1 = new TopicLeg("0", "是");
 			tl1.setVote(i + 1);
 			item.add(tl1);

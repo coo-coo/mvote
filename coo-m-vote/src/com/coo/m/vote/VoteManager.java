@@ -48,7 +48,7 @@ public class VoteManager {
 		sharedManager = new SharedManager(app, "vote");
 
 		// 启动后台程序
-		startVoteService(app);
+		// startVoteService(app);
 	}
 
 	/**
@@ -68,6 +68,10 @@ public class VoteManager {
 	public static String getSdProfileIconPath() {
 		return PACKAGE_Path + "/" + VoteManager.getStrAccount()
 				+ "_icon.png";
+	}
+
+	public static String getSdTopicIconPath(Topic topic) {
+		return PACKAGE_Path + "/" + topic.get_id() + "_icon.png";
 	}
 
 	/**
@@ -140,7 +144,7 @@ public class VoteManager {
 
 		// TODO 可以分享之... 根据图标生成二维码
 		items.add(new CommonItem("icon", "图标", "暂未实现"));
-		items.add(new CommonItem("qrcode", "二维码", "暂未实现"));
+		// items.add(new CommonItem("qrcode", "二维码", "暂未实现"));
 
 		// 本地动态获得,即朋友群:MGroup
 		List<MGroup> mgroups = MManager.findGroupAll();

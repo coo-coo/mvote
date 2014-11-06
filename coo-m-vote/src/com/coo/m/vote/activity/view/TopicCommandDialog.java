@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.coo.m.vote.CommonCommandAdapter;
 import com.coo.m.vote.activity.TopicConfigActivity;
+import com.coo.m.vote.activity.TopicQrcodeActivity;
 import com.coo.s.vote.model.Topic;
 import com.kingstar.ngbf.ms.util.android.CommonItemDialog;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
@@ -66,12 +67,18 @@ public class TopicCommandDialog extends CommonItemDialog<Topic> {
 		items.add(new CommonItem("topic.config", "设置", intent)
 				.uiType(CommonItem.UIT_COMMAND_ACTIVITY));
 
-		items.add(new CommonItem("topic.share", "分享",
-				"TopicShareAction")
-				.uiType(CommonItem.UIT_COMMAND_ACTION));
+		Intent intentQrcode = new Intent(getParent(),
+				TopicQrcodeActivity.class);
+		intentQrcode.putExtras(bundle);
+		items.add(new CommonItem("topic.qrcode", "二维码", intentQrcode)
+				.uiType(CommonItem.UIT_COMMAND_ACTIVITY));
+
+		// items.add(new CommonItem("topic.share", "分享",
+		// "TopicShareAction")
+		// .uiType(CommonItem.UIT_COMMAND_ACTION));
 		// 关闭Dialog
 		items.add(new CommonItem("dialog.cancel", "取消", this)
-						.uiType(CommonItem.UIT_DIALOG_CANCEL));
+				.uiType(CommonItem.UIT_DIALOG_CANCEL));
 		return items;
 	}
 }

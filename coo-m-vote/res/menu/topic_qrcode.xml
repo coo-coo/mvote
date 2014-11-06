@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/item_topic_qrcode"
+        android:icon="@drawable/ico_flash"
+        android:orderInCategory="10"
+        android:showAsAction="ifRoom"
+        android:title="@string/item_topic_qrcode_text"/>
+    <item
+        android:id="@+id/item_topic_share"
+        android:icon="@drawable/ico_cloud"
+        android:orderInCategory="10"
+        android:showAsAction="ifRoom"
+        android:title="@string/item_topic_share_text">
+    </item>
+
+</menu>
