@@ -64,7 +64,8 @@ public class Mock {
 		account.setMobile("13917081673");
 		account.setPassword("111111");
 		account.set_id("541155452170e0df13091431");
-		account.setType(Account.TYPE_ADMIN);
+//		account.setType(Account.TYPE_ADMIN);
+		account.setType(Account.TYPE_COMMON);
 		return account;
 	}
 

@@ -21,11 +21,10 @@ import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 import com.kingstar.ngbf.s.ntp.NtpMessage;
 
 /**
- * Topic创建的activity
+ * 【创建话题】
  * 
- * @since 0.4.0
- * @author shulai.zhang
- * 
+ * @since 1.0
+ * @author boqing.shen
  */
 public class TopicCreateActivity extends CommonBizActivity {
 
@@ -137,7 +136,7 @@ public class TopicCreateActivity extends CommonBizActivity {
 		if (what == Constants.RPC_TOPIC_CREATE) {
 			toast("话题创建成功....");
 			Intent intent = new Intent();
-			intent.setClass(this, TopicActivity.class);
+			intent.setClass(this, MyTopicActivity.class);
 			startActivity(intent);
 		}
 	}

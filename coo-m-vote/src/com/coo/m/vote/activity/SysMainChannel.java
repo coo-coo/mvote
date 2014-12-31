@@ -25,10 +25,10 @@ import com.kingstar.ngbf.ms.util.rpc2.RpcCaller;
 import com.kingstar.ngbf.s.ntp.NtpMessage;
 
 /**
- * 主界面的每一个Channel的Fragment
+ * 【主界面】頻道
  * 
- * @since 0.4.2.0
- * @author Bingjue.Sun
+ * @since 1.0
+ * @author boqing.shen
  */
 @SuppressLint({ "ValidFragment", "HandlerLeak" })
 public class SysMainChannel extends Fragment implements IRpcCallback {

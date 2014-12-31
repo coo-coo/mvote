@@ -14,9 +14,9 @@ import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 import com.kingstar.ngbf.s.ntp.NtpMessage;
 
 /**
- * 【意见反馈】创建
+ * 【意见反馈】,待不发布
  * 
- * @since 0.4.3.0
+ * @since 1.0
  * @author boqing.shen
  */
 public class FeedbackCreateActivity extends CommonBizActivity {

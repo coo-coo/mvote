@@ -2,15 +2,13 @@
 
     <item
         android:id="@+id/item_topic_leg_create"
-        android:icon="@drawable/ico_plus"
         android:orderInCategory="10"
-        android:showAsAction="ifRoom"
+        android:showAsAction="ifRoom|withText"
         android:title="@string/item_topic_leg_create_text"/>
     <item
         android:id="@+id/item_topic_publish"
-        android:icon="@drawable/ico_cloud"
         android:orderInCategory="10"
-        android:showAsAction="ifRoom"
+        android:showAsAction="ifRoom|withText"
         android:title="@string/item_topic_publish_text">
     </item>
 

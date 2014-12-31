@@ -107,14 +107,15 @@ public class VoteManager {
 		List<CommonItem> items = new ArrayList<CommonItem>();
 		// 基础属性
 		String account = getStrAccount();
-		// items.add(new CommonItem("account", "用户名", account));
+
 		items.add(new CommonItem("mobile", "手机号", account));
 		items.add(new CommonItem("password", "登录密码", "")
 				.uiType(CommonItem.UIT_PASSWORD));
 		items.add(new CommonItem("mail", "邮箱", "")
 				.uiType(CommonItem.UIT_TEXT));
-		items.add(new CommonItem("weixin", "微信号", "")
-				.uiType(CommonItem.UIT_TEXT));
+		// TODO 微信号绑定
+		// items.add(new CommonItem("weixin", "微信号", "")
+		// .uiType(CommonItem.UIT_TEXT));
 
 		// 其它属性
 		items.add(new CommonItem("p_nickname", "昵称", "")

@@ -9,19 +9,42 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true" >
 
-        <TextView
-            android:id="@+id/tv_topic_row_title"
-            style="@style/tv_command_row"
-            android:layout_height="80dp"
-            android:layout_marginTop="5dp"
-            android:gravity="left" />
-
         <LinearLayout
-            android:id="@+id/ll_topic_row_base"
+            android:id="@+id/ll_topic_row_top"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
-            android:layout_below="@id/tv_topic_row_title"
+            android:gravity="left"
+            android:orientation="horizontal"
+            android:paddingLeft="1dp"
+            android:paddingRight="5dp" >
+
+            <ImageView
+                android:id="@+id/tv_topic_icon"
+                style="@style/tv_command_row"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/app_blank"
+                android:gravity="left|center_vertical"
+                android:src="@drawable/status_green_36" />
+
+            <TextView
+                android:id="@+id/tv_topic_row_title"
+                style="@style/tv_command_row"
+                 android:layout_width="0dip"
+                android:layout_weight="5"
+                android:layout_height="80dp"
+                android:layout_marginTop="5dp"
+                android:gravity="left" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_topic_row_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/ll_topic_row_top"
             android:gravity="left"
             android:orientation="horizontal"
             android:paddingLeft="1dp"

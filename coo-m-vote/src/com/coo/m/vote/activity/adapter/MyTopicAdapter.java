@@ -20,30 +20,30 @@ import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
  * @author boqing.shen
  * 
  */
-public class TopicAdapter extends CommonAdapter<Topic> {
+public class MyTopicAdapter extends CommonAdapter<Topic> {
 
 	/**
 	 * 构造函数
 	 */
-	public TopicAdapter(Activity parent, List<Topic> items,
+	public MyTopicAdapter(Activity parent, List<Topic> items,
 			ListView composite) {
 		super(parent, items, composite);
 	}
 
 	@Override
 	public int getItemConvertViewId() {
-		return R.layout.topic_activity_row;
+		return R.layout.my_topic_row;
 	}
 
 	@Override
 	public CommonItemHolder initHolder(View convertView) {
 		TopicRowHolder holder = new TopicRowHolder();
 		holder.tv_title = (TextView) convertView
-				.findViewById(R.id.tv_topic_row_title);
+				.findViewById(R.id.tv_my_topic_title);
 		holder.tv_createtime = (TextView) convertView
-				.findViewById(R.id.tv_topic_row_createtime);
+				.findViewById(R.id.tv_my_topic_createtime);
 		holder.tv_vote = (TextView) convertView
-				.findViewById(R.id.tv_topic_row_vote);
+				.findViewById(R.id.tv_my_topic_vote);
 		return holder;
 	}
 
@@ -52,15 +52,14 @@ public class TopicAdapter extends CommonAdapter<Topic> {
 		TopicRowHolder holder = (TopicRowHolder) ciHolder;
 		holder.tv_title.setText(item.getTitle());
 		// 创建时间
-		holder.tv_createtime
-				.setText(VoteUtil.getTsText(item.get_tsi()));
+		holder.tv_createtime.setText("创建日期:"
+				+ VoteUtil.getTsDateText(item.get_tsi()));
 		// 投票数
-		holder.tv_vote.setText("" + item.getVote());
+		holder.tv_vote.setText("投票数:" + item.getVote());
 	}
 }
 
 class TopicRowHolder extends CommonItemHolder {
-	// public TextView tv_icon;
 	public TextView tv_title;
 	public TextView tv_createtime;
 	public TextView tv_vote;

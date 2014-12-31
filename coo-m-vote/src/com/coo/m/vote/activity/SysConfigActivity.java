@@ -11,7 +11,8 @@ import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 /**
  * 【系统设置】
  * 
- * @author Qiaoqiao.Li
+ * @since 1.0
+ * @author boqing.shen
  */
 public class SysConfigActivity extends CommonBizActivity {
 

@@ -10,37 +10,38 @@ import com.coo.m.vote.Constants;
 import com.coo.m.vote.Mock;
 import com.coo.m.vote.R;
 import com.coo.m.vote.VoteManager;
-import com.coo.m.vote.activity.adapter.TopicAdapter;
+import com.coo.m.vote.activity.adapter.MyTopicAdapter;
 import com.coo.m.vote.activity.view.TopicCommandDialog;
 import com.coo.s.vote.model.Topic;
 import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
+import com.kingstar.ngbf.ms.util.android.CommonBizOptions;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
 import com.kingstar.ngbf.s.ntp.NtpMessage;
 
 /**
- * 我(创建)的Topic管理，列表展示?
+ * 【我的话题】
  * 
- * @since 0.4.0
+ * @since 1.0
+ * @author boqing.shen
  */
-public class TopicActivity extends CommonBizActivity {
+public class MyTopicActivity extends CommonBizActivity {
 
 	@Override
-	public String getHeaderTitle() {
-		return "我的话题";
-	}
-
-	@Override
-	public int getResViewLayoutId() {
-		return R.layout.topic_activity;
+	@Reference(override = CommonBizActivity.class)
+	public CommonBizOptions getOptions() {
+		return CommonBizOptions.blank().headerTitle("我的话题")
+				.resViewLayoutId(R.layout.sys_blank_activity);
 	}
 
 	@Override
 	public void loadContent() {
 		if (Constants.MOCK_DATA) {
 			List<Topic> list = Mock.topicshots("my");
-			ListView listView = (ListView) findViewById(R.id.lv_topic);
-			adapter = new TopicAdapter(this, list, listView);
+			ListView composite = new ListView(this, null,
+					R.attr.ref_common_lv);
+			this.setContentView(composite);
+			adapter = new MyTopicAdapter(this, list, composite);
 		} else {
 			// 异步调用数据
 			String account = VoteManager.getStrAccount();
@@ -55,8 +56,10 @@ public class TopicActivity extends CommonBizActivity {
 	public void onHttpCallback(int what, NtpMessage resp) {
 		if (what == Constants.RPC_TOPIC_LIST_MINE) {
 			List<Topic> list = resp.getItems(Topic.class);
-			ListView listView = (ListView) findViewById(R.id.lv_topic);
-			adapter = new TopicAdapter(this, list, listView);
+			ListView composite = new ListView(this, null,
+					R.attr.ref_common_lv);
+			this.setContentView(composite);
+			adapter = new MyTopicAdapter(this, list, composite);
 		}
 	}
 

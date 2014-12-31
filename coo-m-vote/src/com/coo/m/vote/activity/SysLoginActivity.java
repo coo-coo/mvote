@@ -24,9 +24,10 @@ import com.kingstar.ngbf.ms.util.rpc2.RpcCaller;
 import com.kingstar.ngbf.s.ntp.NtpMessage;
 
 /**
- * 登陆界面activity
+ * 【系统登录】
  * 
- * @author Bingjue.Sun
+ * @since 1.0
+ * @author boqing.shen
  */
 public class SysLoginActivity extends GenericActivity implements
 		OnClickListener, IRpcCallback {

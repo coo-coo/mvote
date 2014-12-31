@@ -2,26 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/activity_common" >
 
-    <RelativeLayout style="@style/listview_adapter_common" >
+    <RelativeLayout
+        style="@style/listview_adapter_common"
+        android:layout_width="match_parent"
+        android:layout_height="120dp" >
 
         <ImageView
             android:id="@+id/iv_sys_profile_icon"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="left"
-            android:layout_marginTop="10dp"
-            android:contentDescription="@string/app_blank"/>
-
-        <TextView
-            android:id="@+id/iv_sys_profile_account"
-            style="@style/tv_common_row"
-            android:layout_width="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true" />
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="20dp"
+            android:contentDescription="@string/app_blank" />
     </RelativeLayout>
-	
+
     <View style="@style/view_space" />
-    
+
     <ListView
         android:id="@+id/lv_sys_profile"
         style="@style/listview_common" />

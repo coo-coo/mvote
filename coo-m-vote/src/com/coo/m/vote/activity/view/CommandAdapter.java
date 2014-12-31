@@ -1,4 +1,4 @@
-package com.coo.m.vote;
+package com.coo.m.vote.activity.view;
 
 import java.util.List;
 
@@ -19,13 +19,13 @@ import com.kingstar.ngbf.ms.util.model.CommonItem;
  * @author boqing.shen
  * 
  */
-public class CommonCommandAdapter extends CommonAdapter<CommonItem> {
+public class CommandAdapter extends CommonAdapter<CommonItem> {
 
 	/**
 	 * 构造函数
 	 */
-	public CommonCommandAdapter(Activity parent,
-			List<CommonItem> commands, ListView composite) {
+	public CommandAdapter(Activity parent, List<CommonItem> commands,
+			ListView composite) {
 		super(parent, commands, composite);
 	}
 

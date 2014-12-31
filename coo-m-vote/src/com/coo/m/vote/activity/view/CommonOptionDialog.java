@@ -1,4 +1,4 @@
-package com.coo.m.vote;
+package com.coo.m.vote.activity.view;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class CommonOptionDialog extends CommonItemDialog<CommonItem> {
 		// 定义控件，控件New产生,没有从Context中寻找
 		ListView lv_options = new ListView(parent);
 		// 定义适配器
-		CommonOptionAdapter adapter = new CommonOptionAdapter(
+		OptionAdapter adapter = new OptionAdapter(
 				parent, getItems(), lv_options);
 		adapter.initParams(this, item);
 		// 添加控件

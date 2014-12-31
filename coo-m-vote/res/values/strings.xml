@@ -2,10 +2,11 @@
 <resources>
 
     <!-- APP基础信息 -->
-    <string name="app_name">Vote</string>
+    <string name="app_name">投票</string>
     <string name="app_copyright">2014</string>
     <string name="app_back">返回</string>
     <string name="app_exit">退出</string>
+    <string name="app_delete">删除</string>
     <string name="app_update">更新</string>
     <string name="app_register">注册</string>
     <string name="app_login">登录</string>
@@ -20,14 +21,17 @@
 
     <!-- Menu菜单:Common -->
     <string name="item_search_text">查询</string>
-    <string name="item_topic_create_text">创建</string>
-    <string name="item_more_text">更多</string>
+    <string name="item_topic_create_text">创建话题</string>
+    <string name="item_more_text">更多&#8230;</string>
     <string name="item_profile_text">个人信息</string>
-    <string name="item_sys_config_text">系统设置</string>
-    <string name="item_feedback_create_text">意见反馈</string>
+    <string name="item_my_channel_text">我的频道</string>
+    <string name="item_my_topic_text">我的话题</string>
+    <string name="item_sys_quit_text">应用退出</string>
+    <string name="item_sys_about_text">关于应用</string>
     <string name="item_sys_version_text">版本信息</string>
-    <string name="item_channel_text">频道管理</string>
-    <string name="item_topic_text">我的话题</string>
+    <string name="item_feedback_create_text">意见反馈</string>
+    <string name="item_sys_config_text">系统设置</string>
+
     <!-- Menu菜单:Admin -->
     <string name="item_account_mgt_text">账号管理</string>
     <string name="item_private_text">隐私设置</string>
@@ -56,26 +60,12 @@
     <string name="item_topic_leg_create_text">增加选项</string>
     <string name="item_topic_share_text">分享</string>
     <string name="item_topic_qrcode_text">生成</string>
-    
+
     <!-- Group 创建 -->
     <string name="group_create_name_hint">请输入群组名称</string>
-    
-    
-    
-    <string name="topic_create_content_hint">请输入投票主题</string>
+    <string name="topic_create_content_hint">请输入主题</string>
     <string name="topic_create_leg_delete">删除</string>
-    <string name="et_topic_create_leg_content_hint">请输入选择项</string>
-    <string name="topic_create_leg_label">请编辑选择项</string>
-    <string name="btn_topic_leg_create">新增选项</string>
-    <string name="btn_topic_publish">发布主题</string>
-    <string name="tv_topic_create_leg_index">index</string>
-    <string name="btn_back">返回</string>
-    <string name="topic_title_image">Topic title image</string>
-    <string name="topic_title_label">投票主题内容</string>
-    <string name="topicshot_lastmodified_time">最后更新时间</string>
-    <string name="topicshot_publish_status">投票发送状态</string>
-    <string name="topic_row_image_content_desc">投票图片</string>
-    <string name="topic_row_vote_number">投票数</string>
+    <string name="topic_create_leg_hint">请输入选择项内容</string>
 
     <!-- popup window -->
     <string name="vote_popup_btn_vote">投票</string>

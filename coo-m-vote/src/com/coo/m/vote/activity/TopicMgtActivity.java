@@ -19,8 +19,9 @@ import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 import com.kingstar.ngbf.s.ntp.NtpMessage;
 
 /**
- * admin 话题管理
+ * 【话题管理】
  * 
+ * @since 1.0
  * @author boqing.shen
  * 
  */

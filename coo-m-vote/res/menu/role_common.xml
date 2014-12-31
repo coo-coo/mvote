@@ -1,25 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <!--
-         item
-        android:id="@+id/item_search"
-        android:icon="@drawable/ico_search"
-        android:orderInCategory="10"
-        android:showAsAction="ifRoom"
-        android:title="@string/item_search_text"/
-    -->
     <item
         android:id="@+id/item_topic_create"
-        android:icon="@drawable/ico_plus"
         android:orderInCategory="10"
-        android:showAsAction="ifRoom"
+        android:showAsAction="ifRoom|withText"
         android:title="@string/item_topic_create_text">
     </item>
     <item
         android:id="@+id/item_more"
-        android:icon="@drawable/ico_th"
         android:orderInCategory="10"
-        android:showAsAction="ifRoom"
+        android:showAsAction="ifRoom|withText"
         android:title="@string/item_more_text">
         <menu>
             <item
@@ -29,29 +19,29 @@
                 android:showAsAction="never"
                 android:title="@string/item_profile_text"/>
             <item
-                android:id="@+id/item_channel"
-                android:icon="@drawable/ico_th_large"
+                android:id="@+id/item_my_topic"
+                android:icon="@drawable/ico_heart_empty"
                 android:orderInCategory="100"
                 android:showAsAction="never"
-                android:title="@string/item_channel_text"/>
+                android:title="@string/item_my_topic_text"/>
             <item
-                android:id="@+id/item_topic"
-                android:icon="@drawable/ico_glass"
+                android:id="@+id/item_sys_version"
+                android:icon="@drawable/ico_copyright_mark"
                 android:orderInCategory="100"
                 android:showAsAction="never"
-                android:title="@string/item_topic_text"/>
+                android:title="@string/item_sys_version_text"/>
             <item
-                android:id="@+id/item_feedback_create"
-                android:icon="@drawable/ico_pencil"
+                android:id="@+id/item_sys_about"
+                android:icon="@drawable/ico_info_sign"
                 android:orderInCategory="100"
                 android:showAsAction="never"
-                android:title="@string/item_feedback_create_text"/>
+                android:title="@string/item_sys_about_text"/>
             <item
-                android:id="@+id/item_sys_config"
-                android:icon="@drawable/ico_cog"
+                android:id="@+id/item_sys_quit"
+                android:icon="@drawable/ico_off"
                 android:orderInCategory="100"
                 android:showAsAction="never"
-                android:title="@string/item_sys_config_text"/>
+                android:title="@string/item_sys_quit_text"/>
         </menu>
     </item>
 

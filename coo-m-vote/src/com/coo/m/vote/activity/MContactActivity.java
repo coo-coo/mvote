@@ -11,7 +11,10 @@ import com.coo.m.vote.model.MManager;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 
 /**
- * 我的电话薄Activity,讀取設備信息，進行顯示
+ * 【通讯录】,暂不发布
+ * 
+ * @since 1.0
+ * @author boqing.shen
  * 
  */
 public class MContactActivity extends CommonBizActivity {

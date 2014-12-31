@@ -1,4 +1,4 @@
-package com.coo.m.vote;
+package com.coo.m.vote.activity.view;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.coo.m.vote.R;
 import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemDialog;
 import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
@@ -20,12 +21,12 @@ import com.kingstar.ngbf.ms.util.model.CommonOption;
  * CommonItem的Option填充器,主要是完成针对CommonItem的value值的设定
  * 
  */
-public class CommonOptionAdapter extends CommonAdapter<CommonOption> {
+public class OptionAdapter extends CommonAdapter<CommonOption> {
 
 	/**
 	 * 构造函数
 	 */
-	public CommonOptionAdapter(Activity parent, List<CommonOption> items,
+	public OptionAdapter(Activity parent, List<CommonOption> items,
 			ListView composite) {
 		super(parent, items, composite);
 	}
@@ -43,7 +44,7 @@ public class CommonOptionAdapter extends CommonAdapter<CommonOption> {
 
 	@Override
 	public int getItemConvertViewId() {
-		return R.layout.common_item_option_row;
+		return R.layout.common_option_row;
 	}
 
 	@Override
@@ -53,7 +54,7 @@ public class CommonOptionAdapter extends CommonAdapter<CommonOption> {
 		CommonOption option = getItem(position);
 		// 设置原有的Item的值
 		item.setValue(option.getValue());
-		
+
 		// 通知父类Activity对象进行数据的更新
 		dialog.notifyAdapterEvent(CommonAdapter.EVT_ITEM_CHANGED, item);
 		// 关闭对话框
@@ -77,10 +78,9 @@ public class CommonOptionAdapter extends CommonAdapter<CommonOption> {
 		ImageView icon = holder.iv_selected;
 		if (item.isSelected()) {
 			// 當前選中
-			icon.setImageResource(R.drawable.status_green);
+			icon.setImageResource(R.drawable.status_green_36);
 		} else {
-			// TODO ico_blank
-			icon.setImageResource(R.drawable.status_gray);
+			icon.setImageResource(R.drawable.status_gray_36);
 		}
 	}
 }

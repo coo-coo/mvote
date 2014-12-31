@@ -2,25 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/listview_adapter_common" >
 
-    <TextView
-        android:id="@+id/tv_topic_row_title"
+    <ImageView
+        android:id="@+id/common_item_option_row_selected"
         style="@style/tv_command_row"
         android:layout_width="0dip"
+        android:layout_weight="1"
+        android:contentDescription="@string/app_blank"
+        android:gravity="left|center_vertical" />
+
+    <TextView
+        android:id="@+id/common_item_option_row_value"
+        style="@style/tv_common_row"
+        android:layout_width="0dip"
+        android:layout_marginLeft="10dp"
         android:layout_weight="5"
         android:gravity="left|center_vertical" />
-
-    <TextView
-        android:id="@+id/tv_topic_row_vote"
-        style="@style/tv_common_row"
-        android:layout_width="0dip"
-        android:layout_weight="1"
-        android:gravity="left|center_vertical" />
-
-    <TextView
-        android:id="@+id/tv_topic_row_createtime"
-        style="@style/tv_common_row"
-        android:layout_width="0dip"
-        android:layout_weight="4"
-        android:gravity="right|center_vertical" />
 
 </LinearLayout>

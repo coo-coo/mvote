@@ -18,9 +18,9 @@ import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 import com.kingstar.ngbf.s.ntp.NtpMessage;
 
 /**
- * 【账号管理】
+ * 【账号管理】,待不发布
  * 
- * @since 0.4.3.0
+ * @since 1.0
  * @author boqing.shen
  */
 public class AccountMgtActivity extends CommonBizActivity implements

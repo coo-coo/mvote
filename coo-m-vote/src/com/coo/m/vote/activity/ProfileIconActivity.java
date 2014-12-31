@@ -18,12 +18,14 @@ import com.coo.m.vote.VoteManager;
 import com.coo.m.vote.VoteUtil;
 import com.kingstar.ngbf.ms.cropper.CropImageView;
 import com.kingstar.ngbf.ms.util.FileUtil;
+import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
+import com.kingstar.ngbf.ms.util.android.CommonBizOptions;
 import com.kingstar.ngbf.ms.util.update.FileUploadManager;
 import com.kingstar.ngbf.ms.util.update.FileUploadOptions;
 
 /**
- * Profile
+ * 【个人信息】之头像设置
  * 
  * @deprecated 参见SysProfileActivity,调用系统的图片选取和剪裁
  * @author boqing.shen
@@ -36,13 +38,10 @@ public class ProfileIconActivity extends CommonBizActivity {
 	private Button btnOk;
 
 	@Override
-	public String getHeaderTitle() {
-		return "图标设置";
-	}
-
-	@Override
-	public int getResViewLayoutId() {
-		return R.layout.sys_profile_icon_activity;
+	@Reference(override = CommonBizActivity.class)
+	public CommonBizOptions getOptions() {
+		return CommonBizOptions.blank().headerTitle("图标设置")
+				.resViewLayoutId(R.layout.sys_profile_icon_activity);
 	}
 
 	@Override

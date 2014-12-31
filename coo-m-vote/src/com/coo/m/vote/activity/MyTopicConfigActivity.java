@@ -5,22 +5,23 @@ import java.util.List;
 import android.content.Intent;
 import android.widget.ListView;
 
-import com.coo.m.vote.CommonItemAdapter;
-import com.coo.m.vote.CommonOptionDialog;
 import com.coo.m.vote.R;
 import com.coo.m.vote.VoteManager;
+import com.coo.m.vote.activity.view.ItemAdapter;
+import com.coo.m.vote.activity.view.CommonOptionDialog;
 import com.coo.s.vote.model.Topic;
 import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
 
 /**
- * 话题设置
+ * 【我的话题】话题设置
  * 
+ * @since 1.0
  * @author boqing.shen
  * 
  */
-public class TopicConfigActivity extends CommonBizActivity {
+public class MyTopicConfigActivity extends CommonBizActivity {
 
 	/**
 	 * 当前Topic,从 TopicActivity中传递过来
@@ -36,7 +37,7 @@ public class TopicConfigActivity extends CommonBizActivity {
 		// 初始化设置
 		List<CommonItem> items = VoteManager
 				.getTopicSkeletonItems(current);
-		adapter = new CommonItemAdapter(this, items, lv);
+		adapter = new ItemAdapter(this, items, lv);
 	}
 
 	/**

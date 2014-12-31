@@ -14,7 +14,7 @@
 
 	<properties>
 		<artifactId>coo-m-vote</artifactId>
-		<app.version.name>0.7.3.0</app.version.name>
+		<app.version.name>0.8.0.0</app.version.name>
 		<coo-s-vote-model.version>0.7.3.0</coo-s-vote-model.version>
 		<ngbf-ms-util.version>2.4.9.0</ngbf-ms-util.version>
 		<ngbf-ms-mpchart.version>2.4.0.0</ngbf-ms-mpchart.version>
@@ -85,21 +85,5 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-
 	</dependencies>
-
-	<!-- <build> <plugins> <plugin> <artifactId>maven-compiler-plugin</artifactId> 
-		<configuration> <source>1.6</source> <target>1.6</target> <encoding>UTF-8</encoding> 
-		</configuration> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> 
-		<artifactId>maven-jarsigner-plugin</artifactId> <version>1.2</version> <executions> 
-		<execution> <id>sign</id> <goals> <goal>sign</goal> </goals> </execution> 
-		<execution> <id>verify</id> <goals> <goal>verify</goal> </goals> </execution> 
-		</executions> <configuration> <encoding>UTF-8</encoding> <includes> <include>target/${coo-m-vote}-${app.version.name}.apk</include> 
-		</includes> <removeExistingSignatures>true</removeExistingSignatures> <keystore>${keyFilePath}</keystore> 
-		<storepass>${storePassword}</storepass> <keypass>${keyPassword}</keypass> 
-		<alias>${keyAlias}</alias> </configuration> </plugin> </plugins> </build> 
-		<profiles> <profile> <id>sign</id> <activation> <activeByDefault>true</activeByDefault> 
-		</activation> <properties> <keyFilePath>C:/ngbfkeystore/ngbf.keystore</keyFilePath> 
-		<storePassword>ngbf1234</storePassword> <keyPassword>ngbf1234</keyPassword> 
-		<keyAlias>ngbf.keystore</keyAlias> </properties> </profile> </profiles> -->
 </project>

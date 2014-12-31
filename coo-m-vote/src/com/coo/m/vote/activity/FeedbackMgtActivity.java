@@ -18,10 +18,10 @@ import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 import com.kingstar.ngbf.s.ntp.NtpMessage;
 
 /**
- * 反馈管理
+ * 【反馈管理】,暂不发布
  * 
+ * @since 1.0
  * @author boqing.shen
- * @since 0.4.7.0
  */
 public class FeedbackMgtActivity extends CommonBizActivity implements
 		OnClickListener {

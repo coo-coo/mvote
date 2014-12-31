@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -226,6 +227,8 @@ class ChannelFragementTopicRowHolder extends CommonItemHolder {
 	public TextView tv_createtime;
 	public TextView tv_vote;
 	public TextView tv_author;
-
+	
+	public ImageView iv_icon;
+	
 	public CommonPieChart cpc_chart;
 }

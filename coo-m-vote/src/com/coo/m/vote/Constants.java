@@ -2,7 +2,7 @@ package com.coo.m.vote;
 
 import android.os.Environment;
 
-import com.coo.m.vote.activity.SysLoginActivity;
+import com.coo.m.vote.activity.SysMainActivity;
 
 /**
  * 常量类
@@ -16,9 +16,12 @@ public final class Constants {
 
 	public static boolean MOCK_DATA = true;
 
-//	public static Class<?> LOGIN_CLASS = TopicActivity.class;
+	public static String APP_NAME = "我投";
+	public static String APP_URL = "http://lightapp.baidu.com/?appid=1568236";
 
-	public static Class<?> LOGIN_CLASS = SysLoginActivity.class;
+	public static Class<?> LOGIN_CLASS = SysMainActivity.class;
+
+	// public static Class<?> LOGIN_CLASS = SysLoginActivity.class;
 
 	// TODO BIZ->RPC
 	public final static int RPC_FEEDBACK_CREATE = 2000;

@@ -20,10 +20,10 @@ import com.coo.s.vote.model.Account;
 import com.coo.s.vote.model.Channel;
 
 /**
- * 主界面 TODO Shake 加载最新的条目......
+ * 【主界面】 TODO Shake 加载最新的条目......
  * 
- * @since0.1.0
- * @author Bingjue.Sun
+ * @since 1.0
+ * @author boqing.shen
  */
 public class SysMainActivity extends FragmentActivity {
 
@@ -66,8 +66,7 @@ public class SysMainActivity extends FragmentActivity {
 
 		// viewPager.setPageMargin(300);
 		// 加载左滑动屏....
-		
-		
+
 	}
 
 	/**
@@ -101,10 +100,10 @@ public class SysMainActivity extends FragmentActivity {
 		String type = account.getType();
 		// 一般账号
 		if (type.equals(Account.TYPE_ADMIN)) {
-			getMenuInflater().inflate(R.menu.sys_main_admin, menu);
+			getMenuInflater().inflate(R.menu.role_admin, menu);
 		} else {
 			// 其他账号
-			getMenuInflater().inflate(R.menu.sys_main_common, menu);
+			getMenuInflater().inflate(R.menu.role_common, menu);
 		}
 		return true;
 	}
@@ -115,27 +114,20 @@ public class SysMainActivity extends FragmentActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		// case R.id.item_search:
-		// Toast.makeText(this, "搜索未实现", Toast.LENGTH_SHORT)
-		// .show();
-		// break;
 		case R.id.item_topic_create:
 			handleNext(this, TopicCreateActivity.class);
 			break;
 		case R.id.item_profile:
 			handleNext(this, ProfileActivity.class);
 			break;
-		case R.id.item_sys_config:
-			handleNext(this, SysConfigActivity.class);
-			break;
 		case R.id.item_feedback_create:
 			handleNext(this, FeedbackCreateActivity.class);
 			break;
-		case R.id.item_channel:
-			handleNext(this, ChannelActivity.class);
+		case R.id.item_my_channel:
+			handleNext(this, MyChannelActivity.class);
 			break;
-		case R.id.item_topic:
-			handleNext(this, TopicActivity.class);
+		case R.id.item_my_topic:
+			handleNext(this, MyTopicActivity.class);
 			break;
 		case R.id.item_contact:
 			handleNext(this, MContactActivity.class);
@@ -152,8 +144,27 @@ public class SysMainActivity extends FragmentActivity {
 		case R.id.item_topic_mgt:
 			handleNext(this, TopicMgtActivity.class);
 			break;
+		case R.id.item_sys_config:
+			handleNext(this, SysConfigActivity.class);
+			break;
+		case R.id.item_sys_version:
+			handleNext(this, SysVersionActivity.class);
+			break;
+		case R.id.item_sys_about:
+			handleNext(this, SysAboutActivity.class);
+			break;
+		case R.id.item_sys_quit:
+			doSysQuit();
+			break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void doSysQuit() {
+		VoteManager.get().clearAccount();
+		// 跳转到登录界面....
+		Intent intent = new Intent(this, SysLoginActivity.class);
+		startActivity(intent);
 	}
 
 	/**

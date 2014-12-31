@@ -20,7 +20,10 @@ import com.kingstar.ngbf.ms.util.StringUtil;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 
 /**
- * 群组管理
+ * 【群組編輯】,暂不发布
+ * 
+ * @since 1.0
+ * @author boqing.shen
  */
 public class MGroupEditorActivity extends CommonBizActivity {
 

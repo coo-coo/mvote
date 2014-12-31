@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.coo.m.vote.CommonCommandAdapter;
 import com.coo.m.vote.activity.MGroupEditorActivity;
 import com.coo.m.vote.model.MGroup;
 import com.kingstar.ngbf.ms.util.android.CommonItemDialog;
@@ -34,7 +33,7 @@ public class MGroupCommandDialog extends CommonItemDialog<MGroup> {
 		ListView lv = new ListView(parent);
 		// 定义适配器
 		@SuppressWarnings("unused")
-		CommonCommandAdapter adapter = new CommonCommandAdapter(parent,
+		CommandAdapter adapter = new CommandAdapter(parent,
 				getCommands(), lv);
 		// 添加控件
 		layout.addView(lv);

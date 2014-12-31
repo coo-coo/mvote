@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/listview_adapter_common" >
+
+    <!-- CommonItem:标题 -->
+
+    <TextView
+        android:id="@+id/common_command_row_label"
+        style="@style/tv_command_row" />
+
+</LinearLayout>

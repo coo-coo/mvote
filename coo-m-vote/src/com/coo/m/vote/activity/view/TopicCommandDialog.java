@@ -9,9 +9,7 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.coo.m.vote.CommonCommandAdapter;
-import com.coo.m.vote.activity.TopicConfigActivity;
-import com.coo.m.vote.activity.TopicQrcodeActivity;
+import com.coo.m.vote.activity.MyTopicConfigActivity;
 import com.coo.s.vote.model.Topic;
 import com.kingstar.ngbf.ms.util.android.CommonItemDialog;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
@@ -35,7 +33,7 @@ public class TopicCommandDialog extends CommonItemDialog<Topic> {
 		ListView lv = new ListView(parent);
 		// 定义适配器
 		@SuppressWarnings("unused")
-		CommonCommandAdapter adapter = new CommonCommandAdapter(parent,
+		CommandAdapter adapter = new CommandAdapter(parent,
 				getCommands(), lv);
 		// 添加控件
 		layout.addView(lv);
@@ -60,24 +58,31 @@ public class TopicCommandDialog extends CommonItemDialog<Topic> {
 		List<CommonItem> items = new ArrayList<CommonItem>();
 		// 建立传递的item信息
 		Intent intent = new Intent(getParent(),
-				TopicConfigActivity.class);
+				MyTopicConfigActivity.class);
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("ITEM", item);
 		intent.putExtras(bundle);
-		items.add(new CommonItem("topic.config", "设置", intent)
+		items.add(new CommonItem("topic.config", "话题设置", intent)
 				.uiType(CommonItem.UIT_COMMAND_ACTIVITY));
 
-		Intent intentQrcode = new Intent(getParent(),
-				TopicQrcodeActivity.class);
-		intentQrcode.putExtras(bundle);
-		items.add(new CommonItem("topic.qrcode", "二维码", intentQrcode)
-				.uiType(CommonItem.UIT_COMMAND_ACTIVITY));
-
-		// items.add(new CommonItem("topic.share", "分享",
+		// 话题分享专题,暂不实现,和微信绑定
+		// Intent intentQrcode = new Intent(getParent(),
+		// TopicQrcodeActivity.class);
+		// intentQrcode.putExtras(bundle);
+		// items.add(new CommonItem("topic.qrcode", "生成二维码",
+		// intentQrcode)
+		// .uiType(CommonItem.UIT_COMMAND_ACTIVITY));
+		//
+		// items.add(new CommonItem("topic.share", "分享话题",
 		// "TopicShareAction")
 		// .uiType(CommonItem.UIT_COMMAND_ACTION));
+		
+		// items.add(new CommonItem("topic.icon", "图标设置",
+		// "")
+		// .uiType(CommonItem.UIT_COMMAND_ACTIVITY));
+
 		// 关闭Dialog
-		items.add(new CommonItem("dialog.cancel", "取消", this)
+		items.add(new CommonItem("dialog.cancel", "关闭", this)
 				.uiType(CommonItem.UIT_DIALOG_CANCEL));
 		return items;
 	}

@@ -6,16 +6,16 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.coo.m.vote.CommonItemAdapter;
-import com.coo.m.vote.CommonOptionDialog;
 import com.coo.m.vote.Constants;
 import com.coo.m.vote.R;
 import com.coo.m.vote.VoteManager;
 import com.coo.m.vote.VoteUtil;
+import com.coo.m.vote.activity.view.CommonOptionDialog;
+import com.coo.m.vote.activity.view.ItemAdapter;
 import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
+import com.kingstar.ngbf.ms.util.android.CommonBizOptions;
 import com.kingstar.ngbf.ms.util.android.view.CommonItemPasswordDialog;
 import com.kingstar.ngbf.ms.util.android.view.CommonItemTextDialog;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
@@ -25,18 +25,15 @@ import com.kingstar.ngbf.s.ntp.NtpMessage;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
- * 人员信息Activity，Profile信息先不在本地进行存储，或者是不以本地存储为标准，将来网络会进行存储
+ * 【个人信息】，信息本地存储，网络备份
  * 
- * Profile 本地存储是辅助，存在网页端更新的可能....
- * 
+ * @since 1.0
  * @author boqing.shen
  * 
  */
 public class ProfileActivity extends CommonBizActivity {
 
 	private ImageView ivIcon = null;
-
-	private TextView tvAccount = null;
 
 	// 图片设置管理器
 	private IconSettingManager iconSettingManager = null;
@@ -47,7 +44,7 @@ public class ProfileActivity extends CommonBizActivity {
 		if (Constants.MOCK_DATA) {
 			ListView listView = (ListView) findViewById(R.id.lv_sys_profile);
 			// TODO 需要数据的服务器端Merge处理...
-			adapter = new CommonItemAdapter(this,
+			adapter = new ItemAdapter(this,
 					VoteManager.getProfileSkeletonItems(),
 					listView);
 		} else {
@@ -68,24 +65,19 @@ public class ProfileActivity extends CommonBizActivity {
 				VoteUtil.imageLoadOptions());
 		ivIcon.setOnClickListener(this);
 
-		// 初始化账号
-		tvAccount = (TextView) findViewById(R.id.iv_sys_profile_account);
-		tvAccount.setText(VoteManager.getStrAccount());
-
+		
 		// 图片设置管理器
 		IconSettingOptions options = IconSettingOptions.blank()
 				.icon(ivIcon).store(true).storePath(iconPath);
 		iconSettingManager = new IconSettingManager(this, options);
 	}
 
+	
 	@Override
-	public String getHeaderTitle() {
-		return "个人信息";
-	}
-
-	@Override
-	public int getResViewLayoutId() {
-		return R.layout.sys_profile_activity;
+	@Reference(override = CommonBizActivity.class)
+	public CommonBizOptions getOptions() {
+		return CommonBizOptions.blank().headerTitle("个人信息")
+				.resViewLayoutId(R.layout.sys_profile_activity);
 	}
 
 	/**
@@ -157,7 +149,7 @@ public class ProfileActivity extends CommonBizActivity {
 					ci.setValue(value.toString());
 				}
 			}
-			adapter = new CommonItemAdapter(this, items, listView);
+			adapter = new ItemAdapter(this, items, listView);
 		} else {
 
 		}

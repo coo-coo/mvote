@@ -19,10 +19,10 @@ import com.kingstar.ngbf.ms.util.model.NgbfRuntimeException;
 import com.kingstar.ngbf.s.ntp.NtpMessage;
 
 /**
- * 【注册界面】
+ * 【账户注册】
  * 
- * @since0.1.0.0
- * @author Bingjue.Sun
+ * @since 1.0
+ * @author boqing.shen
  */
 public class SysRegisterActivity extends CommonBizActivity {
 

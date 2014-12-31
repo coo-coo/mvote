@@ -28,9 +28,10 @@ import com.kingstar.ngbf.ms.util.rpc2.RpcCaller;
 import com.kingstar.ngbf.s.ntp.NtpMessage;
 
 /**
- * 欢迎界面,如果没有登录,则进行登录
+ * 【欢迎界面】如果没有登录,则进行登录
  * 
- * @since 0.5.0.0
+ * @since 1.0
+ * @author boqing.shen
  * 
  */
 public class SysWelcomeActivity extends Activity implements AnimationListener,

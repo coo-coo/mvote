@@ -17,7 +17,10 @@ import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
 
 /**
- * 群组管理
+ * 【群組管理】,暂不发布
+ * 
+ * @since 1.0
+ * @author boqing.shen
  */
 public class MGroupActivity extends CommonBizActivity {
 
