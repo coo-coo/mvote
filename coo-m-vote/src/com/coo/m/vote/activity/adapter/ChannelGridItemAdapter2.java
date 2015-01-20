@@ -24,8 +24,9 @@ public class ChannelGridItemAdapter2 extends CommonAdapter<Channel> {
 	/**
 	 * 构造函数
 	 */
-	public ChannelGridItemAdapter2(Activity parent, List<Channel> items, GridView composite) {
-		super(parent,items, composite);
+	public ChannelGridItemAdapter2(Activity parent, List<Channel> items,
+			GridView composite) {
+		super(parent, items, composite);
 	}
 
 	/**
@@ -57,7 +58,7 @@ public class ChannelGridItemAdapter2 extends CommonAdapter<Channel> {
 		// icon.setScaleType(ImageView.ScaleType.CENTER_CROP);
 		icon.setPadding(0, 0, 1, 1);
 		// TODO 根据Channel的状态进行设置图片资源, 0:未关注,1:已关注
-		if (item.getStatus() == 0) {
+		if (item.getStatus().equals(Channel.TYPE_FOCUSD)) {
 			icon.setImageResource(R.drawable.status_green);
 		} else {
 			icon.setImageResource(R.drawable.status_gray);

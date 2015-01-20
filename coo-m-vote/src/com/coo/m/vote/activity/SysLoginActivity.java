@@ -14,7 +14,7 @@ import com.coo.m.vote.Mock;
 import com.coo.m.vote.R;
 import com.coo.m.vote.VoteManager;
 import com.coo.m.vote.VoteUtil;
-import com.coo.s.vote.model.Account;
+import com.coo.s.cloud.model.Account;
 import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.RegexUtil;
 import com.kingstar.ngbf.ms.util.android.GenericActivity;

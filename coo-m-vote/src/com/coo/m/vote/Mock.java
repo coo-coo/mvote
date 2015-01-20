@@ -3,9 +3,9 @@ package com.coo.m.vote;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.coo.s.vote.model.Account;
+import com.coo.s.cloud.model.Account;
+import com.coo.s.cloud.model.Feedback;
 import com.coo.s.vote.model.Channel;
-import com.coo.s.vote.model.Feedback;
 import com.coo.s.vote.model.Topic;
 import com.coo.s.vote.model.TopicLeg;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
@@ -64,7 +64,7 @@ public class Mock {
 		account.setMobile("13917081673");
 		account.setPassword("111111");
 		account.set_id("541155452170e0df13091431");
-//		account.setType(Account.TYPE_ADMIN);
+		// account.setType(Account.TYPE_ADMIN);
 		account.setType(Account.TYPE_COMMON);
 		return account;
 	}
@@ -78,13 +78,13 @@ public class Mock {
 		}
 		return list;
 	}
-	
+
 	public static List<Feedback> feedbacks() {
 		List<Feedback> list = new ArrayList<Feedback>();
 		for (int i = 0; i < 10; i++) {
 			Feedback item = new Feedback();
 			item.setNote("issue-" + i);
-			item.setAppVersion("1.0.0");
+			item.setApp_version("1.0.0");
 			list.add(item);
 		}
 		return list;
@@ -97,7 +97,7 @@ public class Mock {
 			item.setTitle(code + "-Topic Title-" + i);
 			item.setVote(i);
 			item.set_tsi(System.currentTimeMillis());
-//			item.set_id(System.currentTimeMillis() + "-ID");
+			// item.set_id(System.currentTimeMillis() + "-ID");
 			item.set_id("topic-" + i + "-ID");
 			TopicLeg tl1 = new TopicLeg("0", "是");
 			tl1.setVote(i + 1);

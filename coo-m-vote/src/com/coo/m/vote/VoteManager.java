@@ -12,7 +12,7 @@ import android.util.Log;
 
 import com.coo.m.vote.model.MGroup;
 import com.coo.m.vote.model.MManager;
-import com.coo.s.vote.model.Account;
+import com.coo.s.cloud.model.Account;
 import com.coo.s.vote.model.Channel;
 import com.coo.s.vote.model.Topic;
 import com.kingstar.ngbf.ms.util.StringUtil;

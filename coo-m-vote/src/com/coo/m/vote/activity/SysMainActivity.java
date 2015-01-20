@@ -16,7 +16,7 @@ import android.view.MenuItem;
 import com.coo.m.vote.R;
 import com.coo.m.vote.VoteManager;
 import com.coo.m.vote.activity.adapter.ChannelPagerAdapter;
-import com.coo.s.vote.model.Account;
+import com.coo.s.cloud.model.Account;
 import com.coo.s.vote.model.Channel;
 
 /**

@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.litepal.crud.DataSupport;
 
-import com.coo.s.vote.model.Account;
+import com.coo.s.cloud.model.Account;
 import com.coo.s.vote.model.Channel;
 import com.kingstar.ngbf.ms.util.RegexUtil;
 import com.kingstar.ngbf.ms.util.android.component.ContactBean;
@@ -137,7 +137,7 @@ public final class MManager {
 
 		// 手机通讯录 & SQLite之间 同步
 		for (Account account : accounts) {
-			String mobile = account.getAccount();
+			String mobile = account.getMobile();
 			// 只有手机才能参与本地通讯录的存储
 			if (map.containsKey(mobile)) {
 				// 如果M存在，此Mobile已经注册了账号

@@ -9,7 +9,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.coo.m.vote.R;
-import com.coo.s.vote.model.Account;
+import com.coo.s.cloud.model.Account;
 import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
 
@@ -49,7 +49,7 @@ public class AccountMgtAdapter extends CommonAdapter<Account> {
 		holder.tv_mobile.setText(item.getMobile());
 		String statusLabel = "有效";
 		int resIcon = R.drawable.status_green;
-		if (item.getStatus() == 5) {
+		if (item.getStatus().equals(Account.STATUS_LOCKED)) {
 			statusLabel = "被锁定";
 			resIcon = R.drawable.status_gray;
 		}

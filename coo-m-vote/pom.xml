@@ -15,7 +15,8 @@
 	<properties>
 		<artifactId>coo-m-vote</artifactId>
 		<app.version.name>0.8.0.0</app.version.name>
-		<coo-s-vote-model.version>0.7.3.0</coo-s-vote-model.version>
+		<coo-s-vote.version>0.8.0.0</coo-s-vote.version>
+		<coo-s-cloud.version>1.0.0.0</coo-s-cloud.version>
 		<ngbf-ms-util.version>2.4.9.0</ngbf-ms-util.version>
 		<ngbf-ms-mpchart.version>2.4.0.0</ngbf-ms-mpchart.version>
 		<ngbf-ms-cropper.version>2.4.0.0</ngbf-ms-cropper.version>
@@ -25,18 +26,56 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.coo</groupId>
-			<artifactId>coo-s-vote-model</artifactId>
-			<version>${coo-s-vote-model.version}</version>
+			<artifactId>coo-s-vote</artifactId>
+			<version>${coo-s-vote.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
-			<groupId>com.kingstar.ngbf</groupId>
-			<artifactId>ngbf-s-ntp</artifactId>
-			<version>${ngbf-s-ntp.version}</version>
+			<groupId>com.coo</groupId>
+			<artifactId>coo-s-cloud</artifactId>
+			<version>${coo-s-cloud.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>com.ericxu131</groupId>
+					<artifactId>EXWechat</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.google.zxing</groupId>
+					<artifactId>core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.google.zxing</groupId>
+					<artifactId>javase</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>net.sf.json-lib</groupId>
+					<artifactId>json-lib</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.google.code.gson</groupId>
+					<artifactId>gson</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.baidu.bae</groupId>
+					<artifactId>baev3-sdk</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.baidu.bae</groupId>
+					<artifactId>bae-log</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency> 
+		    	<groupId>com.kingstar.ngbf</groupId> 
+		    	<artifactId>ngbf-s-ntp</artifactId> 
+			<version>${ngbf-s-ntp.version}</version> 
+			<type>jar</type> 
+			<scope>compile</scope> 
 		</dependency>
 
 		<dependency>

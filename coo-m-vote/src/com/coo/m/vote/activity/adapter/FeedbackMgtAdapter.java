@@ -9,7 +9,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.coo.m.vote.R;
-import com.coo.s.vote.model.Feedback;
+import com.coo.s.cloud.model.Feedback;
 import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
 
@@ -49,12 +49,12 @@ public class FeedbackMgtAdapter extends CommonAdapter<Feedback> {
 	@Override
 	public void initHolderValue(CommonItemHolder ciHolder, Feedback item) {
 		FeedbackMgtRowHolder holder = (FeedbackMgtRowHolder) ciHolder;
-		holder.tv_version.setText(item.getAppVersion());
+		holder.tv_version.setText(item.getApp_version());
 		holder.tv_note.setText(item.getNote());
 		// holder.tv_status.setText(item.getStatus());
 		ImageView icon = holder.iv_status_icon;
 		int resIcon = R.drawable.status_green;
-		if (item.getStatus() == 0) {
+		if (item.getStatus().equals(Feedback.STATUS_SOLVED)) {
 			resIcon = R.drawable.status_gray;
 		}
 		icon.setAdjustViewBounds(false);

@@ -11,7 +11,7 @@ import com.coo.m.vote.Constants;
 import com.coo.m.vote.Mock;
 import com.coo.m.vote.R;
 import com.coo.m.vote.activity.adapter.FeedbackMgtAdapter;
-import com.coo.s.vote.model.Feedback;
+import com.coo.s.cloud.model.Feedback;
 import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;

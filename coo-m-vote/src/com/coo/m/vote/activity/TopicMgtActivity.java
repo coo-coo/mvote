@@ -60,12 +60,10 @@ public class TopicMgtActivity extends CommonBizActivity implements
 			List<Topic> list = resp.getItems(Topic.class);
 			ListView composite = (ListView) findViewById(R.id.lv_topic_mgt);
 			adapter = new TopicMgtAdapter(this, list, composite);
-		}
-		else if (what == Constants.RPC_TOPIC_UPDATE_STATUS) {
+		} else if (what == Constants.RPC_TOPIC_UPDATE_STATUS) {
 			toast("操作成功!");
-		}
-		else{
-			
+		} else {
+
 		}
 	}
 
@@ -77,9 +75,9 @@ public class TopicMgtActivity extends CommonBizActivity implements
 		// 弹出处理对话框
 		clicked = (Topic) object;
 		// new AccountMgtItemDialog(this, item).show();
-		int status = clicked.getStatus();
+		String status = clicked.getStatus();
 		String msg = "";
-		if (status == Topic.STATUS_VALID) {
+		if (status.equals(Topic.STATUS_VALID)) {
 			msg = "确定要[锁定]" + clicked.getTitle() + "么?";
 		} else {
 			msg = "确定要[解锁]" + clicked.getTitle() + "么?";
@@ -95,8 +93,8 @@ public class TopicMgtActivity extends CommonBizActivity implements
 	@Reference(override = OnClickListener.class)
 	public void onClick(DialogInterface dialog, int whichButton) {
 		if (whichButton == AlertDialog.BUTTON_POSITIVE) {
-			int status = clicked.getStatus();
-			if (status == Topic.STATUS_VALID) {
+			String status = clicked.getStatus();
+			if (status.equals(Topic.STATUS_VALID)) {
 				status = Topic.STATUS_LOCKED;
 			} else {
 				status = Topic.STATUS_VALID;
@@ -114,8 +112,8 @@ public class TopicMgtActivity extends CommonBizActivity implements
 		adapter.notifyDataSetChanged();
 		// 进行RPC调用
 		Topic item = (Topic) object;
-		String uri = "/topic/update/_id/" + item.get_id()
-				+ "/status/" + item.getStatus();
+		String uri = "/topic/update/_id/" + item.get_id() + "/status/"
+				+ item.getStatus();
 		httpCaller.doGet(Constants.RPC_TOPIC_UPDATE_STATUS,
 				Constants.rest(uri));
 	}

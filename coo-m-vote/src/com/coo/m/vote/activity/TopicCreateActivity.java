@@ -13,7 +13,7 @@ import com.coo.m.vote.Constants;
 import com.coo.m.vote.R;
 import com.coo.m.vote.VoteManager;
 import com.coo.m.vote.activity.adapter.TopicLegCreateAdapter;
-import com.coo.s.vote.model.Account;
+import com.coo.s.cloud.model.Account;
 import com.coo.s.vote.model.TopicLeg;
 import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.StringUtil;
@@ -116,11 +116,11 @@ public class TopicCreateActivity extends CommonBizActivity {
 			toast("请输入投票主题!");
 			return;
 		}
-		
+
 		// 创建NtpMessage消息
 		NtpMessage nm = new NtpMessage();
 		nm.set("title", title);
-		nm.set("owner", account.getAccount());
+		nm.set("owner", account.getMobile());
 		for (int i = 0; i < adapter.getCount(); i++) {
 			TopicLeg leg = adapter.getItem(i);
 			nm.add(leg);

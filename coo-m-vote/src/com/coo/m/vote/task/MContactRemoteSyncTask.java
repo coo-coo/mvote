@@ -25,7 +25,7 @@ public class MContactRemoteSyncTask extends CommonTask {
 	public void execute() {
 		// 获取所有的MChannel同步到服务器端
 		List<MContact> list = MManager.findContactAll();
-		NtpMessage sm = new NtpMessage();
+		NtpMessage sm = NtpMessage.ok();
 		for (MContact item : list) {
 			Map<String, Object> map = GenericsUtil.change2map(item);
 			sm.add(map);
@@ -33,9 +33,9 @@ public class MContactRemoteSyncTask extends CommonTask {
 		// String host = VoteManager.getStrAccount();
 		String host = "13917081673";
 		sm.set("host", host);
-//		String uri = "/mcontact/sync";
+		// String uri = "/mcontact/sync";
 		// 提交到服务器端....
-//		rpcCaller.doPost(Constants.BIZ_MCONTACT_SYNC_REMOTE,
-//				Constants.rest(uri), sm);
+		// rpcCaller.doPost(Constants.BIZ_MCONTACT_SYNC_REMOTE,
+		// Constants.rest(uri), sm);
 	}
 }

@@ -11,7 +11,7 @@ import com.coo.m.vote.Constants;
 import com.coo.m.vote.Mock;
 import com.coo.m.vote.R;
 import com.coo.m.vote.activity.adapter.AccountMgtAdapter;
-import com.coo.s.vote.model.Account;
+import com.coo.s.cloud.model.Account;
 import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
@@ -68,9 +68,9 @@ public class AccountMgtActivity extends CommonBizActivity implements
 		// 弹出处理对话框
 		clicked = (Account) object;
 		// new AccountMgtItemDialog(this, item).show();
-		int status = clicked.getStatus();
+		String status = clicked.getStatus();
 		String msg = "";
-		if (status == 0) {
+		if (status.equals(Account.STATUS_VALID)) {
 			msg = "确定要[锁定]" + clicked.getMobile() + "么?";
 		} else {
 			msg = "确定要[解锁]" + clicked.getMobile() + "么?";
@@ -86,13 +86,10 @@ public class AccountMgtActivity extends CommonBizActivity implements
 	@Reference(override = OnClickListener.class)
 	public void onClick(DialogInterface dialog, int whichButton) {
 		if (whichButton == AlertDialog.BUTTON_POSITIVE) {
-			int status = clicked.getStatus();
-			int statusTarget = 0;
-			if (status == 0) {
-				statusTarget = 5;
-			} else {
-				statusTarget = 0;
-			}
+			String status = clicked.getStatus();
+			String statusTarget = status
+					.equals(Account.STATUS_VALID) ? Account.STATUS_LOCKED
+					: Account.STATUS_VALID;
 			clicked.setStatus(statusTarget);
 
 			// 通知对象变更
